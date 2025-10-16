@@ -1,54 +1,89 @@
 import Image from 'next/image';
 
-export default function Home() {
-  const featuredProducts = [
-    {
-      id: 1,
-      name: 'Executive Notebooks',
-      price: 'P 85.00',
-      image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop',
-      description: 'Premium leather-bound journals'
-    },
-    {
-      id: 2,
-      name: 'Professional Pens',
-      price: 'P 45.00',
-      image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&h=400&fit=crop',
-      description: 'Smooth writing experience'
-    },
-    {
-      id: 3,
-      name: 'Desk Organizers',
-      price: 'P 120.00',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
-      description: 'Keep workspace efficient'
-    },
-    {
-      id: 4,
-      name: 'Ergonomic Chairs',
-      price: 'P 450.00',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop',
-      description: 'Comfort meets productivity'
-    },
-    {
-      id: 5,
-      name: 'Writing Collections',
-      price: 'P 150.00',
-      image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=400&fit=crop',
-      description: 'Complete stationery sets'
-    },
-    {
-      id: 6,
-      name: 'Office Desks',
-      price: 'P 680.00',
-      image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&h=400&fit=crop',
-      description: 'Modern workspace solutions'
-    }
-  ];
+// Function to fetch real products from your database
+async function getProducts() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://stationery-hub-template.vercel.app';
+    const res = await fetch(`${baseUrl}/api/products`, {
+      cache: 'no-store' // Always fetch fresh data
+    });
+    
+    if (!res.ok) throw new Error('Failed to fetch products');
+    const products = await res.json();
+    
+    // Ensure products have proper image URLs
+    return products.map((product: any) => ({
+      ...product,
+      image: product.imageUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop'
+    }));
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    // Return fallback products if API fails
+    return [
+      {
+        id: 1,
+        name: 'Executive Notebooks',
+        price: 85.00,
+        image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop',
+        description: 'Premium leather-bound journals',
+        stock: 10
+      },
+      {
+        id: 2,
+        name: 'Professional Pens',
+        price: 45.00,
+        image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&h=400&fit=crop',
+        description: 'Smooth writing experience',
+        stock: 15
+      }
+    ];
+  }
+}
+
+// Hero slider images - focused on cartridges and stationery
+const heroSlides = [
+  {
+    id: 1,
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&h=800&fit=crop',
+    title: 'Premium Printer Cartridges',
+    subtitle: 'Original HP, Canon & Brother cartridges in stock'
+  },
+  {
+    id: 2,
+    image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1920&h=800&fit=crop',
+    title: 'Office Stationery Collection',
+    subtitle: 'Everything you need for a productive workspace'
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=1920&h=800&fit=crop',
+    title: 'Writing Instruments',
+    subtitle: 'Smooth pens, markers, and highlighters'
+  },
+  {
+    id: 4,
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&h=800&fit=crop',
+    title: 'Office Furniture',
+    subtitle: 'Ergonomic chairs and modern desks'
+  },
+  {
+    id: 5,
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1920&h=800&fit=crop',
+    title: 'Notebooks & Journals',
+    subtitle: 'Premium writing companions for professionals'
+  }
+];
+
+export default async function Home() {
+  // Get real products from your Neon database
+  const products = await getProducts();
+  
+  // Use real products from your database - show first 6 as featured
+  const featuredProducts = products.slice(0, 6);
 
   const stats = [
     { number: '500+', label: 'Happy Customers' },
-    { number: '50+', label: 'Products Available' },
+    { number: `${products.length}+`, label: 'Products Available' },
     { number: '24/7', label: 'Customer Support' },
     { number: 'Nationwide', label: 'Delivery Coverage' }
   ];
@@ -92,34 +127,71 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Luxury Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 text-white overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="absolute top-0 right-0 w-72 h-72 bg-blue-400 rounded-full -translate-y-36 translate-x-36 opacity-20"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300 rounded-full translate-y-48 -translate-x-48 opacity-20"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 py-32 lg:py-40">
-          <div className="text-center">
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-              Elevate Your
-              <span className="block bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
-                Workspace
-              </span>
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
-              Premium office supplies and furniture designed for Botswana's 
-              <span className="font-semibold"> modern professionals</span>
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 shadow-lg">
-                Explore Collection
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition duration-300 transform hover:-translate-y-1">
-                Book Consultation
-              </button>
+      {/* FULL-WIDTH HERO SLIDER */}
+      <section className="relative h-screen overflow-hidden">
+        {/* Slider Container */}
+        <div className="relative h-full w-full">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === 0 ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+              </div>
+              
+              {/* Reduced Blue Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-blue-800/30"></div>
+              
+              {/* Content */}
+              <div className="relative h-full flex items-center justify-center text-center text-white">
+                <div className="max-w-4xl px-4">
+                  <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                    {slide.title}
+                  </h1>
+                  <p className="text-xl lg:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
+                    {slide.subtitle}
+                  </p>
+                  <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 shadow-lg">
+                      Shop {slide.title.split(' ')[0]}
+                    </button>
+                    <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition duration-300 transform hover:-translate-y-1">
+                      View All
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Slider Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === 0 ? 'bg-white scale-125' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </section>
 
@@ -137,11 +209,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Premium Products Section */}
+      {/* Premium Products Section - USING REAL DATABASE PRODUCTS */}
       <section className="max-w-7xl mx-auto py-20 px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Curated <span className="text-blue-600">Excellence</span>
+            Featured <span className="text-blue-600">Products</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Handpicked stationery and office solutions that combine aesthetics with functionality
@@ -149,7 +221,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((product) => (
+          {featuredProducts.map((product: any) => (
             <div key={product.id} className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
               <div className="relative h-64 overflow-hidden">
                 <Image
@@ -160,23 +232,36 @@ export default function Home() {
                 />
                 <div className="absolute top-4 right-4">
                   <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Popular
+                    {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
                   </span>
                 </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
+                <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-blue-600">{product.price}</span>
-                  <button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300 transform hover:scale-105">
-                    Add to Cart
+                  <span className="text-2xl font-bold text-blue-600">P {product.price.toFixed(2)}</span>
+                  <button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={product.stock === 0}>
+                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                   </button>
                 </div>
+                {product.stock > 0 && product.stock < 10 && (
+                  <p className="text-sm text-orange-600 mt-2">Only {product.stock} left in stock!</p>
+                )}
               </div>
             </div>
           ))}
         </div>
+
+        {/* View All Products Button */}
+        {products.length > 6 && (
+          <div className="text-center mt-12">
+            <a href="/products" className="inline-block bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+              View All {products.length} Products →
+            </a>
+          </div>
+        )}
       </section>
 
       {/* Premium Features */}
