@@ -12,10 +12,7 @@ async function getProducts() {
     if (!res.ok) throw new Error('Failed to fetch products');
     const products = await res.json();
     
-    return products.map((product: any) => ({
-      ...product,
-      image: product.imageUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop'
-    }));
+    return products;
   } catch (error) {
     console.error('Error fetching products:', error);
     return [];
@@ -88,6 +85,7 @@ const specialOffers = [
 ];
 
 export default async function Home() {
+  // Get REAL products from your Neon database
   const products = await getProducts();
   const featuredProducts = products.slice(0, 8);
 
@@ -277,7 +275,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Featured Products - Makro Style */}
+      {/* Featured Products - USING REAL DATABASE PRODUCTS */}
       <section className="bg-white py-8">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
@@ -285,42 +283,51 @@ export default async function Home() {
             <a href="/products" className="text-red-600 hover:text-red-700 font-semibold">View All →</a>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {featuredProducts.map((product: any) => (
-              <div key={product.id} className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-200 group">
-                <div className="relative h-48 bg-gray-100">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-200"
-                  />
-                  {product.stock === 0 && (
-                    <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                      Out of Stock
+          {featuredProducts.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {featuredProducts.map((product: any) => (
+                <div key={product.id} className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-200 group">
+                  <div className="relative h-48 bg-gray-100">
+                    <Image
+                      src={product.imageUrl || 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&h=400&fit=crop'}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-200"
+                    />
+                    {product.stock === 0 && (
+                      <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                        Out of Stock
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-lg font-bold text-gray-900">P {product.price?.toFixed(2) || '0.00'}</span>
+                      <button 
+                        className={`px-4 py-2 rounded text-sm font-semibold transition duration-200 ${
+                          product.stock === 0 
+                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                            : 'bg-red-600 text-white hover:bg-red-700'
+                        }`}
+                        disabled={product.stock === 0}
+                      >
+                        {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                      </button>
                     </div>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-gray-900">P {product.price.toFixed(2)}</span>
-                    <button 
-                      className={`px-4 py-2 rounded text-sm font-semibold transition duration-200 ${
-                        product.stock === 0 
-                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                          : 'bg-red-600 text-white hover:bg-red-700'
-                      }`}
-                      disabled={product.stock === 0}
-                    >
-                      {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-                    </button>
+                    {product.stock > 0 && product.stock < 5 && (
+                      <p className="text-xs text-orange-600 mt-2">Only {product.stock} left!</p>
+                    )}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No products found. Please check your database connection.</p>
+            </div>
+          )}
         </div>
       </section>
 
