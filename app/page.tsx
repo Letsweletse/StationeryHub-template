@@ -101,7 +101,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* Professional Top Banner */}
       <div className="bg-gradient-to-r from-red-700 to-red-800 text-white py-2 px-4 text-center text-sm font-medium">
-        <p>🚚 Free delivery across Botswana for orders over P500 | 📞 Business inquiries: +267 XXX-XXXX</p>
+        <p>🚚 Free delivery across Gaborone for orders over P500 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
       {/* Corporate Header */}
@@ -488,7 +488,7 @@ export default async function Home() {
                   <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <span>+267 XXX-XXXX</span>
+                  <span>+267 75560140</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -507,7 +507,7 @@ export default async function Home() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-            <p>&copy; 2024 StationeryHub Business Solutions. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2024 StationeryHub Business Solutions by iblimenterprise.com . All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
