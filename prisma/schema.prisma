@@ -1,4 +1,3 @@
-// This matches your existing database table
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,11 +10,11 @@ datasource db {
 model Product {
   id          Int      @id @default(autoincrement())
   name        String
-  category    String?
+  category    String
   price       Float
-  description String?
-  imageUrl    String?  @map("image_url")
-  stock       Int      @default(10)
+  description String   @default("")
+  imageUrl    String   @default("") @map("image_url")
+  stock       Int      @default(0)
   createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("products")
