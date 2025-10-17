@@ -33,7 +33,7 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <Link 
-              href="https://wa.me/267XXXXXXXX" 
+              href="https://wa.me/26775560140" 
               target="_blank"
               className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-200 flex items-center space-x-2"
             >
@@ -72,7 +72,7 @@ export default function Header() {
                 Contact
               </Link>
               <Link 
-                href="https://wa.me/267XXXXXXXX" 
+                href="https://wa.me/26775560140" 
                 target="_blank"
                 className="bg-green-600 text-white px-4 py-3 rounded-lg font-semibold text-center hover:bg-green-700 transition-colors duration-200"
               >
