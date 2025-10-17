@@ -50,3 +50,6 @@
   "author": "StationeryHub Team",
   "license": "MIT"
 }
+"prisma": {
+  "seed": "tsx prisma/seed.ts"
+}
