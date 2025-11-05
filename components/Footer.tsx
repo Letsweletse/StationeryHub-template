@@ -47,7 +47,7 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
             <div className="space-y-2 text-gray-300">
               <p>📞 +267 75560140</p>
-              <p>📧 admin@stationeryhub.co.bw</p>
+              <p>📧 sales@stationeryhub.co.bw</p>
               <p>🕒 Mon-Fri: 8AM-5PM</p>
               <p>📍 Gaborone, Botswana</p>
             </div>
