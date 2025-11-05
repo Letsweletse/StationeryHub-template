@@ -38,9 +38,7 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
         const result = await response.json();
         if (result.success) {
           userId = result.user.id;
-          if (userId) {
-  localStorage.setItem('userId', userId);
-}
+          localStorage.setItem('userId', userId || '');
         }
       } catch (error) {
         alert('Please create an account first!');
