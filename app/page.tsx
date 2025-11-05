@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '@/components/Header';
 
 // Function to fetch real products from your database
 async function getProducts() {
@@ -104,97 +105,8 @@ export default async function Home() {
         <p>🚚 Free delivery across Gaborone for orders over P500 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
-      {/* Corporate Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-48 h-16 relative">
-                <Image
-                  src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
-                  alt="StationeryHub Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </Link>
-
-            {/* Corporate Search */}
-            <div className="flex-1 max-w-2xl mx-8">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search for products, brands, and business supplies..."
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent font-medium text-gray-900 placeholder-gray-500"
-                />
-              </div>
-            </div>
-
-            {/* Corporate Actions */}
-            <div className="flex items-center space-x-6">
-              <button className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors duration-200 font-medium group">
-                <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-red-50 transition-colors duration-200">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <span className="hidden lg:block text-sm">Account</span>
-              </button>
-              
-              <button className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors duration-200 font-medium group">
-                <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-red-50 transition-colors duration-200 relative">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">0</span>
-                </div>
-                <span className="hidden lg:block text-sm">Cart</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Corporate Navigation */}
-      <nav className="bg-gray-900 text-white sticky top-0 z-40 shadow-lg">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between px-4 py-3">
-            <div className="flex items-center space-x-8">
-              <button className="flex items-center space-x-3 bg-red-600 px-4 py-2.5 rounded-lg hover:bg-red-700 transition-colors duration-200 font-semibold group">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <span>All Categories</span>
-              </button>
-              
-              <div className="hidden xl:flex items-center space-x-8 text-sm font-medium">
-                <a href="/deals" className="hover:text-red-300 transition-colors duration-200">Today's Deals</a>
-                <a href="/products" className="hover:text-red-300 transition-colors duration-200">All Products</a>
-                <a href="/business" className="hover:text-red-300 transition-colors duration-200">Business Orders</a>
-                <a href="/education" className="hover:text-red-300 transition-colors duration-200">Education</a>
-                <a href="/brands" className="hover:text-red-300 transition-colors duration-200">Brands</a>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-6 text-sm font-medium">
-              <a href="/store-locator" className="hover:text-red-300 transition-colors duration-200 flex items-center space-x-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
-                <span>Store Locator</span>
-              </a>
-              <a href="/contact" className="hover:text-red-300 transition-colors duration-200">Support</a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Use Header Component */}
+      <Header />
 
       {/* Corporate Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
