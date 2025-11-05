@@ -1,0 +1,27 @@
+import { NextResponse } from 'next/server'
+import { existsSync } from 'fs'
+import path from 'path'
+
+export async function GET() {
+  const prismaFiles = [
+    'lib/prisma/schema.prisma',
+    'lib/prisma/seed.ts', 
+    'lib/db.ts',
+    'app/api/debug/db-test/route.ts'
+  ]
+  
+  const results = prismaFiles.map(file => ({
+    file,
+    exists: existsSync(path.join(process.cwd(), file))
+  }))
+
+  const existingFiles = results.filter(r => r.exists)
+  
+  return NextResponse.json({
+    message: existingFiles.length === 0 
+      ? 'No Prisma files found - ready to build! ✅' 
+      : 'Prisma files still exist - please delete them! ❌',
+    files: results,
+    canBuild: existingFiles.length === 0
+  })
+}
