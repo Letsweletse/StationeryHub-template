@@ -1,11 +1,23 @@
-import { prisma } from '@/lib/db'
-import { NextResponse } from 'next/server'
+import { neon } from '@neondatabase/serverless';
+import { NextResponse } from 'next/server';
+
+const sql = neon(process.env.DATABASE_URL!);
 
 export async function GET() {
   try {
-    const products = await prisma.product.findMany({
-      orderBy: { createdAt: 'desc' }
-    })
+    const products = await sql`
+      SELECT 
+        id,
+        name,
+        category,
+        price,
+        description,
+        image_url as "imageUrl",
+        stock,
+        created_at as "createdAt"
+      FROM products 
+      ORDER BY created_at DESC
+    `;
     
     return NextResponse.json(products)
   } catch (error) {
@@ -29,18 +41,34 @@ export async function POST(request: Request) {
       )
     }
 
-    const product = await prisma.product.create({
-      data: {
-        name: body.name,
-        category: body.category,
-        price: parseFloat(body.price),
-        description: body.description || '',
-        imageUrl: body.imageUrl || '',
-        stock: parseInt(body.stock) || 0,
-      }
-    })
+    const product = await sql`
+      INSERT INTO products (
+        name, 
+        category, 
+        price, 
+        description, 
+        image_url, 
+        stock
+      ) VALUES (
+        ${body.name},
+        ${body.category},
+        ${parseFloat(body.price)},
+        ${body.description || ''},
+        ${body.imageUrl || ''},
+        ${parseInt(body.stock) || 0}
+      )
+      RETURNING 
+        id,
+        name,
+        category,
+        price,
+        description,
+        image_url as "imageUrl",
+        stock,
+        created_at as "createdAt"
+    `;
     
-    return NextResponse.json(product, { status: 201 })
+    return NextResponse.json(product[0], { status: 201 })
   } catch (error: any) {
     console.error('Create product error:', error)
     return NextResponse.json(
