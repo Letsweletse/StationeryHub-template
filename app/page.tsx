@@ -4,7 +4,7 @@ import Link from 'next/link';
 // Function to fetch real products from your database
 async function getProducts() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://stationery-hub-template.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://stationeryhub.co.bw';
     const res = await fetch(`${baseUrl}/api/products`, {
       cache: 'no-store'
     });
@@ -110,12 +110,14 @@ export default async function Home() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <span className="text-white font-bold text-xl">SH</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900 tracking-tight">StationeryHub</h1>
-                <p className="text-xs text-gray-500 font-medium">BUSINESS SOLUTIONS</p>
+              <div className="w-48 h-16 relative">
+                <Image
+                  src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
+                  alt="StationeryHub Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
             </Link>
 
@@ -446,12 +448,13 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <span className="text-red-600 font-bold text-lg">SH</span>
-                </div>
-                <div>
-                  <span className="text-xl font-bold">StationeryHub</span>
-                  <p className="text-xs text-gray-400 font-medium">BUSINESS SOLUTIONS</p>
+                <div className="w-32 h-12 relative">
+                  <Image
+                    src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
+                    alt="StationeryHub Logo"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               </div>
               <p className="text-gray-400 leading-relaxed text-sm">
