@@ -102,7 +102,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* Professional Top Banner */}
       <div className="bg-gradient-to-r from-red-700 to-red-800 text-white py-2 px-4 text-center text-sm font-medium">
-        <p>🚚 Free delivery across Gaborone for orders over P500 | 📞 Business inquiries: +267 75560140</p>
+        <p>🚚 Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
       {/* Use Header Component */}
