@@ -173,6 +173,131 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* NEW: What You Get Section */}
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">What You Get With Every Purchase</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Every time you shop with StationeryHub, you unlock exclusive digital perks for your business
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                💻
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Free 1-Month Website Trial</h3>
+              <p className="text-gray-600 text-xs leading-relaxed">Get your business online with a professional one-page site</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                🤖
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm">WhatsApp Automation Setup</h3>
+              <p className="text-gray-600 text-xs leading-relaxed">Manage inquiries and repeat orders instantly through WhatsApp</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                📧
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Professional Email Hosting</h3>
+              <p className="text-gray-600 text-xs leading-relaxed">Look credible with a yourname@yourbusiness.co.bw email</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                📢
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Discounted Social Media Marketing</h3>
+              <p className="text-gray-600 text-xs leading-relaxed">Boost your brand visibility at a fraction of the normal price</p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                📊
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Free AI-Powered Business Insights</h3>
+              <p className="text-gray-600 text-xs leading-relaxed">See how your business can grow through smart data</p>
+            </div>
+          </div>
+
+          {/* About Us Section */}
+          <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">About Us</h3>
+            <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed mb-6">
+              At StationeryHub, we go beyond selling pens and paper. We believe every business — 
+              small or large — deserves the tools to run smarter. When you buy your stationery or 
+              office supplies from us, you don't just get quality products delivered to your door. 
+              You also get access to digital growth tools that help your business attract more customers, 
+              stay organized, and save time.
+            </p>
+            <div className="bg-red-600 text-white inline-block px-6 py-3 rounded-lg font-semibold text-lg">
+              Our Promise: "Buy smarter. Work smarter. Grow faster."
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Why This Approach Works */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">Why This Approach Works</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We're changing the game for Botswana's small businesses
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-6 h-6 bg-red-600 rounded"></div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg mb-2">One Vendor, Multiple Solutions</h3>
+                  <p className="text-gray-600">Buy stationery and get business tools in one place</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-6 h-6 bg-red-600 rounded"></div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Better ROI</h3>
+                  <p className="text-gray-600">Turn every stationery order into a growth opportunity</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-6 h-6 bg-red-600 rounded"></div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Local Advantage</h3>
+                  <p className="text-gray-600">Get support from a Botswana-based team that understands your needs</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-6 h-6 bg-red-600 rounded"></div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Business Empowerment</h3>
+                  <p className="text-gray-600">We help small businesses move from paper to digital</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Business Solutions Section */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4">
@@ -336,21 +461,25 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Corporate CTA */}
+      {/* NEW: Final Call to Action */}
       <section className="bg-gradient-to-r from-red-600 to-red-700 py-16">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6 tracking-tight">Ready to Transform Your Office?</h2>
+          <h2 className="text-4xl font-bold mb-6 tracking-tight">Ready to Transform Your Business?</h2>
           <p className="text-xl mb-8 opacity-90 leading-relaxed">
-            Join hundreds of businesses across Botswana who trust StationeryHub for their office supply needs
+            Whether you're restocking your office, setting up a home workspace, or growing your small business —
+            StationeryHub helps you do it smarter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-red-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg">
-              Get Business Quote
+              🛒 Start Shopping
             </button>
             <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-red-600 transition-colors duration-200">
-              Contact Sales
+              🚀 Activate Digital Perks
             </button>
           </div>
+          <p className="text-sm mt-6 opacity-80">
+            One Vendor, Multiple Solutions • Better ROI • Local Advantage • Business Empowerment
+          </p>
         </div>
       </section>
 
