@@ -1,39 +1,40 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/utils/supabase/server';
+import { query } from '@/lib/db';
 
 export async function GET() {
   try {
-    const supabase = createClient();
+    // Test connection and check tables
+    const tablesCheck = await query(`
+      SELECT table_name 
+      FROM information_schema.tables 
+      WHERE table_schema = 'public'
+      AND table_name IN ('products', 'product_reviews', 'order_inquiries')
+    `);
     
-    // Test basic connection
-    const { data: { session }, error: authError } = await supabase.auth.getSession();
+    const existingTables = tablesCheck.rows.map(row => row.table_name);
     
-    // Test products table
-    const { data: products, error: productsError } = await supabase
-      .from('products')
-      .select('*')
-      .limit(1);
-
+    // Check products count if table exists
+    let productsCount = 0;
+    if (existingTables.includes('products')) {
+      const countResult = await query('SELECT COUNT(*) FROM products');
+      productsCount = parseInt(countResult.rows[0].count);
+    }
+    
     return NextResponse.json({
       success: true,
-      auth: {
-        connected: !authError,
-        error: authError?.message
-      },
-      database: {
-        productsTableExists: !productsError,
-        productCount: products?.length || 0,
-        error: productsError?.message
-      },
+      database: 'Neon PostgreSQL',
+      connection: 'Connected successfully',
+      existingTables,
+      productsCount,
       environment: {
-        hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-        hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        hasDatabaseUrl: !!process.env.DATABASE_URL,
+        hasDirectUrl: !!process.env.DIRECT_URL
       }
     });
   } catch (error: any) {
     return NextResponse.json({
       success: false,
       error: error.message
-    });
+    }, { status: 500 });
   }
 }
