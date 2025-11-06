@@ -1,0 +1,39 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    const { Pool } = await import('pg');
+    
+    // Use your exact connection string from Vercel
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    });
+
+    const client = await pool.connect();
+    
+    // Test basic query
+    const result = await client.query('SELECT version() as db_version, NOW() as current_time');
+    
+    client.release();
+    
+    return NextResponse.json({
+      success: true,
+      database: 'Neon PostgreSQL',
+      connection: 'Successful',
+      version: result.rows[0].db_version,
+      currentTime: result.rows[0].current_time,
+      connectionDetails: {
+        host: 'ep-rough-dew-adwx26hr-pooler.c-2.us-east-1.aws.neon.tech',
+        database: 'neondb',
+        user: 'neondb_owner'
+      }
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      success: false,
+      error: error.message,
+      connectionStringUsed: process.env.DATABASE_URL ? 'Yes' : 'No'
+    }, { status: 500 });
+  }
+}
