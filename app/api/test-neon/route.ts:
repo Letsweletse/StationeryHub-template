@@ -1,0 +1,45 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    const { Pool } = await import('pg');
+    
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    });
+
+    const client = await pool.connect();
+    
+    // Check if products table exists
+    const tableCheck = await client.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_name = 'products'
+      );
+    `);
+    
+    const productsTableExists = tableCheck.rows[0].exists;
+    
+    let products = [];
+    if (productsTableExists) {
+      const result = await client.query('SELECT * FROM products LIMIT 5');
+      products = result.rows;
+    }
+    
+    client.release();
+    
+    return NextResponse.json({
+      success: true,
+      database: 'Neon PostgreSQL',
+      productsTableExists,
+      productsCount: products.length,
+      sampleProducts: products
+    });
+  } catch (error: any) {
+    return NextResponse.json({
+      success: false,
+      error: error.message
+    }, { status: 500 });
+  }
+}
