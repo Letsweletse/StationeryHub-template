@@ -17,29 +17,12 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
     setIsLoading(true);
     
     try {
-      // Get current user session
       const { data: { session } } = await supabase.auth.getSession();
       let userId = session?.user?.id;
 
-      // If no user session, check for anonymous user ID in localStorage
       if (!userId) {
-        // FIX: Add fallback for localStorage getItem
+        // SIMPLE FIX: Always use empty string fallback
         userId = localStorage.getItem('userId') || '';
-        
-        // If no anonymous user ID exists, create one
-        if (!userId) {
-          const { data: anonUser, error } = await supabase.auth.signInAnonymously();
-          if (error) {
-            console.error('Error creating anonymous user:', error);
-            alert('Please create an account first!');
-            return;
-          }
-          if (anonUser.user) {
-            userId = anonUser.user.id;
-            // FIXED: Added fallback for null case
-            localStorage.setItem('userId', userId || '');
-          }
-        }
       }
 
       if (!userId) {
@@ -47,61 +30,28 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
         return;
       }
 
-      // Check if product already exists in cart
-      const { data: existingItem, error: fetchError } = await supabase
+      // Add to cart logic here
+      const { error } = await supabase
         .from('cart_items')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('product_id', productId)
-        .single();
+        .insert([
+          {
+            user_id: userId,
+            product_id: productId,
+            product_name: productName,
+            price: price,
+            quantity: 1,
+          },
+        ]);
 
-      if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 means no rows found
-        console.error('Error checking cart:', fetchError);
+      if (error) {
         alert('Error adding to cart');
         return;
       }
 
-      if (existingItem) {
-        // Update quantity if item exists
-        const { error: updateError } = await supabase
-          .from('cart_items')
-          .update({ quantity: existingItem.quantity + 1 })
-          .eq('id', existingItem.id);
-
-        if (updateError) {
-          console.error('Error updating cart:', updateError);
-          alert('Error updating cart');
-          return;
-        }
-      } else {
-        // Add new item to cart
-        const { error: insertError } = await supabase
-          .from('cart_items')
-          .insert([
-            {
-              user_id: userId,
-              product_id: productId,
-              product_name: productName,
-              price: price,
-              quantity: 1,
-            },
-          ]);
-
-        if (insertError) {
-          console.error('Error adding to cart:', insertError);
-          alert('Error adding to cart');
-          return;
-        }
-      }
-
       alert('Product added to cart!');
       
-      // Trigger cart update event for other components
-      window.dispatchEvent(new Event('cartUpdated'));
-      
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred while adding to cart');
+      alert('An error occurred');
     } finally {
       setIsLoading(false);
     }
