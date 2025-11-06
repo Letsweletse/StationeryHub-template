@@ -29,21 +29,21 @@ export default function TestPage() {
     testConnection();
   }, []);
 
-  const addSampleProducts = async () => {
+  const setupDatabase = async () => {
     try {
       const response = await fetch('/api/products/seed', { method: 'POST' });
       const result = await response.json();
-      alert(result.success ? 'Products added!' : `Error: ${result.error}`);
+      alert(result.success ? 'Database setup complete!' : `Error: ${result.error}`);
       window.location.reload();
     } catch (error) {
-      alert('Failed to add products');
+      alert('Failed to setup database');
     }
   };
 
   if (loading) {
     return (
       <div className="p-8">
-        <h1 className="text-2xl font-bold mb-4">Testing Database Connection...</h1>
+        <h1 className="text-2xl font-bold mb-4">Testing Neon Database Connection...</h1>
         <p>Please wait...</p>
       </div>
     );
@@ -51,11 +51,11 @@ export default function TestPage() {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Database Connection Test</h1>
+      <h1 className="text-3xl font-bold mb-6">Neon PostgreSQL Connection Test</h1>
 
       {/* Database Status */}
       <div className="mb-8 p-6 border rounded-lg bg-gray-50">
-        <h2 className="text-xl font-semibold mb-4">Connection Status</h2>
+        <h2 className="text-xl font-semibold mb-4">Database Status</h2>
         <pre className="bg-white p-4 rounded border text-sm">
           {JSON.stringify(dbStatus, null, 2)}
         </pre>
@@ -65,12 +65,12 @@ export default function TestPage() {
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Products ({products.length})</h2>
-          {products.length === 0 && (
+          {(!dbStatus?.existingTables?.includes('products') || products.length === 0) && (
             <button
-              onClick={addSampleProducts}
+              onClick={setupDatabase}
               className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
             >
-              Add Sample Products
+              Setup Database & Add Products
             </button>
           )}
         </div>
@@ -79,7 +79,7 @@ export default function TestPage() {
           <div className="text-center py-8 border rounded bg-yellow-50">
             <p className="text-yellow-700">No products found in database</p>
             <p className="text-sm text-yellow-600 mt-2">
-              Click "Add Sample Products" to populate your database
+              Click "Setup Database" to create tables and add sample products
             </p>
           </div>
         ) : (
@@ -89,37 +89,11 @@ export default function TestPage() {
                 <h3 className="font-semibold">{product.name}</h3>
                 <p className="text-gray-600 text-sm">{product.description}</p>
                 <p className="text-green-600 font-bold">P {product.price}</p>
+                <p className="text-sm text-gray-500">Stock: {product.stock}</p>
               </div>
             ))}
           </div>
         )}
-      </div>
-
-      {/* Quick Actions */}
-      <div className="border-t pt-6">
-        <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
-        <div className="flex gap-4">
-          <a
-            href="/api/check-db"
-            target="_blank"
-            className="text-blue-600 hover:underline"
-          >
-            Check DB API
-          </a>
-          <a
-            href="/api/products"
-            target="_blank"
-            className="text-blue-600 hover:underline"
-          >
-            Products API
-          </a>
-          <a
-            href="/"
-            className="text-blue-600 hover:underline"
-          >
-            Homepage
-          </a>
-        </div>
       </div>
     </div>
   );
