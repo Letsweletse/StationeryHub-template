@@ -21,8 +21,19 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
       let userId = session?.user?.id;
 
       if (!userId) {
-        // SIMPLE FIX: Always use empty string fallback
         userId = localStorage.getItem('userId') || '';
+        
+        if (!userId) {
+          const { data: anonUser, error } = await supabase.auth.signInAnonymously();
+          if (error) {
+            alert('Please create an account first!');
+            return;
+          }
+          if (anonUser.user) {
+            userId = anonUser.user.id;
+            localStorage.setItem('userId', userId || '');
+          }
+        }
       }
 
       if (!userId) {
@@ -30,28 +41,37 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
         return;
       }
 
-      // Add to cart logic here
-      const { error } = await supabase
+      const { data: existingItem } = await supabase
         .from('cart_items')
-        .insert([
-          {
-            user_id: userId,
-            product_id: productId,
-            product_name: productName,
-            price: price,
-            quantity: 1,
-          },
-        ]);
+        .select('*')
+        .eq('user_id', userId)
+        .eq('product_id', productId)
+        .single();
 
-      if (error) {
-        alert('Error adding to cart');
-        return;
+      if (existingItem) {
+        await supabase
+          .from('cart_items')
+          .update({ quantity: existingItem.quantity + 1 })
+          .eq('id', existingItem.id);
+      } else {
+        await supabase
+          .from('cart_items')
+          .insert([
+            {
+              user_id: userId,
+              product_id: productId,
+              product_name: productName,
+              price: price,
+              quantity: 1,
+            },
+          ]);
       }
 
       alert('Product added to cart!');
+      window.dispatchEvent(new Event('cartUpdated'));
       
     } catch (error) {
-      alert('An error occurred');
+      alert('An error occurred while adding to cart');
     } finally {
       setIsLoading(false);
     }
