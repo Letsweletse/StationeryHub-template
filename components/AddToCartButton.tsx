@@ -23,7 +23,8 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
 
       // If no user session, check for anonymous user ID in localStorage
       if (!userId) {
-        userId = localStorage.getItem('userId');
+        // FIX: Add fallback for localStorage getItem
+        userId = localStorage.getItem('userId') || '';
         
         // If no anonymous user ID exists, create one
         if (!userId) {
