@@ -35,6 +35,7 @@ export default function AddToCartButton({ productId, productName, price }: AddTo
           }
           if (anonUser.user) {
             userId = anonUser.user.id;
+            // FIXED: Added fallback for null case
             localStorage.setItem('userId', userId || '');
           }
         }
