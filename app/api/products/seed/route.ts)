@@ -1,0 +1,225 @@
+import { NextResponse } from 'next/server';
+import { createClient } from '@/utils/supabase/server';
+
+export async function POST() {
+  try {
+    const supabase = createClient();
+
+    const premiumProducts = [
+      // Printer Cartridges
+      {
+        name: 'HP 304XL High-Yield Ink Cartridge Combo',
+        description: 'Original HP 304XL High-Yield Ink Cartridges (Black + Color) for HP DeskJet 2634, 2652, 2655, 3755, 3760, 4155, 4175 printers. Premium quality with extended page yield.',
+        price: 459.99,
+        stock: 15,
+        category: 'cartridges',
+        image_url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          compatibility: 'HP DeskJet 2634, 2652, 2655, 3755, 3760, 4155, 4175',
+          yield: 'Up to 600 pages (Black), 450 pages (Color)',
+          type: 'Original HP',
+          warranty: '1 Year'
+        }
+      },
+      {
+        name: 'Canon PG-245XL & CL-246XL Combo Pack',
+        description: 'Genuine Canon PG-245XL Black and CL-246XL Color Ink Cartridges for PIXMA TS3122, TS3123, TS3124, TS3125, TS3126, TS3127, TS3128, TS3129 printers.',
+        price: 389.99,
+        stock: 12,
+        category: 'cartridges',
+        image_url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop',
+        is_featured: false,
+        specifications: {
+          compatibility: 'Canon PIXMA TS3122-TS3129 series',
+          yield: 'Up to 400 pages (Black), 300 pages (Color)',
+          type: 'Original Canon',
+          warranty: '1 Year'
+        }
+      },
+
+      // Premium Writing Instruments
+      {
+        name: 'Montblanc Meisterstück Ballpoint Pen',
+        description: 'Luxury Montblanc Meisterstück Classique Ballpoint Pen with platinum-coated clip and ring. Precious resin craftsmanship for the discerning professional.',
+        price: 2499.99,
+        stock: 5,
+        category: 'pens',
+        image_url: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          material: 'Precious Resin with Platinum Coating',
+          refill: 'Montblanc Ballpoint Refill',
+          warranty: 'Lifetime Limited',
+          origin: 'Germany'
+        }
+      },
+      {
+        name: 'Parker Jotter Premium Ballpoint Pen Set',
+        description: 'Elegant Parker Jotter Premium Ballpoint Pen gift set with stainless steel finish and premium blue ink refills. Classic design for modern professionals.',
+        price: 299.99,
+        stock: 25,
+        category: 'pens',
+        image_url: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          material: 'Stainless Steel',
+          refill: 'Parker Quinkflow Ballpoint Refill',
+          color: 'Brushed Stainless Steel',
+          warranty: '2 Years'
+        }
+      },
+
+      // Office Furniture
+      {
+        name: 'Herman Miller Aeron Ergonomic Office Chair',
+        description: 'Professional-grade Herman Miller Aeron Ergonomic Office Chair with PostureFit SL support. Designed for all-day comfort and superior lumbar support.',
+        price: 8999.99,
+        stock: 3,
+        category: 'furniture',
+        image_url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          material: 'Pellicle Suspension Material',
+          adjustments: '8Z Pellicle, Tilt Limiter, Seat Angle',
+          weight_capacity: '159 kg',
+          warranty: '12 Years'
+        }
+      },
+      {
+        name: 'IKEA Markus Executive Office Chair',
+        description: 'Premium IKEA Markus Executive Office Chair with high backrest, adjustable lumbar support, and breathable mesh material for comfortable long working hours.',
+        price: 2199.99,
+        stock: 8,
+        category: 'furniture',
+        image_url: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop',
+        is_featured: false,
+        specifications: {
+          material: 'Polyester, Polypropylene, Steel',
+          adjustments: 'Seat Height, Back Tilt Tension',
+          weight_capacity: '110 kg',
+          warranty: '10 Years'
+        }
+      },
+
+      // Computer Accessories
+      {
+        name: 'Logitech MX Master 3S Wireless Mouse',
+        description: 'Advanced Logitech MX Master 3S Wireless Mouse with MagSpeed electromagnetic scrolling, 8K DPI sensor, and ergonomic design for productivity professionals.',
+        price: 899.99,
+        stock: 15,
+        category: 'computers',
+        image_url: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          connectivity: 'Bluetooth, 2.4GHz Wireless',
+          battery: '70 days',
+          dpi: '8000 DPI',
+          warranty: '2 Years'
+        }
+      },
+      {
+        name: 'Apple Magic Keyboard with Numeric Keypad',
+        description: 'Original Apple Magic Keyboard with numeric keypad. Features a scissor mechanism beneath each key for stability, precision, and responsiveness.',
+        price: 1299.99,
+        stock: 10,
+        category: 'computers',
+        image_url: 'https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=600&h=400&fit=crop',
+        is_featured: false,
+        specifications: {
+          connectivity: 'Bluetooth',
+          battery: '1 month charge',
+          layout: 'QWERTY with Numeric Pad',
+          compatibility: 'Mac, iPad, iPhone'
+        }
+      },
+
+      // Stationery Supplies
+      {
+        name: 'Moleskine Professional Notebook Set',
+        description: 'Premium Moleskine Professional Notebook Set including 3 hardcover notebooks with acid-free paper, ribbon bookmark, and expandable inner pocket.',
+        price: 459.99,
+        stock: 20,
+        category: 'stationery',
+        image_url: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          paper: 'Acid-free, 70 g/m²',
+          pages: '192 pages each',
+          cover: 'Hardcover',
+          size: 'Large 13x21cm'
+        }
+      },
+      {
+        name: 'Staedtler Noris Digital Pencil Set',
+        description: 'Advanced Staedtler Noris Digital Pencil Set for tablets and digital devices. Includes multiple tips, charger, and carrying case for digital artists.',
+        price: 689.99,
+        stock: 12,
+        category: 'stationery',
+        image_url: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=400&fit=crop',
+        is_featured: false,
+        specifications: {
+          compatibility: 'Most digital tablets',
+          pressure_levels: '2048',
+          battery: 'Rechargeable',
+          accessories: 'Multiple tips, USB charger'
+        }
+      },
+
+      // Office Supplies
+      {
+        name: 'Fellowes Saturn 95i Business shredder',
+        description: 'Heavy-duty Fellowes Saturn 95i Business shredder with 18-liter bin, 10-sheet capacity, and advanced safety features for confidential document destruction.',
+        price: 2899.99,
+        stock: 4,
+        category: 'supplies',
+        image_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+        is_featured: true,
+        specifications: {
+          capacity: '10 sheets, 18L bin',
+          shred_size: '4x35mm cross-cut',
+          safety: 'Auto start/stop, overload protection',
+          warranty: '3 Years'
+        }
+      },
+      {
+        name: 'Bamboo Standing Desk Organizer',
+        description: 'Eco-friendly bamboo standing desk organizer with multiple compartments for pens, notebooks, phones, and accessories. Sustainable and stylish.',
+        price: 349.99,
+        stock: 18,
+        category: 'supplies',
+        image_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+        is_featured: false,
+        specifications: {
+          material: 'Natural Bamboo',
+          compartments: '6 sections',
+          dimensions: '30x20x15cm',
+          finish: 'Natural wood finish'
+        }
+      }
+    ];
+
+    const { data, error } = await supabase
+      .from('products')
+      .insert(premiumProducts)
+      .select();
+
+    if (error) {
+      return NextResponse.json(
+        { error: `Failed to add products: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Premium products added successfully',
+      products: data
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Server error: ${error}` },
+      { status: 500 }
+    );
+  }
+}
