@@ -1,0 +1,86 @@
+import { NextResponse } from 'next/server';
+import { createClient } from '@/utils/supabase/server';
+
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = createClient();
+    
+    const { data: reviews, error } = await supabase
+      .from('product_reviews')
+      .select(`
+        *,
+        profiles:user_id (
+          full_name,
+          avatar_url
+        )
+      `)
+      .eq('product_id', params.id)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      return NextResponse.json(
+        { error: 'Failed to fetch reviews' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(reviews || []);
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = createClient();
+    const { rating, comment } = await request.json();
+
+    // Get user session
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const { data, error } = await supabase
+      .from('product_reviews')
+      .insert([{
+        product_id: params.id,
+        user_id: session.user.id,
+        rating,
+        comment
+      }])
+      .select()
+      .single();
+
+    if (error) {
+      return NextResponse.json(
+        { error: `Failed to add review: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Review added successfully',
+      review: data
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
