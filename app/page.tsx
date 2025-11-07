@@ -337,7 +337,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: Hero Slides Between Products - Static Grid (No Animation) */}
+      {/* NEW: Hero Slides Between Products - Static Grid */}
       <section className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Our Business Solutions</h3>
@@ -431,7 +431,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: Before Footer Slideshow - Static Grid (No Animation) */}
+      {/* NEW: Before Footer Slideshow - Static Grid */}
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Why Choose StationeryHub?</h3>
