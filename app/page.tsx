@@ -337,36 +337,24 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: Hero Slides Between Products - Auto Slider */}
+      {/* NEW: Hero Slides Between Products - Static Grid (No Animation) */}
       <section className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Our Business Solutions</h3>
-          <div className="relative overflow-hidden">
-            <div className="flex space-x-6 animate-marquee whitespace-nowrap">
-              {heroSlides.concat(heroSlides).map((slide, index) => (
-                <div key={index} className="flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-lg">
-                  <Image
-                    src={slide}
-                    alt={`Business Solution ${index + 1}`}
-                    width={320}
-                    height={240}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {heroSlides.map((slide, index) => (
+              <div key={index} className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Image
+                  src={slide}
+                  alt={`Business Solution ${index + 1}`}
+                  width={300}
+                  height={200}
+                  className="w-full h-48 object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
-        
-        <style jsx>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 30s linear infinite;
-          }
-        `}</style>
       </section>
 
       {/* Featured Products - Corporate Style */}
@@ -443,36 +431,24 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: Before Footer Slideshow - Auto Slider */}
+      {/* NEW: Before Footer Slideshow - Static Grid (No Animation) */}
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Why Choose StationeryHub?</h3>
-          <div className="relative overflow-hidden">
-            <div className="flex space-x-6 animate-marquee-reverse whitespace-nowrap">
-              {footerSlides.concat(footerSlides).map((slide, index) => (
-                <div key={index} className="flex-shrink-0 w-96 h-64 rounded-2xl overflow-hidden shadow-lg">
-                  <Image
-                    src={slide}
-                    alt={`Business Advantage ${index + 1}`}
-                    width={384}
-                    height={256}
-                    className="w-full h-full object-contain bg-gray-100"
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {footerSlides.map((slide, index) => (
+              <div key={index} className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Image
+                  src={slide}
+                  alt={`Business Advantage ${index + 1}`}
+                  width={400}
+                  height={300}
+                  className="w-full h-64 object-contain bg-gray-100"
+                />
+              </div>
+            ))}
           </div>
         </div>
-        
-        <style jsx>{`
-          @keyframes marquee-reverse {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-          .animate-marquee-reverse {
-            animation: marquee-reverse 40s linear infinite;
-          }
-        `}</style>
       </section>
 
       {/* Business Solutions Section */}
