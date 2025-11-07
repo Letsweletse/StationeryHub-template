@@ -9,7 +9,7 @@ function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-40 h-12 relative">
+            <div className="w-40 h-18 relative">
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub Logo"
@@ -212,7 +212,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* Professional Top Banner */}
       <div className="bg-gradient-to-r from-red-700 to-red-800 text-white py-2 px-4 text-center text-sm font-medium">
-        <p>🚚 Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
+        <p> Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
       {/* Use Header Component */}
@@ -223,29 +223,29 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Professional Sidebar */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1">
-              <h3 className="font-bold text-gray-900 text-lg mb-6 border-b border-gray-200 pb-4">Business Categories</h3>
-              <ul className="space-y-3">
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    <a href={category.link} className="flex items-center justify-between text-gray-700 hover:text-red-600 transition-colors duration-200 group py-3 border-b border-gray-100 last:border-b-0">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-red-50 transition-colors duration-200">
-                          <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 rounded"></div>
-                        </div>
-                        <div>
-                          <span className="font-semibold text-sm">{category.name}</span>
-                          <p className="text-xs text-gray-500">{category.description}</p>
-                        </div>
-                      </div>
-                      <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+<div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1">
+  <h3 className="font-bold text-gray-900 text-lg mb-6 border-b border-gray-200 pb-4">Business Categories</h3>
+  <ul className="space-y-3">
+    {categories.map((category) => (
+      <li key={category.id}>
+        <Link href={category.link} className="flex items-center justify-between text-gray-700 hover:text-red-600 transition-colors duration-200 group py-3 border-b border-gray-100 last:border-b-0">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-red-50 transition-colors duration-200">
+              <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 rounded"></div>
             </div>
+            <div>
+              <span className="font-semibold text-sm">{category.name}</span>
+              <p className="text-xs text-gray-500">{category.description}</p>
+            </div>
+          </div>
+          <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
             {/* Main Corporate Hero */}
             <div className="lg:col-span-3">
@@ -553,7 +553,7 @@ export default async function Home() {
               🛒 Start Shopping
             </a>
             <a href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-red-600 transition-colors duration-200 text-center">
-              🚀 Activate Digital Perks
+               Activate Digital Perks
             </a>
           </div>
           <p className="text-sm mt-6 opacity-80">
