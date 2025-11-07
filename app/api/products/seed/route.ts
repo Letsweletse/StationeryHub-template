@@ -5,7 +5,15 @@ export async function POST() {
   try {
     console.log('Starting database seed...');
 
-    // First, clear any existing products to avoid duplicates
+    // First, ensure table has correct structure
+    await query(`
+      ALTER TABLE products 
+      ADD COLUMN IF NOT EXISTS is_featured BOOLEAN DEFAULT false,
+      ADD COLUMN IF NOT EXISTS image_url TEXT,
+      ADD COLUMN IF NOT EXISTS category VARCHAR(100)
+    `);
+
+    // Clear any existing products
     await query('DELETE FROM products');
 
     // Add sample products
@@ -48,7 +56,7 @@ export async function POST() {
       }
     ];
 
-    // Insert products one by one
+    // Insert products
     for (const product of sampleProducts) {
       await query(
         `INSERT INTO products (name, description, price, stock, category, image_url, is_featured) 
@@ -65,22 +73,20 @@ export async function POST() {
       );
     }
 
-    // Verify insertion
+    // Verify
     const result = await query('SELECT COUNT(*) as count FROM products');
     const count = parseInt(result.rows[0].count);
 
     return NextResponse.json({ 
       success: true, 
-      message: `Successfully added ${count} products to database!`,
-      productsAdded: count
+      message: `Successfully added ${count} products!` 
     });
 
   } catch (error: any) {
     console.error('Seed error:', error);
     return NextResponse.json({ 
       success: false, 
-      error: error.message,
-      details: 'Check database connection and table structure'
+      error: error.message 
     }, { status: 500 });
   }
 }
