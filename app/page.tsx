@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Header() {
+// Header Component
+function Header() {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4">
@@ -54,9 +55,6 @@ export default function Header() {
     </header>
   );
 }
-import Image from 'next/image';
-import Link from 'next/link';
-import Header from '@/components/Header';
 
 // Function to fetch real products from your database
 async function getProducts() {
@@ -217,7 +215,7 @@ export default async function Home() {
         <p>🚚 Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
-      {/* Use Header Component - Logo should be fixed in Header component */}
+      {/* Use Header Component */}
       <Header />
 
       {/* Corporate Hero Section */}
@@ -662,4 +660,5 @@ export default async function Home() {
       </footer>
     </div>
   );
+}
 }
