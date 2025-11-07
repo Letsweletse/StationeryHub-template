@@ -55,41 +55,6 @@ function Header() {
     </header>
   );
 }
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200">
-              Home
-            </Link>
-            <Link href="/products" className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200">
-              Products
-            </Link>
-            <Link href="/business" className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200">
-              Business
-            </Link>
-            <Link href="/education" className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200">
-              Education
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200">
-              Contact
-            </Link>
-          </nav>
-
-          {/* Action Buttons */}
-          <div className="flex items-center space-x-4">
-            <Link href="/cart" className="text-gray-700 hover:text-red-600 transition-colors duration-200">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </Link>
-            <Link href="/contact" className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
-              Get Quote
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 // Function to fetch real products from your database
 async function getProducts() {
@@ -247,7 +212,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* Professional Top Banner */}
       <div className="bg-gradient-to-r from-red-700 to-red-800 text-white py-2 px-4 text-center text-sm font-medium">
-        <p> Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
+        <p>🚚 Free delivery across Gaborone for orders over P5000 | 📞 Business inquiries: +267 75560140</p>
       </div>
 
       {/* Use Header Component */}
@@ -258,29 +223,29 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Professional Sidebar */}
-<div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1">
-  <h3 className="font-bold text-gray-900 text-lg mb-6 border-b border-gray-200 pb-4">Business Categories</h3>
-  <ul className="space-y-3">
-    {categories.map((category) => (
-      <li key={category.id}>
-        <Link href={category.link} className="flex items-center justify-between text-gray-700 hover:text-red-600 transition-colors duration-200 group py-3 border-b border-gray-100 last:border-b-0">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-red-50 transition-colors duration-200">
-              <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 rounded"></div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 lg:col-span-1">
+              <h3 className="font-bold text-gray-900 text-lg mb-6 border-b border-gray-200 pb-4">Business Categories</h3>
+              <ul className="space-y-3">
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <Link href={category.link} className="flex items-center justify-between text-gray-700 hover:text-red-600 transition-colors duration-200 group py-3 border-b border-gray-100 last:border-b-0">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-red-50 transition-colors duration-200">
+                          <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 rounded"></div>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-sm">{category.name}</span>
+                          <p className="text-xs text-gray-500">{category.description}</p>
+                        </div>
+                      </div>
+                      <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div>
-              <span className="font-semibold text-sm">{category.name}</span>
-              <p className="text-xs text-gray-500">{category.description}</p>
-            </div>
-          </div>
-          <svg className="w-4 h-4 text-gray-400 group-hover:text-red-600 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </li>
-    ))}
-  </ul>
-</div>
 
             {/* Main Corporate Hero */}
             <div className="lg:col-span-3">
@@ -303,12 +268,12 @@ export default async function Home() {
                       Enterprise-grade stationery and furniture for Botswana's leading businesses and institutions
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <a href="/products" className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-4 rounded-lg font-bold text-center transition-colors duration-200">
+                      <Link href="/products" className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-4 rounded-lg font-bold text-center transition-colors duration-200">
                         Explore Business Solutions
-                      </a>
-                      <a href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 text-lg px-8 py-4 rounded-lg font-bold text-center transition-colors duration-200">
+                      </Link>
+                      <Link href="/contact" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 text-lg px-8 py-4 rounded-lg font-bold text-center transition-colors duration-200">
                         Request Quote
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -400,9 +365,9 @@ export default async function Home() {
               <h2 className="text-4xl font-bold text-gray-900 mb-2 tracking-tight">Featured Products</h2>
               <p className="text-xl text-gray-600">Quality supplies trusted by businesses nationwide</p>
             </div>
-            <a href="/products" className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+            <Link href="/products" className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
               View All Products
-            </a>
+            </Link>
           </div>
           
           {featuredProducts.length > 0 ? (
@@ -437,7 +402,7 @@ export default async function Home() {
                           <p className="text-xs text-gray-500 mt-1">In stock: {product.stock}</p>
                         )}
                       </div>
-                      <a 
+                      <Link 
                         href={`/product/${product.id}`}
                         className={`px-4 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${
                           product.stock === 0 
@@ -446,7 +411,7 @@ export default async function Home() {
                         }`}
                       >
                         {product.stock === 0 ? 'Out of Stock' : 'View Details'}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -515,12 +480,12 @@ export default async function Home() {
                 <div className="p-6">
                   <h3 className="font-bold text-xl text-gray-900 mb-3">{offer.title}</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">{offer.subtitle}</p>
-                  <a href={offer.link} className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 font-semibold group">
+                  <Link href={offer.link} className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 font-semibold group">
                     <span>Learn More</span>
                     <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -539,7 +504,7 @@ export default async function Home() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Nationwide Delivery</h3>
-              <p className="text-gray-600 text-sm">Delivery across Botswana for qualified orders</p>
+              <p className="text-gray-600 text-sm">Free delivery across Botswana for qualified orders</p>
             </div>
             
             <div className="p-6">
@@ -584,12 +549,12 @@ export default async function Home() {
             StationeryHub helps you do it smarter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/products" className="bg-white text-red-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg text-center">
+            <Link href="/products" className="bg-white text-red-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg text-center">
               🛒 Start Shopping
-            </a>
-            <a href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-red-600 transition-colors duration-200 text-center">
-               Activate Digital Perks
-            </a>
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-red-600 transition-colors duration-200 text-center">
+              🚀 Activate Digital Perks
+            </Link>
           </div>
           <p className="text-sm mt-6 opacity-80">
             One Vendor, Multiple Solutions • Better ROI • Local Advantage • Business Empowerment
@@ -620,22 +585,22 @@ export default async function Home() {
             <div>
               <h4 className="font-semibold text-lg mb-6">Business Services</h4>
               <ul className="space-y-3 text-gray-400 text-sm">
-                <li><a href="/business" className="hover:text-white transition-colors duration-200">Corporate Accounts</a></li>
-                <li><a href="/education" className="hover:text-white transition-colors duration-200">Education Institutions</a></li>
-                <li><a href="/government" className="hover:text-white transition-colors duration-200">Government Tenders</a></li>
-                <li><a href="/bulk-orders" className="hover:text-white transition-colors duration-200">Bulk Orders</a></li>
-                <li><a href="/account-managers" className="hover:text-white transition-colors duration-200">Account Managers</a></li>
+                <li><Link href="/business" className="hover:text-white transition-colors duration-200">Corporate Accounts</Link></li>
+                <li><Link href="/education" className="hover:text-white transition-colors duration-200">Education Institutions</Link></li>
+                <li><Link href="/government" className="hover:text-white transition-colors duration-200">Government Tenders</Link></li>
+                <li><Link href="/bulk-orders" className="hover:text-white transition-colors duration-200">Bulk Orders</Link></li>
+                <li><Link href="/account-managers" className="hover:text-white transition-colors duration-200">Account Managers</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-semibold text-lg mb-6">Support</h4>
               <ul className="space-y-3 text-gray-400 text-sm">
-                <li><a href="/contact" className="hover:text-white transition-colors duration-200">Contact Sales</a></li>
-                <li><a href="/support" className="hover:text-white transition-colors duration-200">Customer Support</a></li>
-                <li><a href="/delivery" className="hover:text-white transition-colors duration-200">Delivery Information</a></li>
-                <li><a href="/returns" className="hover:text-white transition-colors duration-200">Returns Policy</a></li>
-                <li><a href="/faq" className="hover:text-white transition-colors duration-200">FAQ</a></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors duration-200">Contact Sales</Link></li>
+                <li><Link href="/support" className="hover:text-white transition-colors duration-200">Customer Support</Link></li>
+                <li><Link href="/delivery" className="hover:text-white transition-colors duration-200">Delivery Information</Link></li>
+                <li><Link href="/returns" className="hover:text-white transition-colors duration-200">Returns Policy</Link></li>
+                <li><Link href="/faq" className="hover:text-white transition-colors duration-200">FAQ</Link></li>
               </ul>
             </div>
 
