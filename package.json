@@ -20,7 +20,8 @@
     "react-hot-toast": "^2.4.1",
     "csv-parse": "^5.5.0",
     "uuid": "^9.0.1",
-    "@types/uuid": "^9.0.7"
+    "@types/uuid": "^9.0.7",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
@@ -43,9 +44,4 @@
   ],
   "author": "StationeryHub Team",
   "license": "MIT"
-}
-{
-  "dependencies": {
-    "pg": "^8.11.3"
-  }
 }
