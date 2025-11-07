@@ -94,6 +94,62 @@ const businessOffers = [
   }
 ];
 
+// Hero slides between products
+const heroSlides = [
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761665741/Hero_5_furzrq.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png'
+];
+
+// Before footer slides
+const footerSlides = [
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761737331/1_oirpow.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761737333/2_ezvzow.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761737340/3_rspdke.png',
+  'https://res.cloudinary.com/dseimivxo/image/upload/v1761737341/4_elpyai.png'
+];
+
+// What You Get perks
+const perks = [
+  {
+    id: 1,
+    icon: '💻',
+    title: 'Free 1-Month Website Trial',
+    description: 'Get your business online with a professional one-page site',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop'
+  },
+  {
+    id: 2,
+    icon: '🤖',
+    title: 'WhatsApp Automation Setup',
+    description: 'Manage inquiries and repeat orders instantly through WhatsApp',
+    image: 'https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=300&h=200&fit=crop'
+  },
+  {
+    id: 3,
+    icon: '📧',
+    title: 'Professional Email Hosting',
+    description: 'Look credible with a yourname@yourbusiness.co.bw email',
+    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=200&fit=crop'
+  },
+  {
+    id: 4,
+    icon: '📢',
+    title: 'Discounted Social Media Marketing',
+    description: 'Boost your brand visibility at a fraction of the normal price',
+    image: 'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=300&h=200&fit=crop'
+  },
+  {
+    id: 5,
+    icon: '📊',
+    title: 'Free AI-Powered Business Insights',
+    description: 'See how your business can grow through smart data',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop'
+  }
+];
+
 export default async function Home() {
   const products = await getProducts();
   const featuredProducts = products.slice(0, 8);
@@ -173,7 +229,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: What You Get Section */}
+      {/* NEW: What You Get Section - Modern Slider */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -183,46 +239,25 @@ export default async function Home() {
             </p>
           </div>
           
+          {/* Perks Grid - Responsive Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                💻
+            {perks.map((perk, index) => (
+              <div 
+                key={perk.id}
+                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-xl transition-all duration-300 hover:scale-105 group overflow-hidden relative"
+              >
+                {/* Background Animation */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-orange-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl group-hover:scale-110 transition-transform duration-300">
+                    {perk.icon}
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm leading-tight">{perk.title}</h3>
+                  <p className="text-gray-600 text-xs leading-relaxed">{perk.description}</p>
+                </div>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Free 1-Month Website Trial</h3>
-              <p className="text-gray-600 text-xs leading-relaxed">Get your business online with a professional one-page site</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                🤖
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">WhatsApp Automation Setup</h3>
-              <p className="text-gray-600 text-xs leading-relaxed">Manage inquiries and repeat orders instantly through WhatsApp</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                📧
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Professional Email Hosting</h3>
-              <p className="text-gray-600 text-xs leading-relaxed">Look credible with a yourname@yourbusiness.co.bw email</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                📢
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Discounted Social Media Marketing</h3>
-              <p className="text-gray-600 text-xs leading-relaxed">Boost your brand visibility at a fraction of the normal price</p>
-            </div>
-            
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 text-center border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-              <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                📊
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm">Free AI-Powered Business Insights</h3>
-              <p className="text-gray-600 text-xs leading-relaxed">See how your business can grow through smart data</p>
-            </div>
+            ))}
           </div>
 
           {/* About Us Section */}
@@ -242,98 +277,19 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* NEW: Why This Approach Works */}
-      <section className="bg-gray-50 py-16">
+      {/* NEW: Hero Slides Between Products */}
+      <section className="py-12 bg-gradient-to-r from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">Why This Approach Works</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We're changing the game for Botswana's small businesses
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <div className="w-6 h-6 bg-red-600 rounded"></div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-lg mb-2">One Vendor, Multiple Solutions</h3>
-                  <p className="text-gray-600">Buy stationery and get business tools in one place</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <div className="w-6 h-6 bg-red-600 rounded"></div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Better ROI</h3>
-                  <p className="text-gray-600">Turn every stationery order into a growth opportunity</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <div className="w-6 h-6 bg-red-600 rounded"></div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Local Advantage</h3>
-                  <p className="text-gray-600">Get support from a Botswana-based team that understands your needs</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <div className="w-6 h-6 bg-red-600 rounded"></div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 text-lg mb-2">Business Empowerment</h3>
-                  <p className="text-gray-600">We help small businesses move from paper to digital</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Solutions Section */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">Business Solutions</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Tailored office supply programs for enterprises, schools, and government institutions across Botswana
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {businessOffers.map((offer) => (
-              <div key={offer.id} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 card-hover border border-gray-200">
-                <div className="relative h-48">
-                  <Image
-                    src={offer.image}
-                    alt={offer.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      {offer.badge}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-xl text-gray-900 mb-3">{offer.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{offer.subtitle}</p>
-                  <a href={offer.link} className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 font-semibold group">
-                    <span>Learn More</span>
-                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {heroSlides.map((slide, index) => (
+              <div key={index} className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Image
+                  src={slide}
+                  alt={`Hero Slide ${index + 1}`}
+                  width={300}
+                  height={200}
+                  className="w-full h-48 object-cover"
+                />
               </div>
             ))}
           </div>
@@ -411,6 +367,68 @@ export default async function Home() {
               <p className="text-gray-400 mt-2">Please check back later or contact our sales team.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* NEW: Before Footer Slideshow */}
+      <section className="py-12 bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Business Solutions Showcase</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {footerSlides.map((slide, index) => (
+              <div key={index} className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Image
+                  src={slide}
+                  alt={`Business Solution ${index + 1}`}
+                  width={400}
+                  height={300}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Business Solutions Section */}
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">Business Solutions</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Tailored office supply programs for enterprises, schools, and government institutions across Botswana
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {businessOffers.map((offer) => (
+              <div key={offer.id} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 card-hover border border-gray-200">
+                <div className="relative h-48">
+                  <Image
+                    src={offer.image}
+                    alt={offer.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                      {offer.badge}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-xl text-gray-900 mb-3">{offer.title}</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{offer.subtitle}</p>
+                  <a href={offer.link} className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 font-semibold group">
+                    <span>Learn More</span>
+                    <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
