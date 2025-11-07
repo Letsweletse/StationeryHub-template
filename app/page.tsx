@@ -504,7 +504,7 @@ export default async function Home() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Nationwide Delivery</h3>
-              <p className="text-gray-600 text-sm">Free delivery across Botswana for qualified orders</p>
+              <p className="text-gray-600 text-sm">Delivery across Botswana for qualified orders</p>
             </div>
             
             <div className="p-6">
