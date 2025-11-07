@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@/utils/supabase/client';
 
 interface AddToCartButtonProps {
   productId: string;
@@ -20,54 +19,40 @@ export default function AddToCartButton({
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [customerMessage, setCustomerMessage] = useState('');
-  const supabase = createClient();
 
   const handleAddToCart = async () => {
     setIsLoading(true);
     
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      let userId = session?.user?.id;
-
+      // Simple cart logic without Supabase
+      let userId = localStorage.getItem('userId');
+      
       if (!userId) {
-        userId = localStorage.getItem('userId') || '';
-        
-        if (!userId) {
-          const { data: anonUser, error } = await supabase.auth.signInAnonymously();
-          if (error) {
-            alert('Please create an account first!');
-            return;
-          }
-          if (anonUser.user) {
-            userId = anonUser.user.id;
-            localStorage.setItem('userId', userId || '');
-          }
-        }
+        userId = 'guest-' + Date.now();
+        localStorage.setItem('userId', userId);
       }
 
-      if (!userId) {
-        alert('Please create an account first!');
-        return;
-      }
-
-      // Add to cart logic
-      const { error } = await supabase
-        .from('cart_items')
-        .insert([{
+      // Add to cart using your API
+      const response = await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           user_id: userId,
           product_id: productId,
           product_name: productName,
           price: price,
           quantity: quantity,
-        }]);
+        }),
+      });
 
-      if (error) {
+      if (response.ok) {
+        alert('Product added to cart!');
+        window.dispatchEvent(new Event('cartUpdated'));
+      } else {
         alert('Error adding to cart');
-        return;
       }
-
-      alert('Product added to cart!');
-      window.dispatchEvent(new Event('cartUpdated'));
       
     } catch (error) {
       alert('An error occurred');
@@ -94,7 +79,6 @@ export default function AddToCartButton({
       const result = await response.json();
 
       if (result.success) {
-        // Open WhatsApp in new tab
         window.open(result.whatsapp_url, '_blank');
         setShowWhatsAppModal(false);
         setCustomerMessage('');
