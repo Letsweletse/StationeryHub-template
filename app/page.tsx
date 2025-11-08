@@ -539,7 +539,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-800 mt-16 pt-8 text-center text-gray-400 text-lg">
-            <p>&copy; 2024 StationeryHub Enterprise Solutions. All rights reserved.</p>
+            <p>&copy; 2025 IBLIM Enterprise (Pty) Ltd T/A StationeryHub. All rights reserved.</p>
           </div>
         </div>
       </footer>
