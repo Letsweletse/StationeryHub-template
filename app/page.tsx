@@ -76,7 +76,7 @@ function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Refined */}
           <Link href="/" className="flex items-center">
-            <div className="w-44 h-9 relative">
+            <div className="w-44 h-18 relative">
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub"
