@@ -21,7 +21,7 @@ function WhatsAppButton({ phone = "+26775560140", message = "Hello! I'm interest
   );
 }
 
-// Ultra Premium Apple-style Header - FULL WIDTH
+// Ultra Premium Apple-style Header
 function Header() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -39,7 +39,6 @@ function Header() {
     }`}>
       <div className="w-full px-6">
         <div className="flex items-center justify-between h-20 max-w-7xl mx-auto">
-          {/* Premium Logo */}
           <Link href="/" className="flex items-center group">
             <div className="w-52 h-10 relative">
               <Image
@@ -52,7 +51,6 @@ function Header() {
             </div>
           </Link>
 
-          {/* Executive Navigation */}
           <div className="hidden lg:flex items-center space-x-12">
             <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 border-b-2 border-transparent hover:border-blue-600 pb-1">
               Home
@@ -71,7 +69,6 @@ function Header() {
             </Link>
           </div>
 
-          {/* Action Buttons - Minimal */}
           <div className="flex items-center space-x-6">
             <Link href="/contact" className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200">
               Contact Sales
@@ -83,16 +80,28 @@ function Header() {
   );
 }
 
-// Apple-level Hero Section - FULL WIDTH
+// Apple-level Hero Section with Background Image
 function AppleHero() {
   return (
-    <section className="w-full bg-black text-white">
-      <div className="w-full px-6 py-32">
+    <section className="w-full relative bg-black text-white min-h-screen flex items-center justify-center">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png"
+          alt="Premium Office Solutions"
+          fill
+          className="object-cover opacity-40"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
+      </div>
+      
+      <div className="w-full px-6 py-32 relative z-10">
         <div className="text-center max-w-7xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-8 tracking-tight">
             StationeryHub
           </h1>
-          <p className="text-3xl md:text-4xl text-gray-400 mb-12 leading-relaxed">
+          <p className="text-3xl md:text-4xl text-gray-300 mb-12 leading-relaxed">
             Enterprise office solutions.<br />Delivered.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -106,7 +115,7 @@ function AppleHero() {
               href="https://wa.me/26775560140?text=Hello! I'm interested in enterprise solutions for my business"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 text-lg font-medium transition-colors duration-200 flex items-center"
+              className="border-2 border-white/30 hover:border-white/60 text-white px-10 py-5 rounded-full text-lg font-medium transition-colors duration-200 flex items-center"
             >
               WhatsApp Business
               <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +129,7 @@ function AppleHero() {
   );
 }
 
-// About Us Section - FULL WIDTH
+// About Us Section
 function AboutUs() {
   return (
     <section className="w-full bg-white py-28">
@@ -159,7 +168,7 @@ function AboutUs() {
           </div>
           <div className="relative h-[600px] rounded-3xl overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&h=700&fit=crop"
+              src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png"
               alt="About StationeryHub"
               fill
               className="object-cover"
@@ -171,7 +180,35 @@ function AboutUs() {
   );
 }
 
-// Full Width Products - FULL WIDTH
+// Hero Images Gallery Between Products
+function HeroImagesGallery() {
+  const heroImages = [
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665741/Hero_5_furzrq.png"
+  ];
+
+  return (
+    <section className="w-full py-20 bg-gray-50">
+      <div className="w-full px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {heroImages.map((image, index) => (
+            <div key={index} className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer">
+              <Image
+                src={image}
+                alt={`Office Solution ${index + 1}`}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Full Width Products
 function FullWidthProducts() {
   const products = [
     {
@@ -212,63 +249,56 @@ function FullWidthProducts() {
     {
       name: "Executive Desk Organizer Set",
       price: "P 355",
-      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
+      image: "https://images.unsplash.com/-photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
       category: "Desk Accessories",
       whatsappMessage: "Hello! I'd like the Executive Desk Organizer Set for P355"
     }
   ];
 
   return (
-    <section id="products" className="w-full bg-gray-50 py-20">
+    <section id="products" className="w-full bg-white py-20">
       <div className="w-full px-6">
         <div className="text-center mb-16 max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Featured Products
-          </h2>
-          <p className="text-2xl text-gray-600">
-            Premium office supplies with instant WhatsApp ordering
-          </p>
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">Featured Products</h2>
+          <p className="text-2xl text-gray-600">Premium office supplies with instant WhatsApp ordering</p>
         </div>
 
-        {/* Full Width Sliding Container */}
-        <div className="w-full">
-          <div className="flex space-x-8 overflow-x-auto pb-8 px-6 scrollbar-hide snap-x snap-mandatory">
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
+        <div className="flex space-x-8 overflow-x-auto pb-8 px-6 scrollbar-hide snap-x snap-mandatory">
+          {products.map((product, index) => (
+            <div key={index} className="flex-shrink-0 w-80 snap-center">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                <div className="relative h-64 bg-gray-100">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute top-5 left-5">
+                    <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      {product.category}
+                    </span>
                   </div>
                 </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                    {product.name}
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-900 mb-4">
+                    {product.price}
+                  </p>
+                  <a 
+                    href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                  >
+                    Order on WhatsApp
+                  </a>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-12 max-w-7xl mx-auto">
@@ -287,7 +317,7 @@ function FullWidthProducts() {
   );
 }
 
-// Digital Business Solutions - FULL WIDTH
+// Digital Business Solutions
 function DigitalSolutions() {
   const solutions = [
     {
@@ -313,37 +343,23 @@ function DigitalSolutions() {
       title: 'Digital Marketing Suite',
       description: 'Strategic social media and online presence management',
       whatsappMessage: "Hello! I'm interested in your Digital Marketing Suite services"
-    },
-    {
-      icon: '🤖',
-      title: 'AI Business Intelligence',
-      description: 'Data-driven insights and growth opportunity analysis',
-      whatsappMessage: "Hello! I'd like to discuss AI Business Intelligence solutions"
     }
   ];
 
   return (
-    <section className="w-full bg-white py-28">
+    <section className="w-full bg-gray-50 py-28">
       <div className="w-full px-6">
         <div className="text-center mb-20 max-w-7xl mx-auto">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Digital Business Solutions
-          </h2>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transform your business operations with our integrated digital toolkit
-          </p>
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">Digital Business Solutions</h2>
+          <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">Transform your business operations with our integrated digital toolkit</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {solutions.map((solution, index) => (
             <div key={index} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 p-8">
               <div className="text-4xl mb-6">{solution.icon}</div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                {solution.title}
-              </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                {solution.description}
-              </p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">{solution.title}</h3>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">{solution.description}</p>
               <a 
                 href={`https://wa.me/26775560140?text=${encodeURIComponent(solution.whatsappMessage)}`}
                 target="_blank"
@@ -363,7 +379,38 @@ function DigitalSolutions() {
   );
 }
 
-// Newsletter Signup - FULL WIDTH
+// Slides Section Before Footer
+function SlidesSection() {
+  const slides = [
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737341/4_elpyai.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737340/3_rspdke.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737333/2_ezvzow.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737331/1_oirpow.png"
+  ];
+
+  return (
+    <section className="w-full bg-white py-20">
+      <div className="w-full px-6">
+        <div className="flex space-x-8 overflow-x-auto pb-8 px-6 scrollbar-hide snap-x snap-mandatory">
+          {slides.map((slide, index) => (
+            <div key={index} className="flex-shrink-0 w-full md:w-3/4 lg:w-2/3 snap-center">
+              <div className="relative h-96 md:h-[500px] rounded-3xl overflow-hidden">
+                <Image
+                  src={slide}
+                  alt={`Business Solution ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Newsletter Signup
 function NewsletterSignup() {
   return (
     <section className="w-full bg-gray-900 text-white py-20">
@@ -395,7 +442,7 @@ function NewsletterSignup() {
   );
 }
 
-// Complete Footer - FULL WIDTH
+// Footer
 function Footer() {
   return (
     <footer className="w-full bg-gray-900 text-white py-20">
@@ -413,23 +460,6 @@ function Footer() {
             <p className="text-gray-400 text-lg leading-relaxed mb-6">
               Botswana's premier enterprise office solutions provider
             </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a href="https://instagram.com/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.24 14.815 3.75 13.664 3.75 12.367s.49-2.448 1.376-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.886.875 1.376 2.026 1.376 3.323s-.49 2.448-1.376 3.323c-.875.808-2.026 1.297-3.323 1.297z"/>
-                </svg>
-              </a>
-              <a href="https://linkedin.com/company/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
           </div>
           
           <div>
@@ -469,13 +499,6 @@ function Footer() {
                 </svg>
                 <a href="mailto:sales@stationeryhub.co.bw" className="hover:text-white transition-colors">sales@stationeryhub.co.bw</a>
               </div>
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>Gaborone, Botswana</span>
-              </div>
               <a 
                 href="https://wa.me/26775560140"
                 target="_blank"
@@ -507,7 +530,9 @@ export default function Home() {
       <AppleHero />
       <AboutUs />
       <FullWidthProducts />
+      <HeroImagesGallery />
       <DigitalSolutions />
+      <SlidesSection />
       <NewsletterSignup />
       <Footer />
       
