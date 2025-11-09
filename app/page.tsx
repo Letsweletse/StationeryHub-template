@@ -24,10 +24,7 @@ function WhatsAppButton({ phone = "+26775560140", message = "Hello! I'm interest
 // Apple-style Image Slider
 function AppleImageSlider() {
   const slides = [
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737341/4_elpyai.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737340/3_rspdke.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737333/2_ezvzow.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761737331/1_oirpow.png",
+
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png",
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png",
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png",
@@ -182,7 +179,7 @@ function AboutUs() {
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
                 <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-                <span className="text-lg text-gray-700">500+ Business Clients Served</span>
+                <span className="text-lg text-gray-700">100+ Business Clients Served</span>
               </div>
               <div className="flex items-center space-x-4">
                 <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
@@ -220,22 +217,22 @@ function AboutUs() {
 function FullWidthProducts() {
   const products = [
     {
-      name: "HP LaserJet 44A Toner Cartridge",
-      price: "P 699",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=500&fit=crop",
+      name: "HP 3YP17A Colour Printhead",
+      price: "P 780.00",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681955/H3YP17AE_qupbup.jpg",
       category: "Print Supplies",
-      whatsappMessage: "Hello! I'm interested in the HP LaserJet 44A Toner Cartridge for P699"
+      whatsappMessage: "Hello! I'm interested in the HP 3YP17A Colour Printhead for P780"
     },
     {
-      name: "Ergonomic Executive Chair", 
-      price: "P 1,299",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I'd like to purchase the Ergonomic Executive Chair for P1,299"
+      name: "HP 47 Black Ink Cartridge", 
+      price: "P 280.00",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png",
+      category: "Print Supplies",
+      whatsappMessage: "Hello! I'd like to purchase the HP 47 Black Ink Cartridge P280.00"
     },
     {
-      name: "Premium Writing Instrument Set",
-      price: "P 456",
+      name: "HP 57 Colour Ink Cartridge",
+      price: "P 2,156.00",
       image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&h=500&fit=crop",
       category: "Writing Tools",
       whatsappMessage: "Hello! I want to order the Premium Writing Instrument Set for P456"
