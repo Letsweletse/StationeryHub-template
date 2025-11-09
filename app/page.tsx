@@ -24,7 +24,6 @@ function WhatsAppButton({ phone = "+26775560140", message = "Hello! I'm interest
 // Apple-style Image Slider
 function AppleImageSlider() {
   const slides = [
-
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png",
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png",
     "https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png",
