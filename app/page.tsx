@@ -93,24 +93,84 @@ function Header() {
             </div>
           </Link>
 
-          {/* Navigation - Ultra Clean */}
-          <div className="hidden md:flex items-center space-x-10">
-            <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Home
-            </Link>
-            <Link href="/products" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Products
-            </Link>
-            <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Business
-            </Link>
-            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              About
-            </Link>
-            <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-              Contact
-            </Link>
-          </div>
+         {/* Navigation - Ultra Clean */}
+<div className="hidden md:flex items-center space-x-10">
+  <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+    Home
+  </Link>
+  
+  {/* Explore Products with Dropdown */}
+  <div className="relative group">
+    <button className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 flex items-center">
+      Explore Products
+      <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    
+    {/* Dropdown Menu */}
+    <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+      <div className="p-4 grid grid-cols-2 gap-4">
+        {/* Mobile Brands Column */}
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile</h3>
+          <ul className="space-y-1">
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mi</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Realme</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Samsung</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Oppo</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Apple</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Vivo</a></li>
+          </ul>
+        </div>
+        
+        {/* Speakers Column */}
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Speakers</h3>
+          <ul className="space-y-1">
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Audio Speakers</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Theatres</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Soundbars</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Bluetooth Speakers</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">DTH Set Top Box</a></li>
+          </ul>
+        </div>
+        
+        {/* Mobile Accessories Column */}
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile Accessories</h3>
+          <ul className="space-y-1">
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mobile Cases</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Headphones & Headsets</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Power Banks</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Screenguards</a></li>
+          </ul>
+        </div>
+        
+        {/* Computer Accessories Column */}
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Computer Accessories</h3>
+          <ul className="space-y-1">
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">External Hard Disks</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Pendrives</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Skins & Decals</a></li>
+            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Bags</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+    Business
+  </Link>
+  <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+    About
+  </Link>
+  <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+    Contact
+  </Link>
+</div>
 
           {/* Action Buttons - Minimal */}
           <div className="flex items-center space-x-6">
