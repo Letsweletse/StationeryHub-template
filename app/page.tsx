@@ -93,84 +93,84 @@ function Header() {
             </div>
           </Link>
 
-         {/* Navigation - Ultra Clean */}
-<div className="hidden md:flex items-center space-x-10">
-  <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-    Home
-  </Link>
-  
-  {/* Explore Products with Dropdown */}
-  <div className="relative group">
-    <button className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 flex items-center">
-      Explore Products
-      <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
-    
-    {/* Dropdown Menu */}
-    <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-      <div className="p-4 grid grid-cols-2 gap-4">
-        {/* Mobile Brands Column */}
-        <div>
-          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile</h3>
-          <ul className="space-y-1">
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mi</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Realme</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Samsung</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Oppo</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Apple</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Vivo</a></li>
-          </ul>
-        </div>
-        
-        {/* Speakers Column */}
-        <div>
-          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Speakers</h3>
-          <ul className="space-y-1">
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Audio Speakers</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Theatres</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Soundbars</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Bluetooth Speakers</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">DTH Set Top Box</a></li>
-          </ul>
-        </div>
-        
-        {/* Mobile Accessories Column */}
-        <div>
-          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile Accessories</h3>
-          <ul className="space-y-1">
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mobile Cases</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Headphones & Headsets</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Power Banks</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Screenguards</a></li>
-          </ul>
-        </div>
-        
-        {/* Computer Accessories Column */}
-        <div>
-          <h3 className="font-semibold text-gray-900 mb-2 text-sm">Computer Accessories</h3>
-          <ul className="space-y-1">
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">External Hard Disks</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Pendrives</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Skins & Decals</a></li>
-            <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Bags</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+          {/* Navigation - Ultra Clean */}
+          <div className="hidden md:flex items-center space-x-10">
+            <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+              Home
+            </Link>
+            
+            {/* Explore Products with Dropdown */}
+            <div className="relative group">
+              <button className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 flex items-center">
+                Explore Products
+                <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* Dropdown Menu */}
+              <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="p-4 grid grid-cols-2 gap-4">
+                  {/* Mobile Brands Column */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile</h3>
+                    <ul className="space-y-1">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mi</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Realme</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Samsung</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Oppo</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Apple</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Vivo</a></li>
+                    </ul>
+                  </div>
+                  
+                  {/* Speakers Column */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Speakers</h3>
+                    <ul className="space-y-1">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Audio Speakers</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Theatres</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Soundbars</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Bluetooth Speakers</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">DTH Set Top Box</a></li>
+                    </ul>
+                  </div>
+                  
+                  {/* Mobile Accessories Column */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile Accessories</h3>
+                    <ul className="space-y-1">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mobile Cases</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Headphones & Headsets</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Power Banks</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Screenguards</a></li>
+                    </ul>
+                  </div>
+                  
+                  {/* Computer Accessories Column */}
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Computer Accessories</h3>
+                    <ul className="space-y-1">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">External Hard Disks</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Pendrives</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Skins & Decals</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Bags</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-    Business
-  </Link>
-  <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-    About
-  </Link>
-  <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
-    Contact
-  </Link>
-</div>
+            <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+              Business
+            </Link>
+            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+              About
+            </Link>
+            <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+              Contact
+            </Link>
+          </div>
 
           {/* Action Buttons - Minimal */}
           <div className="flex items-center space-x-6">
@@ -272,7 +272,7 @@ function AboutUs() {
   );
 }
 
-// Full Width Sliding Products
+// Full Width Sliding Products - ORIGINAL
 function FullWidthProducts() {
   const products = [
     {
@@ -388,7 +388,419 @@ function FullWidthProducts() {
   );
 }
 
-// Digital Business Solutions with WhatsApp Integration - Updated with Hero Image
+// Full Width Sliding Products - DUPLICATE 1
+function FullWidthProducts1() {
+  const products = [
+    {
+      name: "Wireless Mouse Pro",
+      price: "P 120.00",
+      image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&h=500&fit=crop",
+      category: "Computer Accessories",
+      whatsappMessage: "Hello! I'm interested in the Wireless Mouse Pro for P120"
+    },
+    {
+      name: "Mechanical Keyboard", 
+      price: "P 450.00",
+      image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=500&h=500&fit=crop",
+      category: "Computer Accessories",
+      whatsappMessage: "Hello! I'd like to purchase the Mechanical Keyboard for P450.00"
+    },
+    {
+      name: "USB-C Hub 7-in-1",
+      price: "P 320.00",
+      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500&h=500&fit=crop",
+      category: "Computer Accessories",
+      whatsappMessage: "Hello! I want to order the USB-C Hub 7-in-1 for P320"
+    },
+    {
+      name: "Wireless Earbuds",
+      price: "P 280.00",
+      image: "https://images.unsplash.com/photo-1590658165737-15a047b8b5e8?w=500&h=500&fit=crop",
+      category: "Audio",
+      whatsappMessage: "Hello! I need Wireless Earbuds for P280"
+    },
+    {
+      name: "Laptop Stand Aluminum",
+      price: "P 190.00",
+      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=500&fit=crop",
+      category: "Office Equipment",
+      whatsappMessage: "Hello! I'm interested in the Laptop Stand Aluminum for P190"
+    },
+    {
+      name: "Webcam 1080p HD",
+      price: "P 340.00",
+      image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=500&fit=crop",
+      category: "Computer Accessories",
+      whatsappMessage: "Hello! I'd like the Webcam 1080p HD for P340"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">
+            Tech Accessories
+          </h2>
+          <p className="text-2xl text-gray-600">
+            Modern computer accessories for enhanced productivity
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            {products.map((product, index) => (
+              <div key={index} className="flex-shrink-0 w-80 snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-bold text-gray-900 mb-4">
+                      {product.price}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Full Width Sliding Products - DUPLICATE 2
+function FullWidthProducts2() {
+  const products = [
+    {
+      name: "Executive Office Chair",
+      price: "P 1,250.00",
+      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I'm interested in the Executive Office Chair for P1,250"
+    },
+    {
+      name: "Standing Desk Pro", 
+      price: "P 2,800.00",
+      image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I'd like to purchase the Standing Desk Pro for P2,800.00"
+    },
+    {
+      name: "Filing Cabinet 4-Drawer",
+      price: "P 890.00",
+      image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I want to order the Filing Cabinet 4-Drawer for P890"
+    },
+    {
+      name: "Conference Table Large",
+      price: "P 3,500.00",
+      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I need Conference Table Large for P3,500"
+    },
+    {
+      name: "Visitor Chairs Set of 4",
+      price: "P 1,100.00",
+      image: "https://images.unsplash.com/photo-1503602642458-232111445657?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I'm interested in Visitor Chairs Set of 4 for P1,100"
+    },
+    {
+      name: "Office Bookshelf",
+      price: "P 670.00",
+      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=500&fit=crop",
+      category: "Office Furniture",
+      whatsappMessage: "Hello! I'd like the Office Bookshelf for P670"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">
+            Office Furniture
+          </h2>
+          <p className="text-2xl text-gray-600">
+            Premium furniture for comfortable and productive workspaces
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            {products.map((product, index) => (
+              <div key={index} className="flex-shrink-0 w-80 snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-bold text-gray-900 mb-4">
+                      {product.price}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Full Width Sliding Products - DUPLICATE 3
+function FullWidthProducts3() {
+  const products = [
+    {
+      name: "Premium Notebook Set",
+      price: "P 85.00",
+      image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=500&fit=crop",
+      category: "Writing Supplies",
+      whatsappMessage: "Hello! I'm interested in the Premium Notebook Set for P85"
+    },
+    {
+      name: "Executive Pen Set", 
+      price: "P 150.00",
+      image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&h=500&fit=crop",
+      category: "Writing Supplies",
+      whatsappMessage: "Hello! I'd like to purchase the Executive Pen Set for P150.00"
+    },
+    {
+      name: "Sticky Notes 10-Pack",
+      price: "P 45.00",
+      image: "https://images.unsplash.com/photo-1600248285731-d5b6b7eefd41?w=500&h=500&fit=crop",
+      category: "Office Supplies",
+      whatsappMessage: "Hello! I want to order Sticky Notes 10-Pack for P45"
+    },
+    {
+      name: "Document Organizer",
+      price: "P 120.00",
+      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
+      category: "Desk Accessories",
+      whatsappMessage: "Hello! I need Document Organizer for P120"
+    },
+    {
+      name: "Whiteboard 120x90cm",
+      price: "P 320.00",
+      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&h=500&fit=crop",
+      category: "Office Equipment",
+      whatsappMessage: "Hello! I'm interested in Whiteboard 120x90cm for P320"
+    },
+    {
+      name: "Paper Clips Assorted",
+      price: "P 25.00",
+      image: "https://images.unsplash.com/photo-1600248285731-d5b6b7eefd41?w=500&h=500&fit=crop",
+      category: "Office Supplies",
+      whatsappMessage: "Hello! I'd like Paper Clips Assorted for P25"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">
+            Office Supplies
+          </h2>
+          <p className="text-2xl text-gray-600">
+            Essential supplies for daily office operations
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            {products.map((product, index) => (
+              <div key={index} className="flex-shrink-0 w-80 snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-bold text-gray-900 mb-4">
+                      {product.price}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Full Width Sliding Products - DUPLICATE 4
+function FullWidthProducts4() {
+  const products = [
+    {
+      name: "Wireless Presenter",
+      price: "P 180.00",
+      image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=500&fit=crop",
+      category: "Presentation Tools",
+      whatsappMessage: "Hello! I'm interested in the Wireless Presenter for P180"
+    },
+    {
+      name: "Projector HD 1080p", 
+      price: "P 2,500.00",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=500&fit=crop",
+      category: "Presentation Tools",
+      whatsappMessage: "Hello! I'd like to purchase the Projector HD 1080p for P2,500.00"
+    },
+    {
+      name: "Conference Phone",
+      price: "P 890.00",
+      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=500&h=500&fit=crop",
+      category: "Communication",
+      whatsappMessage: "Hello! I want to order Conference Phone for P890"
+    },
+    {
+      name: "Noise Cancelling Headphones",
+      price: "P 420.00",
+      image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop",
+      category: "Audio",
+      whatsappMessage: "Hello! I need Noise Cancelling Headphones for P420"
+    },
+    {
+      name: "Document Scanner",
+      price: "P 1,100.00",
+      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=500&fit=crop",
+      category: "Office Equipment",
+      whatsappMessage: "Hello! I'm interested in Document Scanner for P1,100"
+    },
+    {
+      name: "Smart Board Interactive",
+      price: "P 4,200.00",
+      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&h=500&fit=crop",
+      category: "Presentation Tools",
+      whatsappMessage: "Hello! I'd like Smart Board Interactive for P4,200"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold text-gray-900 mb-5">
+            Professional Equipment
+          </h2>
+          <p className="text-2xl text-gray-600">
+            High-end equipment for modern business needs
+          </p>
+        </div>
+
+        <div className="relative">
+          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            {products.map((product, index) => (
+              <div key={index} className="flex-shrink-0 w-80 snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-bold text-gray-900 mb-4">
+                      {product.price}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Digital Business Solutions with WhatsApp Integration
 function DigitalSolutions() {
   const solutions = [
     {
@@ -422,88 +834,6 @@ function DigitalSolutions() {
       whatsappMessage: "Hello! I'd like to discuss AI Business Intelligence solutions"
     }
   ];
-
-  return (
-    <section className="relative py-28 bg-gray-900 overflow-hidden">
-      {/* Hero Image Background */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://res.cloudinary.com/dseimivxo/image/upload/v1762700337/Black_and_Orange_Modern_Digital_Marketing_Portofolio_Presentation_1_cdjb1i.png"
-          alt="Digital Business Solutions"
-          fill
-          className="object-cover opacity-20"
-        />
-        {/* Dark overlay for better readability */}
-        <div className="absolute inset-0 bg-gray-900/80"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-8">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Digital Business Solutions
-          </h2>
-          <p className="text-2xl text-orange-400 max-w-3xl mx-auto leading-relaxed font-medium">
-            Transform your business operations with our integrated digital toolkit
-          </p>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mt-8"></div>
-        </div>
-
-        {/* Solutions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {solutions.map((solution, index) => (
-            <div 
-              key={index} 
-              className="group bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-2xl hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-orange-400 hover:scale-105 p-8"
-            >
-              <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                {solution.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors duration-300">
-                {solution.title}
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                {solution.description}
-              </p>
-              <a 
-                href={`https://wa.me/26775560140?text=${encodeURIComponent(solution.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-full font-semibold text-lg transition-all duration-300 group-hover:scale-105"
-              >
-                Get Started
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-16 bg-black/50 backdrop-blur-sm rounded-3xl p-12 border border-white/10">
-          <h3 className="text-3xl font-bold text-white mb-6">
-            Ready to Transform Your Business?
-          </h3>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Let's discuss how our digital solutions can drive your business growth
-          </p>
-          <a 
-            href="https://wa.me/26775560140?text=Hello! I'd like to discuss digital business solutions for my company"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-bold text-xl transition-all duration-300 hover:scale-105 shadow-2xl"
-          >
-            <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.171-3.495-8.428"/>
-            </svg>
-            Start WhatsApp Conversation
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 
   return (
     <section className="py-28 bg-white">
@@ -689,8 +1019,12 @@ export default function Home() {
       <Header />
       <AppleHero />
       <AboutUs />
-      <FullWidthProducts />
-      <AppleImageSlider /> {/* Added your images as a clean slider */}
+      <FullWidthProducts /> {/* Original Products Section */}
+      <FullWidthProducts1 /> {/* Duplicate 1 - Tech Accessories */}
+      <FullWidthProducts2 /> {/* Duplicate 2 - Office Furniture */}
+      <FullWidthProducts3 /> {/* Duplicate 3 - Office Supplies */}
+      <FullWidthProducts4 /> {/* Duplicate 4 - Professional Equipment */}
+      <AppleImageSlider />
       <DigitalSolutions />
       <NewsletterSignup />
       <Footer />
