@@ -292,12 +292,12 @@ function FullWidthProducts() {
     {
       name: "HP 57 Colour Ink Cartridge",
       price: "P 2,156.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png",
-      category: "Writing Tools",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg",
+      category: "Print Supplies",
       whatsappMessage: "Hello! I want to order the Premium Writing Instrument Set for P456"
     },
     {
-      name: "A4 Premium Copy Paper (500 sheets)",
+      name: "Canon 486 Standard Colour Ink Cartridge",
       price: "P 90",
       image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=500&fit=crop",
       category: "Office Paper",
