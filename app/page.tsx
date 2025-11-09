@@ -292,7 +292,7 @@ function FullWidthProducts() {
     {
       name: "HP 57 Colour Ink Cartridge",
       price: "P 2,156.00",
-      image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&h=500&fit=crop",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png",
       category: "Writing Tools",
       whatsappMessage: "Hello! I want to order the Premium Writing Instrument Set for P456"
     },
