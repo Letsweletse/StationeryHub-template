@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // WhatsApp Integration Component
 function WhatsAppButton({ phone = "+26775560140", message = "Hello! I'm interested in your products and services" }) {
@@ -184,88 +184,51 @@ function Header() {
   );
 }
 
-// Apple-level Hero Section
+// Apple-level Hero Section with Video Background
 function AppleHero() {
   return (
-    <section className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-8 py-32">
-        <div className="text-center">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
-            StationeryHub
-          </h1>
-          <p className="text-3xl md:text-4xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Enterprise office solutions.<br />Delivered.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-            <Link 
-              href="#products" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-colors duration-200"
-            >
-              View Products
-            </Link>
-            <a 
-              href="https://wa.me/26775560140?text=Hello! I'm interested in enterprise solutions for my business"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 text-lg font-medium transition-colors duration-200 flex items-center"
-            >
-              WhatsApp Business
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// About Us Section
-function AboutUs() {
-  return (
-    <section className="py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-5xl font-bold text-gray-900 mb-8">About StationeryHub</h2>
-            <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-              StationeryHub is Botswana's premier enterprise office solutions provider, dedicated to transforming workplace efficiency through premium supplies and integrated digital tools.
-            </p>
-            <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-              Founded with the vision to bridge the gap between traditional office supplies and modern digital business needs, we provide comprehensive solutions that empower businesses to operate smarter and grow faster.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-                <span className="text-lg text-gray-700">100+ Business Clients Served</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-                <span className="text-lg text-gray-700">Nationwide Delivery Network</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-                <span className="text-lg text-gray-700">ISO Quality Certified Products</span>
-              </div>
-            </div>
-            <a 
-              href="https://wa.me/26775560140?text=Hello! I'd like to learn more about StationeryHub and your services"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg mt-8 transition-colors duration-200"
-            >
-              Connect on WhatsApp
-            </a>
-          </div>
-          <div className="relative h-[600px] rounded-3xl overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&h=700&fit=crop"
-              alt="About StationeryHub"
-              fill
-              className="object-cover"
-            />
-          </div>
+    <section className="relative bg-black text-white h-screen flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      >
+        <source src="https://res.cloudinary.com/dseimivxo/video/upload/v1762764005/Hero_Section_clip_mazwgq.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
+      {/* Dark Overlay for Better Text Readability */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+      
+      {/* Hero Content */}
+      <div className="relative z-10 text-center max-w-7xl mx-auto px-8">
+        <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
+          StationeryHub
+        </h1>
+        <p className="text-3xl md:text-4xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
+          Enterprise office solutions.<br />Delivered.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+          <Link 
+            href="#products" 
+            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-colors duration-200"
+          >
+            View Products
+          </Link>
+          <a 
+            href="https://wa.me/26775560140?text=Hello! I'm interested in enterprise solutions for my business"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-300 hover:text-blue-200 text-lg font-medium transition-colors duration-200 flex items-center"
+          >
+            WhatsApp Business
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -800,51 +763,35 @@ function FullWidthProducts4() {
   );
 }
 
-// Digital Business Solutions with WhatsApp Integration - UPDATED
+// Digital Business Solutions with Arrow Scrollers
 function DigitalSolutions() {
-  const solutions = [
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
-      title: 'Professional Web Presence',
-      description: 'One-month complimentary website trial with custom domain',
-      whatsappMessage: "Hello! I'm interested in the Professional Web Presence package for my business"
-    },
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759477/6_n3wjje.png",
-      title: 'WhatsApp Business Integration',
-      description: 'Automated customer service and order management system',
-      whatsappMessage: "Hello! I'd like to learn about WhatsApp Business Integration for my company"
-    },
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759473/3_emtghn.png",
-      title: 'Corporate Email Suite',
-      description: 'Professional email hosting with your business domain',
-      whatsappMessage: "Hello! I need Corporate Email Suite setup for my business"
-    },
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759467/5_iubpve.png",
-      title: 'Digital Marketing Suite',
-      description: 'Strategic social media and online presence management',
-      whatsappMessage: "Hello! I'm interested in your Digital Marketing Suite services"
-    },
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759443/4_m6jg7o.png",
-      title: 'AI Business Intelligence',
-      description: 'Data-driven insights and growth opportunity analysis',
-      whatsappMessage: "Hello! I'd like to discuss AI Business Intelligence solutions"
-    },
-    {
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png",
-      title: 'Complete Digital Transformation',
-      description: 'End-to-end digital solutions for modern businesses',
-      whatsappMessage: "Hello! I want to discuss complete digital transformation for my business"
-    }
+  const images = [
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759477/6_n3wjje.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759473/3_emtghn.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759467/5_iubpve.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759443/4_m6jg7o.png",
+    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png"
   ];
 
+  const scrollContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="py-28 bg-white">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-5">
             Digital Business Solutions
           </h2>
@@ -853,45 +800,71 @@ function DigitalSolutions() {
           </p>
         </div>
 
-        {/* Button Sliding Images Container */}
+        {/* Images Container with Arrow Controls */}
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
-            {solutions.map((solution, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
+          {/* Left Arrow */}
+          <button 
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Images Scroll Container */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {images.map((image, index) => (
+              <div key={index} className="flex-shrink-0 w-[500px] snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-[400px] w-full">
                     <Image
-                      src={solution.image}
-                      alt={solution.title}
+                      src={image}
+                      alt={`Digital Solution ${index + 1}`}
                       fill
                       className="object-contain hover:scale-105 transition-transform duration-700"
                     />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                      {solution.title}
-                    </h3>
-                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                      {solution.description}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(solution.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Get Started on WhatsApp
-                    </a>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Right Arrow */}
+          <button 
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Dots Indicator */}
+        <div className="flex justify-center space-x-3 mt-8">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  const scrollPosition = index * 528; // 500px width + 28px gap
+                  scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+                }
+              }}
+              className="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors duration-200"
+            />
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
 // Newsletter Signup
 function NewsletterSignup() {
   return (
@@ -1034,7 +1007,6 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
       <AppleHero />
-      <AboutUs />
       <FullWidthProducts /> {/* Original Products Section */}
       <FullWidthProducts1 /> {/* Duplicate 1 - Tech Accessories */}
       <FullWidthProducts2 /> {/* Duplicate 2 - Office Furniture */}
