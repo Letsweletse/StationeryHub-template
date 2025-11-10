@@ -78,14 +78,15 @@ function Header() {
   }, []);
 
   return (
-    <header className={`w-full bg-[#02497e]/95 sticky top-0 z-50 border-b transition-all duration-300 ${
-      scrolled ? 'border-gray-200 shadow-sm' : 'border-transparent'
+    <header className={`w-full fixed top-0 z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-gradient-to-r from-gray-900/95 to-gray-800/95 backdrop-blur-xl shadow-2xl border-b border-gray-700/30' 
+        : 'bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-md'
     }`}>
       <nav className="max-w-7xl mx-auto px-8">
-        <div className="flex items-center justify-between h-20"> {/* Increased height */}
-          {/* Logo - Made Larger */}
-          <Link href="/" className="flex items-center">
-            <div className="w-60 h-12 relative"> {/* Increased size */}
+        <div className="flex items-center justify-between h-20">
+          <Link href="/" className="flex items-center z-60">
+            <div className="w-60 h-12 relative">
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub"
@@ -96,90 +97,83 @@ function Header() {
             </div>
           </Link>
 
-          {/* Navigation */}
           <div className="hidden md:flex items-center space-x-10">
-            <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+            <Link href="/" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
               Home
             </Link>
             
-            {/* Explore Products with Dropdown */}
             <div className="relative group">
-              <button className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 flex items-center">
+              <button className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 flex items-center">
                 Explore Products
                 <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               
-              {/* Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div className="p-4 grid grid-cols-2 gap-4">
-                  {/* Mobile Brands Column */}
+              <div className="absolute top-full left-0 mt-2 w-96 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform group-hover:translate-y-0 translate-y-2">
+                <div className="p-6 grid grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile</h3>
-                    <ul className="space-y-1">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mi</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Realme</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Samsung</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Oppo</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Apple</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Vivo</a></li>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Mobile</h3>
+                    <ul className="space-y-2">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Mi</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Realme</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Samsung</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Oppo</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Apple</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Vivo</a></li>
                     </ul>
                   </div>
                   
-                  {/* Speakers Column */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Speakers</h3>
-                    <ul className="space-y-1">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Audio Speakers</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Home Theatres</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Soundbars</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Bluetooth Speakers</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">DTH Set Top Box</a></li>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Speakers</h3>
+                    <ul className="space-y-2">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Home Audio Speakers</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Home Theatres</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Soundbars</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Bluetooth Speakers</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">DTH Set Top Box</a></li>
                     </ul>
                   </div>
                   
-                  {/* Mobile Accessories Column */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Mobile Accessories</h3>
-                    <ul className="space-y-1">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Mobile Cases</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Headphones & Headsets</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Power Banks</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Screenguards</a></li>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Mobile Accessories</h3>
+                    <ul className="space-y-2">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Mobile Cases</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Headphones & Headsets</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Power Banks</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Screenguards</a></li>
                     </ul>
                   </div>
                   
-                  {/* Computer Accessories Column */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 text-sm">Computer Accessories</h3>
-                    <ul className="space-y-1">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">External Hard Disks</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Pendrives</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Skins & Decals</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1">Laptop Bags</a></li>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Computer Accessories</h3>
+                    <ul className="space-y-2">
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">External Hard Disks</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Pendrives</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Laptop Skins & Decals</a></li>
+                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Laptop Bags</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-            {/* In your Header component, update the navigation links */}
-<Link href="/products" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
-  All Products
-</Link>            <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+
+            <Link href="/business" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
               Business
             </Link>
-            <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+            <Link href="/about" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
               About
             </Link>
-            <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+            <Link href="/contact" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
               Contact
             </Link>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center space-x-6">
-            <Link href="/contact" className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200">
+            <Link 
+              href="/contact" 
+              className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 hover:scale-105 shadow-lg"
+            >
               Contact Sales
             </Link>
           </div>
@@ -193,23 +187,9 @@ function Header() {
 function AppleHero() {
   return (
     <section className="relative bg-black text-white h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover"
-      >
-        <source src="https://res.cloudinary.com/dseimivxo/video/upload/v1762764005/Hero_Section_clip_mazwgq.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      
-      {/* Dark Overlay for Better Text Readability */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
       
-      {/* Hero Content */}
-      <div className="relative z-10 text-center max-w-7xl mx-auto px-8">
+      <div className="relative z-10 text-center max-w-7xl mx-auto px-8 mt-20">
         <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
           StationeryHub
         </h1>
@@ -219,7 +199,7 @@ function AppleHero() {
         <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
           <Link 
             href="#products" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-colors duration-200"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-200 hover:scale-105 shadow-2xl"
           >
             View Products
           </Link>
@@ -227,7 +207,7 @@ function AppleHero() {
             href="https://wa.me/26775560140?text=Hello! I'm interested in enterprise solutions for my business"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-300 hover:text-blue-200 text-lg font-medium transition-colors duration-200 flex items-center"
+            className="text-blue-300 hover:text-blue-200 text-lg font-medium transition-colors duration-200 flex items-center hover:scale-105"
           >
             WhatsApp Business
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -240,56 +220,7 @@ function AppleHero() {
   );
 }
 
-// Product Card Component
-function ProductCard({ product }: { product: any }) {
-  return (
-    <div className="flex-shrink-0 w-80">
-      <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-        <div className="relative h-64 bg-gray-100">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-cover hover:scale-105 transition-transform duration-700"
-          />
-          <div className="absolute top-5 left-5">
-            <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-              {product.category}
-            </span>
-          </div>
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-            {product.name}
-          </h3>
-          <p className="text-2xl font-bold text-gray-900 mb-4">
-            {product.price}
-          </p>
-          <a 
-            href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-          >
-            Order on WhatsApp
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// In your FullWidthProducts component, update the "View All Products" link:
-<Link 
-  href="/products" 
-  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-all duration-200 hover:scale-105"
->
-  View All Products
-  <svg className="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-  </svg>
-</Link>
-// Full Width Sliding Products - ORIGINAL
+// Full Width Sliding Products
 function FullWidthProducts() {
   const products = [
     {
@@ -354,54 +285,50 @@ function FullWidthProducts() {
           </p>
         </div>
 
-        {/* Full Width Sliding Container */}
-        <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    {/* Make product name clickable */}
-                    <Link href={`/products/${product.id}`}>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight hover:text-blue-600 transition-colors cursor-pointer">
-                        {product.name}
-                      </h3>
-                    </Link>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
+        <div className="flex space-x-8 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {products.map((product, index) => (
+            <div key={index} className="flex-shrink-0 w-80">
+              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                <div className="relative h-64 bg-gray-100">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute top-5 left-5">
+                    <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      {product.category}
+                    </span>
                   </div>
                 </div>
+                <div className="p-6">
+                  <Link href={`/products/${product.id}`}>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight hover:text-blue-600 transition-colors cursor-pointer">
+                      {product.name}
+                    </h3>
+                  </Link>
+                  <p className="text-2xl font-bold text-gray-900 mb-4">
+                    {product.price}
+                  </p>
+                  <a 
+                    href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                  >
+                    Order on WhatsApp
+                  </a>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-12">
           <Link 
             href="/products" 
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-all duration-200 hover:scale-105"
           >
             View All Products
             <svg className="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -414,7 +341,7 @@ function FullWidthProducts() {
   );
 }
 
-// Digital Business Solutions with Arrow Scrollers - UPDATED with larger images
+// Digital Business Solutions with Arrow Scrollers
 function DigitalSolutions() {
   const images = [
     "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
@@ -425,17 +352,28 @@ function DigitalSolutions() {
     "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png"
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -600, behavior: 'smooth' });
+      setCurrentIndex(Math.max(0, currentIndex - 1));
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: 600, behavior: 'smooth' });
+      setCurrentIndex(Math.min(images.length - 1, currentIndex + 1));
+    }
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (scrollContainerRef.current) {
+      const scrollPosition = index * 828;
+      scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      setCurrentIndex(index);
     }
   };
 
@@ -451,34 +389,30 @@ function DigitalSolutions() {
           </p>
         </div>
 
-        {/* Images Container with Arrow Controls - UPDATED with larger container */}
         <div className="relative">
-          {/* Left Arrow */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200/20"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
-          {/* Images Scroll Container - UPDATED with larger images */}
           <div 
             ref={scrollContainerRef}
             className="flex space-x-8 overflow-x-auto pb-8 scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {images.map((image, index) => (
-              <div key={index} className="flex-shrink-0 w-[800px]"> {/* Increased width */}
+              <div key={index} className="flex-shrink-0 w-[800px]">
                 <div className="bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-[600px] w-full"> {/* Increased height */}
+                  <div className="relative h-[600px] w-full">
                     <Image
                       src={image}
                       alt={`Digital Solution ${index + 1}`}
                       fill
                       className="object-contain hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, 800px"
                     />
                   </div>
                 </div>
@@ -486,10 +420,9 @@ function DigitalSolutions() {
             ))}
           </div>
 
-          {/* Right Arrow */}
           <button 
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200/20"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -497,18 +430,14 @@ function DigitalSolutions() {
           </button>
         </div>
 
-        {/* Dots Indicator */}
         <div className="flex justify-center space-x-3 mt-8">
           {images.map((_, index) => (
             <button
               key={index}
-              onClick={() => {
-                if (scrollContainerRef.current) {
-                  const scrollPosition = index * 828; // 800px width + 28px gap
-                  scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-                }
-              }}
-              className="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors duration-200"
+              onClick={() => scrollToIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-200 hover:scale-125 ${
+                index === currentIndex ? 'bg-blue-600 scale-125' : 'bg-gray-300 hover:bg-gray-400'
+              }`}
             />
           ))}
         </div>
@@ -519,27 +448,55 @@ function DigitalSolutions() {
 
 // Newsletter Signup
 function NewsletterSignup() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setStatus('success');
+      setEmail('');
+    } catch (error) {
+      setStatus('error');
+    }
+  };
+
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
       <div className="max-w-4xl mx-auto px-8 text-center">
         <h2 className="text-4xl font-bold mb-6">Stay Connected</h2>
         <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
           Get exclusive offers, new product updates, and business insights delivered to your inbox
         </p>
         
-        <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
           <input 
             type="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email address"
-            className="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+            disabled={status === 'loading'}
+            className="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 backdrop-blur-sm"
           />
           <button 
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors duration-200"
+            disabled={status === 'loading'}
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-2xl"
           >
-            Subscribe
+            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
           </button>
         </form>
+        
+        {status === 'success' && (
+          <p className="text-green-400 mt-4">Thank you for subscribing!</p>
+        )}
+        {status === 'error' && (
+          <p className="text-red-400 mt-4">Something went wrong. Please try again.</p>
+        )}
         
         <p className="text-gray-400 text-sm mt-4">
           No spam, unsubscribe at any time
@@ -552,11 +509,11 @@ function NewsletterSignup() {
 // Complete Footer
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-20">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-20">
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <div className="w-48 h-12 relative mb-6"> {/* Increased footer logo size */}
+            <div className="w-48 h-12 relative mb-6">
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub"
@@ -655,6 +612,21 @@ function Footer() {
 
 // Main Page Component
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
