@@ -281,6 +281,7 @@ function ProductCard({ product }: { product: any }) {
 function FullWidthProducts() {
   const products = [
     {
+      id: 'hp-3yp17a',
       name: "HP 3YP17A Colour Printhead",
       price: "P 780.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681955/H3YP17AE_qupbup.jpg",
@@ -288,6 +289,7 @@ function FullWidthProducts() {
       whatsappMessage: "Hello! I'm interested in the HP 3YP17A Colour Printhead for P780"
     },
     {
+      id: 'hp-47-black',
       name: "HP 47 Black Ink Cartridge", 
       price: "P 280.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png",
@@ -295,6 +297,7 @@ function FullWidthProducts() {
       whatsappMessage: "Hello! I'd like to purchase the HP 47 Black Ink Cartridge P280.00"
     },
     {
+      id: 'canon-486-colour',
       name: "Canon 486 Standard Colour Ink Cartridge",
       price: "P 756.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg",
@@ -302,22 +305,25 @@ function FullWidthProducts() {
       whatsappMessage: "Hello! I want to order the Canon 486 Standard Colour Ink Cartridge for P756.00"
     },
     {
+      id: 'canon-pg-485',
       name: "Canon PG-485 Standard Black Ink Cartridge",
       price: "P 780.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762696702/CPG-485XL_ctheag.jpg",
-      category: "Office Paper",
-      whatsappMessage: "Hello! I need Canon PG-485 Standard Black Ink Cartridge for P780.00
+      category: "Print Supplies",
+      whatsappMessage: "Hello! I need Canon PG-485 Standard Black Ink Cartridge for P780.00"
     },
     {
+      id: 'hp-154a',
       name: "HP 154A Neverstop Toner Reload Cartridge",
-      price: "450.00",
+      price: "P 450.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762682083/HW1540A_bwvqbi.png",
       category: "Print Supplies",
-      whatsappMessage: "Hello! I'm interested in the HP 154A Neverstop Toner Reload Cartridge for P450
+      whatsappMessage: "Hello! I'm interested in the HP 154A Neverstop Toner Reload Cartridge for P450"
     },
     {
+      id: 'hp-925e',
       name: "HP 925e Evomore High Yield Magenta Ink Cartridge",
-      price: "P 560",
+      price: "P 560.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681957/HP4K0W0PE_nissve.jpg",
       category: "Print Supplies",
       whatsappMessage: "Hello! I'd like the HP 925e Evomore High Yield Magenta Ink Cartridge for P560.00"
@@ -340,7 +346,42 @@ function FullWidthProducts() {
         <div className="relative">
           <div className="flex space-x-8 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {products.map((product, index) => (
-              <ProductCard key={index} product={product} />
+              <div key={index} className="flex-shrink-0 w-80">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    {/* Make product name clickable */}
+                    <Link href={`/products/${product.id}`}>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight hover:text-blue-600 transition-colors cursor-pointer">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    <p className="text-2xl font-bold text-gray-900 mb-4">
+                      {product.price}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Order on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
