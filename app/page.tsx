@@ -78,7 +78,7 @@ function Header() {
   }, []);
 
   return (
-    <header className={`w-full bg-white/95 sticky top-0 z-50 border-b transition-all duration-300 ${
+    <header className={`w-full bg-[#02497e]/95 sticky top-0 z-50 border-b transition-all duration-300 ${
       scrolled ? 'border-gray-200 shadow-sm' : 'border-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto px-8">
