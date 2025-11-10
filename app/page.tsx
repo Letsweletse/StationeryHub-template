@@ -279,6 +279,16 @@ function ProductCard({ product }: { product: any }) {
   );
 }
 
+// In your FullWidthProducts component, update the "View All Products" link:
+<Link 
+  href="/products" 
+  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-all duration-200 hover:scale-105"
+>
+  View All Products
+  <svg className="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+  </svg>
+</Link>
 // Full Width Sliding Products - ORIGINAL
 function FullWidthProducts() {
   const products = [
