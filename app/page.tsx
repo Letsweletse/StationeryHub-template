@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 // WhatsApp Integration Component
-function WhatsAppButton({ phone = "+26775560140", message = "Hello! I'm interested in your products and services" }) {
+function WhatsAppButton() {
+  const phone = "+26775560140";
+  const message = "Hello! I'm interested in your products and services";
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   
   return (
@@ -41,7 +43,7 @@ function AppleImageSlider() {
             <p className="text-xl text-gray-600">Experience the StationeryHub difference</p>
           </div>
           
-          <div className="flex space-x-6 overflow-x-auto pb-8">
+          <div className="flex space-x-6 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {slides.map((slide, index) => (
               <div key={index} className="flex-shrink-0 w-80">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
@@ -76,12 +78,12 @@ function Header() {
   }, []);
 
   return (
-    <header className={`w-full bg-white/95 backdrop-blur-lg sticky top-0 z-50 border-b transition-all duration-300 ${
+    <header className={`w-full bg-white/95 sticky top-0 z-50 border-b transition-all duration-300 ${
       scrolled ? 'border-gray-200 shadow-sm' : 'border-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Refined */}
+          {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="w-44 h-9 relative">
               <Image
@@ -94,7 +96,7 @@ function Header() {
             </div>
           </Link>
 
-          {/* Navigation - Ultra Clean */}
+          {/* Navigation */}
           <div className="hidden md:flex items-center space-x-10">
             <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
               Home
@@ -173,7 +175,7 @@ function Header() {
             </Link>
           </div>
 
-          {/* Action Buttons - Minimal */}
+          {/* Action Buttons */}
           <div className="flex items-center space-x-6">
             <Link href="/contact" className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200">
               Contact Sales
@@ -233,6 +235,45 @@ function AppleHero() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Product Card Component
+function ProductCard({ product }: { product: any }) {
+  return (
+    <div className="flex-shrink-0 w-80">
+      <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+        <div className="relative h-64 bg-gray-100">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute top-5 left-5">
+            <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+              {product.category}
+            </span>
+          </div>
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
+            {product.name}
+          </h3>
+          <p className="text-2xl font-bold text-gray-900 mb-4">
+            {product.price}
+          </p>
+          <a 
+            href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+          >
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -297,41 +338,9 @@ function FullWidthProducts() {
 
         {/* Full Width Sliding Container */}
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={index} product={product} />
             ))}
           </div>
         </div>
@@ -352,418 +361,6 @@ function FullWidthProducts() {
   );
 }
 
-// Full Width Sliding Products - DUPLICATE 1
-function FullWidthProducts1() {
-  const products = [
-    {
-      name: "Wireless Mouse Pro",
-      price: "P 120.00",
-      image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&h=500&fit=crop",
-      category: "Computer Accessories",
-      whatsappMessage: "Hello! I'm interested in the Wireless Mouse Pro for P120"
-    },
-    {
-      name: "Mechanical Keyboard", 
-      price: "P 450.00",
-      image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=500&h=500&fit=crop",
-      category: "Computer Accessories",
-      whatsappMessage: "Hello! I'd like to purchase the Mechanical Keyboard for P450.00"
-    },
-    {
-      name: "USB-C Hub 7-in-1",
-      price: "P 320.00",
-      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=500&h=500&fit=crop",
-      category: "Computer Accessories",
-      whatsappMessage: "Hello! I want to order the USB-C Hub 7-in-1 for P320"
-    },
-    {
-      name: "Wireless Earbuds",
-      price: "P 280.00",
-      image: "https://images.unsplash.com/photo-1590658165737-15a047b8b5e8?w=500&h=500&fit=crop",
-      category: "Audio",
-      whatsappMessage: "Hello! I need Wireless Earbuds for P280"
-    },
-    {
-      name: "Laptop Stand Aluminum",
-      price: "P 190.00",
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=500&fit=crop",
-      category: "Office Equipment",
-      whatsappMessage: "Hello! I'm interested in the Laptop Stand Aluminum for P190"
-    },
-    {
-      name: "Webcam 1080p HD",
-      price: "P 340.00",
-      image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=500&fit=crop",
-      category: "Computer Accessories",
-      whatsappMessage: "Hello! I'd like the Webcam 1080p HD for P340"
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Tech Accessories
-          </h2>
-          <p className="text-2xl text-gray-600">
-            Modern computer accessories for enhanced productivity
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Full Width Sliding Products - DUPLICATE 2
-function FullWidthProducts2() {
-  const products = [
-    {
-      name: "Executive Office Chair",
-      price: "P 1,250.00",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I'm interested in the Executive Office Chair for P1,250"
-    },
-    {
-      name: "Standing Desk Pro", 
-      price: "P 2,800.00",
-      image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I'd like to purchase the Standing Desk Pro for P2,800.00"
-    },
-    {
-      name: "Filing Cabinet 4-Drawer",
-      price: "P 890.00",
-      image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I want to order the Filing Cabinet 4-Drawer for P890"
-    },
-    {
-      name: "Conference Table Large",
-      price: "P 3,500.00",
-      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I need Conference Table Large for P3,500"
-    },
-    {
-      name: "Visitor Chairs Set of 4",
-      price: "P 1,100.00",
-      image: "https://images.unsplash.com/photo-1503602642458-232111445657?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I'm interested in Visitor Chairs Set of 4 for P1,100"
-    },
-    {
-      name: "Office Bookshelf",
-      price: "P 670.00",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=500&fit=crop",
-      category: "Office Furniture",
-      whatsappMessage: "Hello! I'd like the Office Bookshelf for P670"
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Office Furniture
-          </h2>
-          <p className="text-2xl text-gray-600">
-            Premium furniture for comfortable and productive workspaces
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Full Width Sliding Products - DUPLICATE 3
-function FullWidthProducts3() {
-  const products = [
-    {
-      name: "Premium Notebook Set",
-      price: "P 85.00",
-      image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=500&fit=crop",
-      category: "Writing Supplies",
-      whatsappMessage: "Hello! I'm interested in the Premium Notebook Set for P85"
-    },
-    {
-      name: "Executive Pen Set", 
-      price: "P 150.00",
-      image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&h=500&fit=crop",
-      category: "Writing Supplies",
-      whatsappMessage: "Hello! I'd like to purchase the Executive Pen Set for P150.00"
-    },
-    {
-      name: "Sticky Notes 10-Pack",
-      price: "P 45.00",
-      image: "https://images.unsplash.com/photo-1600248285731-d5b6b7eefd41?w=500&h=500&fit=crop",
-      category: "Office Supplies",
-      whatsappMessage: "Hello! I want to order Sticky Notes 10-Pack for P45"
-    },
-    {
-      name: "Document Organizer",
-      price: "P 120.00",
-      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
-      category: "Desk Accessories",
-      whatsappMessage: "Hello! I need Document Organizer for P120"
-    },
-    {
-      name: "Whiteboard 120x90cm",
-      price: "P 320.00",
-      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&h=500&fit=crop",
-      category: "Office Equipment",
-      whatsappMessage: "Hello! I'm interested in Whiteboard 120x90cm for P320"
-    },
-    {
-      name: "Paper Clips Assorted",
-      price: "P 25.00",
-      image: "https://images.unsplash.com/photo-1600248285731-d5b6b7eefd41?w=500&h=500&fit=crop",
-      category: "Office Supplies",
-      whatsappMessage: "Hello! I'd like Paper Clips Assorted for P25"
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Office Supplies
-          </h2>
-          <p className="text-2xl text-gray-600">
-            Essential supplies for daily office operations
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Full Width Sliding Products - DUPLICATE 4
-function FullWidthProducts4() {
-  const products = [
-    {
-      name: "Wireless Presenter",
-      price: "P 180.00",
-      image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=500&fit=crop",
-      category: "Presentation Tools",
-      whatsappMessage: "Hello! I'm interested in the Wireless Presenter for P180"
-    },
-    {
-      name: "Projector HD 1080p", 
-      price: "P 2,500.00",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=500&fit=crop",
-      category: "Presentation Tools",
-      whatsappMessage: "Hello! I'd like to purchase the Projector HD 1080p for P2,500.00"
-    },
-    {
-      name: "Conference Phone",
-      price: "P 890.00",
-      image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=500&h=500&fit=crop",
-      category: "Communication",
-      whatsappMessage: "Hello! I want to order Conference Phone for P890"
-    },
-    {
-      name: "Noise Cancelling Headphones",
-      price: "P 420.00",
-      image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop",
-      category: "Audio",
-      whatsappMessage: "Hello! I need Noise Cancelling Headphones for P420"
-    },
-    {
-      name: "Document Scanner",
-      price: "P 1,100.00",
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=500&fit=crop",
-      category: "Office Equipment",
-      whatsappMessage: "Hello! I'm interested in Document Scanner for P1,100"
-    },
-    {
-      name: "Smart Board Interactive",
-      price: "P 4,200.00",
-      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=500&h=500&fit=crop",
-      category: "Presentation Tools",
-      whatsappMessage: "Hello! I'd like Smart Board Interactive for P4,200"
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Professional Equipment
-          </h2>
-          <p className="text-2xl text-gray-600">
-            High-end equipment for modern business needs
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
-            {products.map((product, index) => (
-              <div key={index} className="flex-shrink-0 w-80 snap-center">
-                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-64 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                        {product.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                      {product.name}
-                    </h3>
-                    <p className="text-2xl font-bold text-gray-900 mb-4">
-                      {product.price}
-                    </p>
-                    <a 
-                      href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                    >
-                      Order on WhatsApp
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // Digital Business Solutions with Arrow Scrollers
 function DigitalSolutions() {
   const images = [
@@ -775,7 +372,7 @@ function DigitalSolutions() {
     "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png"
   ];
 
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -806,7 +403,7 @@ function DigitalSolutions() {
           {/* Left Arrow */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -816,10 +413,11 @@ function DigitalSolutions() {
           {/* Images Scroll Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth"
+            className="flex space-x-8 overflow-x-auto pb-8 scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {images.map((image, index) => (
-              <div key={index} className="flex-shrink-0 w-[500px] snap-center">
+              <div key={index} className="flex-shrink-0 w-[500px]">
                 <div className="bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
                   <div className="relative h-[400px] w-full">
                     <Image
@@ -837,7 +435,7 @@ function DigitalSolutions() {
           {/* Right Arrow */}
           <button 
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -852,7 +450,7 @@ function DigitalSolutions() {
               key={index}
               onClick={() => {
                 if (scrollContainerRef.current) {
-                  const scrollPosition = index * 528; // 500px width + 28px gap
+                  const scrollPosition = index * 528;
                   scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
                 }
               }}
@@ -897,7 +495,7 @@ function NewsletterSignup() {
   );
 }
 
-// Complete Footer with ALL Links
+// Complete Footer
 function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-20">
@@ -1007,16 +605,11 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
       <AppleHero />
-      <FullWidthProducts /> {/* Original Products Section */}
-      <FullWidthProducts1 /> {/* Duplicate 1 - Tech Accessories */}
-      <FullWidthProducts2 /> {/* Duplicate 2 - Office Furniture */}
-      <FullWidthProducts3 /> {/* Duplicate 3 - Office Supplies */}
-      <FullWidthProducts4 /> {/* Duplicate 4 - Professional Equipment */}
+      <FullWidthProducts />
       <AppleImageSlider />
       <DigitalSolutions />
       <NewsletterSignup />
       <Footer />
-      
       <WhatsAppButton />
     </div>
   );
