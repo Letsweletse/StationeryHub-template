@@ -295,16 +295,16 @@ function FullWidthProducts() {
       whatsappMessage: "Hello! I'd like to purchase the HP 47 Black Ink Cartridge P280.00"
     },
     {
-      name: "HP 57 Colour Ink Cartridge",
-      price: "P 2,156.00",
+      name: "Canon 486 Standard Colour Ink Cartridge",
+      price: "P 756.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg",
       category: "Print Supplies",
       whatsappMessage: "Hello! I want to order the Premium Writing Instrument Set for P456"
     },
     {
-      name: "Canon 486 Standard Colour Ink Cartridge",
-      price: "P 90",
-      image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=500&fit=crop",
+      name: "Canon PG-485 Standard Black Ink Cartridge",
+      price: "P 780.00",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762696702/CPG-485XL_ctheag.jpg",
       category: "Office Paper",
       whatsappMessage: "Hello! I need A4 Premium Copy Paper - 500 sheets for P90"
     },
