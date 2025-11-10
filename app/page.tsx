@@ -299,28 +299,28 @@ function FullWidthProducts() {
       price: "P 756.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg",
       category: "Print Supplies",
-      whatsappMessage: "Hello! I want to order the Premium Writing Instrument Set for P456"
+      whatsappMessage: "Hello! I want to order the Canon 486 Standard Colour Ink Cartridge for P756.00"
     },
     {
       name: "Canon PG-485 Standard Black Ink Cartridge",
       price: "P 780.00",
       image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762696702/CPG-485XL_ctheag.jpg",
       category: "Office Paper",
-      whatsappMessage: "Hello! I need A4 Premium Copy Paper - 500 sheets for P90"
+      whatsappMessage: "Hello! I need Canon PG-485 Standard Black Ink Cartridge for P780.00
     },
     {
-      name: "HP LaserJet Pro M404dn",
-      price: "P 2,199",
-      image: "https://images.unsplash.com/photo-1558756520-22cfe5d382ca?w=500&h=500&fit=crop",
-      category: "Office Equipment",
-      whatsappMessage: "Hello! I'm interested in the HP LaserJet Pro M404dn printer for P2,199"
+      name: "HP 154A Neverstop Toner Reload Cartridge",
+      price: "450.00",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762682083/HW1540A_bwvqbi.png",
+      category: "Print Supplies",
+      whatsappMessage: "Hello! I'm interested in the HP 154A Neverstop Toner Reload Cartridge for P450
     },
     {
-      name: "Executive Desk Organizer Set",
-      price: "P 355",
-      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
-      category: "Desk Accessories",
-      whatsappMessage: "Hello! I'd like the Executive Desk Organizer Set for P355"
+      name: "HP 925e Evomore High Yield Magenta Ink Cartridge",
+      price: "P 560",
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681957/HP4K0W0PE_nissve.jpg",
+      category: "Print Supplies",
+      whatsappMessage: "Hello! I'd like the HP 925e Evomore High Yield Magenta Ink Cartridge for P560.00"
     }
   ];
 
