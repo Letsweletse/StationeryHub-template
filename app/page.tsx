@@ -82,10 +82,10 @@ function Header() {
       scrolled ? 'border-gray-200 shadow-sm' : 'border-transparent'
     }`}>
       <nav className="max-w-7xl mx-auto px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-20"> {/* Increased height */}
+          {/* Logo - Made Larger */}
           <Link href="/" className="flex items-center">
-            <div className="w-44 h-9 relative">
+            <div className="w-60 h-12 relative"> {/* Increased size */}
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub"
@@ -361,7 +361,7 @@ function FullWidthProducts() {
   );
 }
 
-// Digital Business Solutions with Arrow Scrollers
+// Digital Business Solutions with Arrow Scrollers - UPDATED with larger images
 function DigitalSolutions() {
   const images = [
     "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
@@ -376,13 +376,13 @@ function DigitalSolutions() {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: -600, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+      scrollContainerRef.current.scrollBy({ left: 600, behavior: 'smooth' });
     }
   };
 
@@ -398,7 +398,7 @@ function DigitalSolutions() {
           </p>
         </div>
 
-        {/* Images Container with Arrow Controls */}
+        {/* Images Container with Arrow Controls - UPDATED with larger container */}
         <div className="relative">
           {/* Left Arrow */}
           <button 
@@ -410,21 +410,22 @@ function DigitalSolutions() {
             </svg>
           </button>
 
-          {/* Images Scroll Container */}
+          {/* Images Scroll Container - UPDATED with larger images */}
           <div 
             ref={scrollContainerRef}
             className="flex space-x-8 overflow-x-auto pb-8 scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {images.map((image, index) => (
-              <div key={index} className="flex-shrink-0 w-[500px]">
+              <div key={index} className="flex-shrink-0 w-[800px]"> {/* Increased width */}
                 <div className="bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-[400px] w-full">
+                  <div className="relative h-[600px] w-full"> {/* Increased height */}
                     <Image
                       src={image}
                       alt={`Digital Solution ${index + 1}`}
                       fill
                       className="object-contain hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, 800px"
                     />
                   </div>
                 </div>
@@ -450,7 +451,7 @@ function DigitalSolutions() {
               key={index}
               onClick={() => {
                 if (scrollContainerRef.current) {
-                  const scrollPosition = index * 528;
+                  const scrollPosition = index * 828; // 800px width + 28px gap
                   scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
                 }
               }}
@@ -502,7 +503,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
-            <div className="w-36 h-8 relative mb-6">
+            <div className="w-48 h-12 relative mb-6"> {/* Increased footer logo size */}
               <Image
                 src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
                 alt="StationeryHub"
