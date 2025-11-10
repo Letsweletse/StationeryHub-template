@@ -800,38 +800,44 @@ function FullWidthProducts4() {
   );
 }
 
-// Digital Business Solutions with WhatsApp Integration
+// Digital Business Solutions with WhatsApp Integration - UPDATED
 function DigitalSolutions() {
   const solutions = [
     {
-      icon: '🌐',
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
       title: 'Professional Web Presence',
       description: 'One-month complimentary website trial with custom domain',
       whatsappMessage: "Hello! I'm interested in the Professional Web Presence package for my business"
     },
     {
-      icon: '💬',
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759477/6_n3wjje.png",
       title: 'WhatsApp Business Integration',
       description: 'Automated customer service and order management system',
       whatsappMessage: "Hello! I'd like to learn about WhatsApp Business Integration for my company"
     },
     {
-      icon: '📧',
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759473/3_emtghn.png",
       title: 'Corporate Email Suite',
       description: 'Professional email hosting with your business domain',
       whatsappMessage: "Hello! I need Corporate Email Suite setup for my business"
     },
     {
-      icon: '📱',
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759467/5_iubpve.png",
       title: 'Digital Marketing Suite',
       description: 'Strategic social media and online presence management',
       whatsappMessage: "Hello! I'm interested in your Digital Marketing Suite services"
     },
     {
-      icon: '🤖',
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759443/4_m6jg7o.png",
       title: 'AI Business Intelligence',
       description: 'Data-driven insights and growth opportunity analysis',
       whatsappMessage: "Hello! I'd like to discuss AI Business Intelligence solutions"
+    },
+    {
+      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png",
+      title: 'Complete Digital Transformation',
+      description: 'End-to-end digital solutions for modern businesses',
+      whatsappMessage: "Hello! I want to discuss complete digital transformation for my business"
     }
   ];
 
@@ -847,35 +853,45 @@ function DigitalSolutions() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {solutions.map((solution, index) => (
-            <div key={index} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 p-8">
-              <div className="text-4xl mb-6">{solution.icon}</div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                {solution.title}
-              </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                {solution.description}
-              </p>
-              <a 
-                href={`https://wa.me/26775560140?text=${encodeURIComponent(solution.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg"
-              >
-                Get Started
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
-          ))}
+        {/* Button Sliding Images Container */}
+        <div className="relative">
+          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+            {solutions.map((solution, index) => (
+              <div key={index} className="flex-shrink-0 w-80 snap-center">
+                <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                  <div className="relative h-64 bg-gray-100">
+                    <Image
+                      src={solution.image}
+                      alt={solution.title}
+                      fill
+                      className="object-contain hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                      {solution.title}
+                    </h3>
+                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                      {solution.description}
+                    </p>
+                    <a 
+                      href={`https://wa.me/26775560140?text=${encodeURIComponent(solution.whatsappMessage)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
+                    >
+                      Get Started on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
 // Newsletter Signup
 function NewsletterSignup() {
   return (
