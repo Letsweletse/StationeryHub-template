@@ -1,4 +1,5 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
@@ -40,7 +41,7 @@ function AppleImageSlider() {
             <p className="text-xl text-gray-600">Experience the StationeryHub difference</p>
           </div>
           
-          <div className="flex space-x-6 overflow-x-auto pb-8 scrollbar-hide">
+          <div className="flex space-x-6 overflow-x-auto pb-8">
             {slides.map((slide, index) => (
               <div key={index} className="flex-shrink-0 w-80">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
@@ -296,7 +297,7 @@ function FullWidthProducts() {
 
         {/* Full Width Sliding Container */}
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
             {products.map((product, index) => (
               <div key={index} className="flex-shrink-0 w-80 snap-center">
                 <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
@@ -308,7 +309,7 @@ function FullWidthProducts() {
                       className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
                         {product.category}
                       </span>
                     </div>
@@ -411,7 +412,7 @@ function FullWidthProducts1() {
         </div>
 
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
             {products.map((product, index) => (
               <div key={index} className="flex-shrink-0 w-80 snap-center">
                 <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
@@ -423,7 +424,7 @@ function FullWidthProducts1() {
                       className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
                         {product.category}
                       </span>
                     </div>
@@ -514,7 +515,7 @@ function FullWidthProducts2() {
         </div>
 
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
             {products.map((product, index) => (
               <div key={index} className="flex-shrink-0 w-80 snap-center">
                 <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
@@ -526,7 +527,7 @@ function FullWidthProducts2() {
                       className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
                         {product.category}
                       </span>
                     </div>
@@ -617,7 +618,7 @@ function FullWidthProducts3() {
         </div>
 
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
             {products.map((product, index) => (
               <div key={index} className="flex-shrink-0 w-80 snap-center">
                 <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
@@ -629,7 +630,7 @@ function FullWidthProducts3() {
                       className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
                         {product.category}
                       </span>
                     </div>
@@ -720,7 +721,7 @@ function FullWidthProducts4() {
         </div>
 
         <div className="relative">
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+          <div className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory">
             {products.map((product, index) => (
               <div key={index} className="flex-shrink-0 w-80 snap-center">
                 <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
@@ -732,7 +733,7 @@ function FullWidthProducts4() {
                       className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-5 left-5">
-                      <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
+                      <span className="bg-white/95 text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
                         {product.category}
                       </span>
                     </div>
@@ -805,7 +806,7 @@ function DigitalSolutions() {
           {/* Left Arrow */}
           <button 
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -815,8 +816,7 @@ function DigitalSolutions() {
           {/* Images Scroll Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory scroll-smooth"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex space-x-8 overflow-x-auto pb-8 snap-x snap-mandatory scroll-smooth"
           >
             {images.map((image, index) => (
               <div key={index} className="flex-shrink-0 w-[500px] snap-center">
@@ -837,7 +837,7 @@ function DigitalSolutions() {
           {/* Right Arrow */}
           <button 
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/80 hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
