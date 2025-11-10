@@ -163,8 +163,10 @@ function Header() {
                 </div>
               </div>
             </div>
-
-            <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
+            {/* In your Header component, update the navigation links */}
+<Link href="/products" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
+  All Products
+</Link>            <Link href="/business" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
               Business
             </Link>
             <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200">
