@@ -1,1 +1,80 @@
+'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function About() {
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Simple Header */}
+      <header className="w-full bg-white border-b border-gray-200">
+        <nav className="max-w-7xl mx-auto px-8">
+          <div className="flex items-center justify-between h-20">
+            <Link href="/" className="flex items-center">
+              <div className="w-60 h-12 relative">
+                <Image
+                  src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
+                  alt="StationeryHub"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+            <div className="flex items-center space-x-6">
+              <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
+              <Link href="/about" className="text-blue-600 font-medium">About</Link>
+              <Link href="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* Simple About Content */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-8">
+          <h1 className="text-5xl font-bold text-gray-900 mb-8 text-center">About Us</h1>
+          
+          <div className="prose prose-lg max-w-none">
+            <p className="text-xl text-gray-600 mb-6">
+              StationeryHub is Botswana's premier enterprise office solutions provider.
+            </p>
+            
+            <p className="text-gray-600 mb-6">
+              We provide comprehensive office supplies and digital business solutions to help 
+              businesses operate more efficiently and productively.
+            </p>
+            
+            <p className="text-gray-600 mb-6">
+              Our mission is to deliver quality products and services that meet the evolving 
+              needs of modern businesses in Botswana.
+            </p>
+
+            <div className="bg-gray-50 p-6 rounded-2xl mt-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
+              <ul className="text-gray-600 space-y-2">
+                <li>• Premium quality office supplies</li>
+                <li>• Fast and reliable delivery</li>
+                <li>• Competitive pricing</li>
+                <li>• Excellent customer service</li>
+                <li>• WhatsApp ordering convenience</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-8 text-center">
+          <p className="text-gray-400">&copy; 2024 StationeryHub. All rights reserved.</p>
+          <div className="mt-4">
+            <Link href="/" className="text-gray-400 hover:text-white mx-4">Home</Link>
+            <Link href="/about" className="text-gray-400 hover:text-white mx-4">About</Link>
+            <Link href="/contact" className="text-gray-400 hover:text-white mx-4">Contact</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
