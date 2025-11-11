@@ -1,4 +1,3 @@
-// lib/products.ts - REPLACE ENTIRE FILE WITH THIS
 export interface Product {
   id: string;
   name: string;
