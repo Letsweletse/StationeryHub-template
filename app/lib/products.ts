@@ -1,4 +1,3 @@
-// Create this file at lib/products.ts
 export interface Product {
   id: string;
   name: string;
@@ -34,3 +33,4 @@ export const products: Product[] = [
     category: "accessories"
   }
 ];
+// REMOVE THE DUPLICATE EXPORT AT THE BOTTOM
