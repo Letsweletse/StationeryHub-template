@@ -1,4 +1,3 @@
-// components/WhatsAppButton.tsx - REPLACE ENTIRE FILE WITH THIS
 'use client';
 
 export default function WhatsAppButton() {
