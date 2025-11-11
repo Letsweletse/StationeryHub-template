@@ -1,3 +1,4 @@
+// lib/products.ts - REPLACE ENTIRE FILE WITH THIS
 export interface Product {
   id: string;
   name: string;
@@ -33,4 +34,3 @@ export const products: Product[] = [
     category: "accessories"
   }
 ];
-// REMOVE THE DUPLICATE EXPORT AT THE BOTTOM
