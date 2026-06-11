@@ -1,642 +1,319 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+const whatsappNumber = '26775560140';
 
-// WhatsApp Integration Component
-function WhatsAppButton() {
-  const phone = "+26775560140";
-  const message = "Hello! I'm interested in your products and services";
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-  
+const products = [
+  {
+    name: 'HP 3YP17A Colour Printhead',
+    category: 'Print Supplies',
+    price: 'P 780',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762681955/H3YP17AE_qupbup.jpg',
+    badge: 'In stock',
+  },
+  {
+    name: 'HP 47 Black Ink Cartridge',
+    category: 'Print Supplies',
+    price: 'P 280',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png',
+    badge: 'Fast moving',
+  },
+  {
+    name: 'Canon 486 Colour Ink Cartridge',
+    category: 'Print Supplies',
+    price: 'P 756',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg',
+    badge: 'Available',
+  },
+  {
+    name: 'Canon PG-485 Standard Black Ink',
+    category: 'Print Supplies',
+    price: 'P 780',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762696702/CPG-485XL_ctheag.jpg',
+    badge: 'In stock',
+  },
+  {
+    name: 'HP 154A Neverstop Toner Reload',
+    category: 'Toner',
+    price: 'P 450',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762682083/HW1540A_bwvqbi.png',
+    badge: 'Bulk ready',
+  },
+  {
+    name: 'HP 925e Evomore High Yield Magenta',
+    category: 'Ink Cartridge',
+    price: 'P 560',
+    image: 'https://res.cloudinary.com/dseimivxo/image/upload/v1762681957/HP4K0W0PE_nissve.jpg',
+    badge: 'New stock',
+  },
+];
+
+const categories = [
+  { icon: '✏️', title: 'Office Stationery', text: 'Pens, paper, files and everyday desk essentials' },
+  { icon: '🖨️', title: 'Printers & Cartridges', text: 'HP, Canon, toner, ink and print consumables' },
+  { icon: '🪑', title: 'Office Furniture', text: 'Desks, chairs, storage and workspace setup' },
+  { icon: '💻', title: 'Technology', text: 'Laptops, accessories, gadgets and business devices' },
+  { icon: '📦', title: 'Office Supplies', text: 'Bulk office orders for teams and organisations' },
+];
+
+const solutionImages = [
+  { src: 'https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png', label: 'Enterprise setup' },
+  { src: 'https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png', label: 'Workstations' },
+  { src: 'https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png', label: 'Print centre' },
+  { src: 'https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png', label: 'Boardroom' },
+  { src: 'https://res.cloudinary.com/dseimivxo/image/upload/v1761665741/Hero_5_furzrq.png', label: 'Reception' },
+];
+
+const strengths = [
+  ['01', 'WhatsApp-first ordering', 'Customers can order directly from any product card with a ready-made WhatsApp message.'],
+  ['02', 'Built for Botswana businesses', 'Clear pricing, local contact details, and a business-focused product catalogue.'],
+  ['03', 'Bulk and corporate supply', 'Designed for offices, schools, clinics, companies and procurement teams.'],
+  ['04', 'Fast quote workflow', 'Reduce friction by moving interested buyers straight into a sales conversation.'],
+];
+
+function waLink(message: string) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
+function ArrowIcon() {
   return (
-    <a 
-      href={whatsappUrl} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
-    >
-      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.171-3.495-8.428"/>
-      </svg>
-    </a>
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </svg>
   );
 }
 
-// Apple-style Image Slider
-function AppleImageSlider() {
-  const slides = [
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665744/Hero_1_pymjmc.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665743/Hero_2_zmt98u.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1761665741/Hero_5_furzrq.png"
-  ];
-
+function WhatsAppIcon({ className = 'h-4 w-4' }: { className?: string }) {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="w-full px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Premium Office Solutions</h2>
-            <p className="text-xl text-gray-600">Experience the StationeryHub difference</p>
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.214a.75.75 0 0 0 .928.928l5.339-1.478A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22.5c-2.04 0-3.95-.533-5.605-1.463l-.401-.233-4.152 1.149 1.149-4.152-.233-.401A10.455 10.455 0 0 1 1.5 12c0-5.79 4.71-10.5 10.5-10.5S22.5 6.21 22.5 12 17.79 22.5 12 22.5z" />
+    </svg>
+  );
+}
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-[#f0ede8] text-[#0e0e0e]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-[#f0ede8]/95 backdrop-blur-xl">
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-10">
+          <a href="#top" className="text-2xl font-black uppercase tracking-[0.18em]">
+            Stationery<span className="text-[#c8481a]">Hub</span>
+          </a>
+          <div className="hidden items-center gap-8 text-xs font-semibold uppercase tracking-[0.18em] text-black/55 md:flex">
+            <a href="#products" className="hover:text-[#c8481a]">Products</a>
+            <a href="#solutions" className="hover:text-[#c8481a]">Solutions</a>
+            <a href="#categories" className="hover:text-[#c8481a]">Categories</a>
+            <a href="#about" className="hover:text-[#c8481a]">About</a>
           </div>
-          
-          <div className="flex space-x-6 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {slides.map((slide, index) => (
-              <div key={index} className="flex-shrink-0 w-80">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                  <div className="relative h-48">
-                    <Image
-                      src={slide}
-                      alt={`Office Solution ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
+          <a href={waLink('Hello StationeryHub, I need assistance with office supplies.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#0e0e0e] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#f0ede8] transition hover:bg-[#c8481a]">
+            <WhatsAppIcon /> WhatsApp
+          </a>
+        </nav>
+      </header>
+
+      <section id="top" className="relative flex min-h-screen items-end overflow-hidden bg-[#0e0e0e] pt-16 text-[#f0ede8]">
+        <video className="absolute inset-0 h-full w-full object-cover opacity-45" autoPlay muted loop playsInline poster="https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_4_nimrnz.png">
+          <source src="https://res.cloudinary.com/dseimivxo/video/upload/v1762764005/Hero_Section_clip_mazwgq.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black/70 to-transparent" />
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-5 pb-10 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:pb-16">
+          <div className="flex flex-col justify-end">
+            <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-[#e8622e]"><span className="h-px w-9 bg-[#e8622e]" /> Botswana enterprise office supplier</p>
+            <h1 className="max-w-4xl text-6xl font-black uppercase leading-[0.9] tracking-tight sm:text-7xl lg:text-8xl">
+              Enterprise office <span className="text-[#e8622e]">solutions.</span> Delivered.
+            </h1>
+            <p className="mt-7 max-w-xl text-base leading-8 text-white/70">
+              Premium stationery, cartridges, office furniture, print supplies and technology for teams that need quick quotes and reliable supply.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a href="#products" className="inline-flex items-center justify-center gap-2 bg-[#c8481a] px-7 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-[#e8622e]">
+                View products <ArrowIcon />
+              </a>
+              <a href={waLink('Hello StationeryHub, I need enterprise office supplies for my business.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/30 px-7 py-4 text-sm font-bold uppercase tracking-widest text-white transition hover:border-white hover:bg-white/10">
+                Request quote
+              </a>
+            </div>
+          </div>
+
+          <div className="grid content-end gap-3 sm:grid-cols-2 lg:pb-4">
+            {[
+              ['100+', 'Products in stock'],
+              ['24hr', 'Gaborone quote response'],
+              ['P280+', 'Starting cartridge price'],
+              ['Bulk', 'Business ordering'],
+            ].map(([value, label]) => (
+              <div key={label} className="border border-white/10 bg-black/45 p-5 backdrop-blur">
+                <div className="text-3xl font-black uppercase text-white">{value}</div>
+                <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/45">{label}</div>
               </div>
             ))}
           </div>
         </div>
+      </section>
+
+      <div className="overflow-hidden bg-[#0e0e0e] py-4 text-[#f0ede8]/50">
+        <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-10 whitespace-nowrap text-xs font-bold uppercase tracking-[0.22em]">
+          {['Print Supplies', 'Office Furniture', 'Technology', 'Stationery', 'Bulk Orders', 'WhatsApp Ordering', 'Gaborone Delivery', 'Enterprise Solutions', 'Print Supplies', 'Office Furniture', 'Technology', 'Stationery'].map((item, index) => (
+            <span key={`${item}-${index}`} className="flex items-center gap-3"><span className="h-1 w-1 rounded-full bg-[#c8481a]" />{item}</span>
+          ))}
+        </div>
       </div>
-    </section>
-  );
-}
 
-// Ultra Premium Apple-style Header
-function Header() {
-  const [scrolled, setScrolled] = useState(false);
+      <section id="products" className="mx-auto max-w-7xl px-5 py-20 lg:px-10">
+        <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#c8481a]">Featured products</p>
+            <h2 className="max-w-3xl text-5xl font-black uppercase leading-none tracking-tight md:text-6xl">Premium office supplies with instant ordering</h2>
+          </div>
+          <a href="/products" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-black/55 transition hover:text-[#c8481a]">All products <ArrowIcon /></a>
+        </div>
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <header className={`w-full fixed top-0 z-50 transition-all duration-500 ${
-      scrolled 
-        ? 'bg-gradient-to-r from-gray-900/95 to-gray-800/95 backdrop-blur-xl shadow-2xl border-b border-gray-700/30' 
-        : 'bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-md'
-    }`}>
-      <nav className="max-w-7xl mx-auto px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center z-60">
-            <div className="w-60 h-12 relative">
-              <Image
-                src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
-                alt="StationeryHub"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </Link>
-
-          <div className="hidden md:flex items-center space-x-10">
-            <Link href="/" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
-              Home
-            </Link>
-            
-            <div className="relative group">
-              <button className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 flex items-center">
-                Explore Products
-                <svg className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              <div className="absolute top-full left-0 mt-2 w-96 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform group-hover:translate-y-0 translate-y-2">
-                <div className="p-6 grid grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Mobile</h3>
-                    <ul className="space-y-2">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Mi</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Realme</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Samsung</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Oppo</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Apple</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Vivo</a></li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Speakers</h3>
-                    <ul className="space-y-2">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Home Audio Speakers</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Home Theatres</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Soundbars</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Bluetooth Speakers</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">DTH Set Top Box</a></li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Mobile Accessories</h3>
-                    <ul className="space-y-2">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Mobile Cases</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Headphones & Headsets</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Power Banks</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Screenguards</a></li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-sm border-b border-gray-100 pb-2">Computer Accessories</h3>
-                    <ul className="space-y-2">
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">External Hard Disks</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Pendrives</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Laptop Skins & Decals</a></li>
-                      <li><a href="#" className="text-sm text-gray-600 hover:text-blue-600 block py-1 transition-colors duration-200">Laptop Bags</a></li>
-                    </ul>
-                  </div>
-                </div>
+        <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10 md:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <article key={product.name} className="group bg-[#f0ede8] transition hover:z-10 hover:shadow-2xl">
+              <div className="relative aspect-square overflow-hidden bg-[#e8e4dd]">
+                <img src={product.image} alt={product.name} className="h-full w-full object-contain p-8 transition duration-500 group-hover:scale-110" />
+                <span className="absolute left-4 top-4 bg-[#0e0e0e] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-[#f0ede8]">{product.badge}</span>
               </div>
-            </div>
-
-            <Link href="/business" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
-              Business
-            </Link>
-            <Link href="/about" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
-              About
-            </Link>
-            <Link href="/contact" className="text-sm text-gray-200 hover:text-white font-medium transition-colors duration-200 hover:scale-105">
-              Contact
-            </Link>
-          </div>
-
-          <div className="flex items-center space-x-6">
-            <Link 
-              href="/contact" 
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all duration-200 hover:scale-105 shadow-lg"
-            >
-              Contact Sales
-            </Link>
-          </div>
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-// Apple-level Hero Section with Video Background
-function AppleHero() {
-  return (
-    <section className="relative bg-black text-white h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-      
-      <div className="relative z-10 text-center max-w-7xl mx-auto px-8 mt-20">
-        <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
-          StationeryHub
-        </h1>
-        <p className="text-3xl md:text-4xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
-          Enterprise office solutions.<br />Delivered.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-          <Link 
-            href="#products" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-medium transition-all duration-200 hover:scale-105 shadow-2xl"
-          >
-            View Products
-          </Link>
-          <a 
-            href="https://wa.me/26775560140?text=Hello! I'm interested in enterprise solutions for my business"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-300 hover:text-blue-200 text-lg font-medium transition-colors duration-200 flex items-center hover:scale-105"
-          >
-            WhatsApp Business
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Full Width Sliding Products
-function FullWidthProducts() {
-  const products = [
-    {
-      id: 'hp-3yp17a',
-      name: "HP 3YP17A Colour Printhead",
-      price: "P 780.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681955/H3YP17AE_qupbup.jpg",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I'm interested in the HP 3YP17A Colour Printhead for P780"
-    },
-    {
-      id: 'hp-47-black',
-      name: "HP 47 Black Ink Cartridge", 
-      price: "P 280.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681958/H6ZD61AE_op7tus.png",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I'd like to purchase the HP 47 Black Ink Cartridge P280.00"
-    },
-    {
-      id: 'canon-486-colour',
-      name: "Canon 486 Standard Colour Ink Cartridge",
-      price: "P 756.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681956/HC6657AE_b6ra8c.jpg",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I want to order the Canon 486 Standard Colour Ink Cartridge for P756.00"
-    },
-    {
-      id: 'canon-pg-485',
-      name: "Canon PG-485 Standard Black Ink Cartridge",
-      price: "P 780.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762696702/CPG-485XL_ctheag.jpg",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I need Canon PG-485 Standard Black Ink Cartridge for P780.00"
-    },
-    {
-      id: 'hp-154a',
-      name: "HP 154A Neverstop Toner Reload Cartridge",
-      price: "P 450.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762682083/HW1540A_bwvqbi.png",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I'm interested in the HP 154A Neverstop Toner Reload Cartridge for P450"
-    },
-    {
-      id: 'hp-925e',
-      name: "HP 925e Evomore High Yield Magenta Ink Cartridge",
-      price: "P 560.00",
-      image: "https://res.cloudinary.com/dseimivxo/image/upload/v1762681957/HP4K0W0PE_nissve.jpg",
-      category: "Print Supplies",
-      whatsappMessage: "Hello! I'd like the HP 925e Evomore High Yield Magenta Ink Cartridge for P560.00"
-    }
-  ];
-
-  return (
-    <section id="products" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Featured Products
-          </h2>
-          <p className="text-2xl text-gray-600">
-            Premium office supplies with instant WhatsApp ordering
-          </p>
-        </div>
-
-        <div className="flex space-x-8 overflow-x-auto pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {products.map((product, index) => (
-            <div key={index} className="flex-shrink-0 w-80">
-              <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                <div className="relative h-64 bg-gray-100">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-5 left-5">
-                    <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-medium">
-                      {product.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <Link href={`/products/${product.id}`}>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight hover:text-blue-600 transition-colors cursor-pointer">
-                      {product.name}
-                    </h3>
-                  </Link>
-                  <p className="text-2xl font-bold text-gray-900 mb-4">
-                    {product.price}
-                  </p>
-                  <a 
-                    href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-colors duration-200"
-                  >
-                    Order on WhatsApp
+              <div className="border-t border-black/10 p-6">
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-[#c8481a]">{product.category}</p>
+                <h3 className="mt-3 min-h-[56px] text-lg font-bold leading-snug">{product.name}</h3>
+                <div className="mt-6 flex items-center justify-between gap-4">
+                  <span className="text-3xl font-black uppercase">{product.price}</span>
+                  <a href={waLink(`Hello StationeryHub, I want to order ${product.name} for ${product.price}.`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#0e0e0e] px-4 py-3 text-xs font-black uppercase tracking-widest text-[#f0ede8] transition hover:bg-[#c8481a]">
+                    <WhatsAppIcon /> Order
                   </a>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
+      </section>
 
-        <div className="text-center mt-12">
-          <Link 
-            href="/products" 
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-lg transition-all duration-200 hover:scale-105"
-          >
-            View All Products
-            <svg className="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
+      <section id="solutions" className="bg-[#0e0e0e] px-5 py-20 text-[#f0ede8] lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 max-w-3xl">
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#e8622e]">Premium office solutions</p>
+            <h2 className="text-5xl font-black uppercase leading-none tracking-tight md:text-6xl">A sharper buying experience for serious offices</h2>
+          </div>
+          <div className="grid gap-px overflow-hidden bg-white/10 lg:grid-cols-12">
+            {solutionImages.map((item, index) => (
+              <div key={item.label} className={`${index === 0 ? 'lg:col-span-7 lg:row-span-2' : 'lg:col-span-5'} group relative min-h-[260px] overflow-hidden bg-[#1c1c1c]`}>
+                <img src={item.src} alt={item.label} className="h-full min-h-[260px] w-full object-cover opacity-80 transition duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                <span className="absolute bottom-5 left-5 bg-black/70 px-3 py-2 text-xs font-black uppercase tracking-[0.22em] text-white backdrop-blur">{item.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// Digital Business Solutions with Arrow Scrollers
-function DigitalSolutions() {
-  const images = [
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759498/2_guqitl.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759477/6_n3wjje.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759473/3_emtghn.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759467/5_iubpve.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759443/4_m6jg7o.png",
-    "https://res.cloudinary.com/dseimivxo/image/upload/v1762759386/7_cjamjj.png"
-  ];
+      <section id="categories" className="bg-[#e8e4dd] px-5 py-20 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#c8481a]">Browse by category</p>
+            <h2 className="text-5xl font-black uppercase leading-none tracking-tight md:text-6xl">Everything your office needs</h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {categories.map((category) => (
+              <a key={category.title} href={waLink(`Hello StationeryHub, I am looking for ${category.title}.`)} target="_blank" rel="noopener noreferrer" className="group border border-black/10 bg-white p-6 transition hover:-translate-y-1 hover:border-[#c8481a] hover:shadow-xl">
+                <div className="text-4xl">{category.icon}</div>
+                <h3 className="mt-5 text-lg font-black">{category.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-black/55">{category.text}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#c8481a]">Enquire <ArrowIcon /></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -600, behavior: 'smooth' });
-      setCurrentIndex(Math.max(0, currentIndex - 1));
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 600, behavior: 'smooth' });
-      setCurrentIndex(Math.min(images.length - 1, currentIndex + 1));
-    }
-  };
-
-  const scrollToIndex = (index: number) => {
-    if (scrollContainerRef.current) {
-      const scrollPosition = index * 828;
-      scrollContainerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-      setCurrentIndex(index);
-    }
-  };
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-gray-900 mb-5">
-            Digital Business Solutions
-          </h2>
-          <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transform your business operations with our integrated digital toolkit
+      <section id="about" className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:px-10">
+        <div>
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.28em] text-[#c8481a]">Why StationeryHub</p>
+          <h2 className="text-5xl font-black uppercase leading-none tracking-tight md:text-6xl">Botswana's trusted office partner</h2>
+          <p className="mt-6 max-w-xl text-base leading-8 text-black/55">
+            From a single cartridge to a full office supply order, StationeryHub keeps the buying process simple: choose, WhatsApp, get quoted, and move.
           </p>
-        </div>
-
-        <div className="relative">
-          <button 
-            onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200/20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <div 
-            ref={scrollContainerRef}
-            className="flex space-x-8 overflow-x-auto pb-8 scroll-smooth"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {images.map((image, index) => (
-              <div key={index} className="flex-shrink-0 w-[800px]">
-                <div className="bg-white rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100">
-                  <div className="relative h-[600px] w-full">
-                    <Image
-                      src={image}
-                      alt={`Digital Solution ${index + 1}`}
-                      fill
-                      className="object-contain hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
+          <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
+            {strengths.map(([number, title, text]) => (
+              <div key={title} className="grid grid-cols-[48px_1fr] gap-5 py-6">
+                <span className="text-xl font-black text-[#c8481a]">{number}</span>
+                <div>
+                  <h3 className="font-black">{title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-black/55">{text}</p>
                 </div>
               </div>
             ))}
           </div>
-
-          <button 
-            onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 hover:text-blue-600 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gray-200/20"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
         </div>
-
-        <div className="flex justify-center space-x-3 mt-8">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 hover:scale-125 ${
-                index === currentIndex ? 'bg-blue-600 scale-125' : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-            />
-          ))}
+        <div className="relative min-h-[420px] overflow-hidden bg-[#e8e4dd]">
+          <img src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png" alt="StationeryHub office setup" className="h-full w-full object-cover" />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-white">
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">Direct support</p>
+            <h3 className="mt-2 text-3xl font-black uppercase">Call or WhatsApp +267 755 60140</h3>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-// Newsletter Signup
-function NewsletterSignup() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-    
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setStatus('success');
-      setEmail('');
-    } catch (error) {
-      setStatus('error');
-    }
-  };
-
-  return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
-      <div className="max-w-4xl mx-auto px-8 text-center">
-        <h2 className="text-4xl font-bold mb-6">Stay Connected</h2>
-        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Get exclusive offers, new product updates, and business insights delivered to your inbox
-        </p>
-        
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <input 
-            type="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email address"
-            required
-            disabled={status === 'loading'}
-            className="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 backdrop-blur-sm"
-          />
-          <button 
-            type="submit"
-            disabled={status === 'loading'}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-2xl"
-          >
-            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
-          </button>
-        </form>
-        
-        {status === 'success' && (
-          <p className="text-green-400 mt-4">Thank you for subscribing!</p>
-        )}
-        {status === 'error' && (
-          <p className="text-red-400 mt-4">Something went wrong. Please try again.</p>
-        )}
-        
-        <p className="text-gray-400 text-sm mt-4">
-          No spam, unsubscribe at any time
-        </p>
-      </div>
-    </section>
-  );
-}
-
-// Complete Footer
-function Footer() {
-  return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-20">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <section className="relative overflow-hidden bg-[#c8481a] px-5 py-16 text-white lg:px-10">
+        <div className="absolute -left-6 top-1/2 -translate-y-1/2 text-[12rem] font-black uppercase tracking-widest text-white/5">Enterprise</div>
+        <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-center">
           <div>
-            <div className="w-48 h-12 relative mb-6">
-              <Image
-                src="https://res.cloudinary.com/dseimivxo/image/upload/v1761627173/logo_uamr64.png"
-                alt="StationeryHub"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <p className="text-gray-400 text-lg leading-relaxed mb-6">
-              Botswana's premier enterprise office solutions provider
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a href="https://instagram.com/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.24 14.815 3.75 13.664 3.75 12.367s.49-2.448 1.376-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.886.875 1.376 2.026 1.376 3.323s-.49 2.448-1.376 3.323c-.875.808-2.026 1.297-3.323 1.297z"/>
-                </svg>
-              </a>
-              <a href="https://linkedin.com/company/stationeryhub" className="text-gray-400 hover:text-white transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
+            <h2 className="text-5xl font-black uppercase leading-none tracking-tight">Ready to order?</h2>
+            <p className="mt-4 max-w-xl text-white/80">Send your product list, cartridge model, or office requirement. We will respond with availability and pricing.</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a href={waLink('Hello StationeryHub, please assist me with a quote.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white px-7 py-4 text-sm font-black uppercase tracking-widest text-[#c8481a] transition hover:-translate-y-1 hover:shadow-xl">
+              WhatsApp quote <WhatsAppIcon />
+            </a>
+            <a href="mailto:sales@stationeryhub.co.bw" className="inline-flex items-center justify-center gap-2 border border-white/40 px-7 py-4 text-sm font-black uppercase tracking-widest text-white transition hover:bg-white/10">
+              Email sales
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-[#1c1c1c] px-5 py-12 text-[#f0ede8] lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div>
+            <div className="text-3xl font-black uppercase tracking-[0.18em]">Stationery<span className="text-[#e8622e]">Hub</span></div>
+            <p className="mt-4 max-w-sm text-sm leading-7 text-white/45">Botswana's premier enterprise office solutions provider. Quality you can count on, service you remember.</p>
+          </div>
+          <div>
+            <h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Contact</h3>
+            <div className="mt-4 space-y-2 text-sm text-white/60">
+              <p>+267 755 60140</p>
+              <p>sales@stationeryhub.co.bw</p>
+              <p>Gaborone, Botswana</p>
             </div>
           </div>
-          
           <div>
-            <h4 className="font-semibold text-white mb-6 text-lg">Quick Links</h4>
-            <ul className="space-y-4 text-gray-400 text-lg">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/products" className="hover:text-white transition-colors">All Products</Link></li>
-              <li><Link href="/business" className="hover:text-white transition-colors">Business Solutions</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold text-white mb-6 text-lg">Categories</h4>
-            <ul className="space-y-4 text-gray-400 text-lg">
-              <li><Link href="/products/printers" className="hover:text-white transition-colors">Printers & Cartridges</Link></li>
-              <li><Link href="/products/stationery" className="hover:text-white transition-colors">Office Stationery</Link></li>
-              <li><Link href="/products/furniture" className="hover:text-white transition-colors">Office Furniture</Link></li>
-              <li><Link href="/products/technology" className="hover:text-white transition-colors">Technology</Link></li>
-              <li><Link href="/products/supplies" className="hover:text-white transition-colors">Office Supplies</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold text-white mb-6 text-lg">Contact Info</h4>
-            <div className="space-y-4 text-gray-400 text-lg">
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                </svg>
-                <a href="tel:+26775560140" className="hover:text-white transition-colors">+267 75560140</a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                <a href="mailto:sales@stationeryhub.co.bw" className="hover:text-white transition-colors">sales@stationeryhub.co.bw</a>
-              </div>
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>Gaborone, Botswana</span>
-              </div>
-              <a 
-                href="https://wa.me/26775560140"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-green-400 hover:text-green-300 mt-4"
-              >
-                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.171-3.495-8.428"/>
-                </svg>
-                Message us on WhatsApp
-              </a>
+            <h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Quick links</h3>
+            <div className="mt-4 grid gap-2 text-sm text-white/60">
+              <a href="#products" className="hover:text-white">Products</a>
+              <a href="#solutions" className="hover:text-white">Solutions</a>
+              <a href="#categories" className="hover:text-white">Categories</a>
+              <a href={waLink('Hello StationeryHub, I need help.')} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a>
             </div>
           </div>
         </div>
-        
-        <div className="border-t border-gray-800 mt-16 pt-8 text-center text-gray-400 text-lg">
-          <p>&copy; 2024 StationeryHub Enterprise Solutions. All rights reserved.</p>
+        <div className="mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/25 md:flex-row">
+          <p>© 2026 IBLIM Enterprise T/A StationeryHub. All rights reserved.</p>
+          <p>Built for fast WhatsApp ordering and enterprise office supply.</p>
         </div>
-      </div>
-    </footer>
-  );
-}
+      </footer>
 
-// Main Page Component
-export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+      <a href={waLink('Hello StationeryHub, I need help with an order.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp StationeryHub" className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-2xl shadow-green-500/30 transition hover:scale-110">
+        <WhatsAppIcon className="h-7 w-7" />
+      </a>
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <AppleHero />
-      <FullWidthProducts />
-      <AppleImageSlider />
-      <DigitalSolutions />
-      <NewsletterSignup />
-      <Footer />
-      <WhatsAppButton />
-    </div>
+      <style jsx global>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
+    </main>
   );
 }
