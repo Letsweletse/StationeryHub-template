@@ -16,6 +16,24 @@ function clean(value: unknown, max = 500) {
   return String(value ?? '').trim().slice(0, max);
 }
 
+function phoneDigits(value: string) {
+  return value.replace(/[^0-9]/g, '');
+}
+
+async function sendUltraMsg(to: string, body: string) {
+  const instanceId = process.env.ULTRAMSG_INSTANCE_ID;
+  const token = process.env.ULTRAMSG_TOKEN;
+  if (!instanceId || !token) return { skipped: true };
+
+  const response = await fetch(`https://api.ultramsg.com/${instanceId}/messages/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ token, to: phoneDigits(to), body: body.slice(0, 950), priority: '10' }),
+  });
+
+  return { ok: response.ok, status: response.status };
+}
+
 export async function POST(request: NextRequest) {
   try {
     if (!process.env.DATABASE_URL) {
@@ -48,8 +66,25 @@ export async function POST(request: NextRequest) {
       values (${customerId}, ${companyName}, ${fullName}, ${phone}, ${email}, ${location}, ${requestedItems}, 'new')
       returning id
     `;
+    const quoteRequestId = quoteRows[0].id as string;
 
-    return NextResponse.json({ ok: true, quoteRequestId: quoteRows[0].id, customerId });
+    const settingsRows = await sql`
+      select whatsapp_number
+      from stationery_business_settings
+      order by updated_at desc
+      limit 1
+    `;
+    const ownerWhatsApp = String(settingsRows[0]?.whatsapp_number || '+26775560140');
+
+    await sql`
+      insert into stationery_followups (quote_request_id, followup_type, message, scheduled_for, status)
+      values (${quoteRequestId}, 'quote_followup', ${`Prepare quote for ${fullName}. Phone: ${phone}. Items: ${requestedItems.slice(0, 250)}`}, now() + interval '1 hour', 'pending')
+    `;
+
+    const alertText = `New StationeryHub quote request\nName: ${fullName}\nCompany: ${companyName || '-'}\nPhone: ${phone}\nArea: ${location}\nItems: ${requestedItems.slice(0, 350)}\nQuote: ${quoteRequestId.slice(0, 8)}`;
+    const alertResult = await sendUltraMsg(ownerWhatsApp, alertText);
+
+    return NextResponse.json({ ok: true, quoteRequestId, customerId, alertResult });
   } catch (error) {
     console.error('Quote request failed:', error);
     return NextResponse.json({ error: 'Failed to capture quote request.' }, { status: 500 });
