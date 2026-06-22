@@ -88,7 +88,6 @@ export async function POST(request: NextRequest) {
         <h1 style="margin:0 0 10px;font-size:28px;">StationeryHub Botswana Price List</h1>
         <p>Good day, here is a current StationeryHub office supplies price list. Reply to this email or WhatsApp us for availability and bulk pricing.</p>
         <p><strong>Sales:</strong> sales@stationeryhub.co.bw<br/>
-        <strong>Admin:</strong> letsweletseseatla@stationeryhub.co.bw<br/>
         <strong>WhatsApp:</strong> +267 75 560 140 / +267 72 347 712</p>
         <table style="width:100%;border-collapse:collapse;margin-top:20px;">
           <thead><tr style="background:#111;color:white;"><th align="left" style="padding:10px;">Product</th><th align="left" style="padding:10px;">Category</th><th align="left" style="padding:10px;">Price</th><th align="left" style="padding:10px;">Stock</th></tr></thead>

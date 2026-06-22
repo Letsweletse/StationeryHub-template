@@ -61,7 +61,6 @@ export default function QuotePage() {
 
         <div className="mt-8 border-t border-black/10 pt-5 text-sm text-black/60">
           <p>Sales: <a className="font-bold text-[#c8481a]" href="mailto:sales@stationeryhub.co.bw">sales@stationeryhub.co.bw</a></p>
-          <p>Admin: <a className="font-bold text-[#c8481a]" href="mailto:letsweletseseatla@stationeryhub.co.bw">letsweletseseatla@stationeryhub.co.bw</a></p>
           <p>WhatsApp: +267 75 560 140 / +267 72 347 712</p>
         </div>
       </div>

@@ -27,6 +27,40 @@ function whatsappText(text: string) {
   return encodeURIComponent(text.slice(0, 850));
 }
 
+async function sendZapierLead(payload: {
+  email: string;
+  name: string;
+  phone: string;
+  company: string;
+  location: string;
+  product: string;
+}) {
+  const webhookUrl = process.env.ZAPIER_LEADS_WEBHOOK_URL;
+
+  if (!webhookUrl) {
+    return { skipped: true, reason: 'ZAPIER_LEADS_WEBHOOK_URL env var missing' };
+  }
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error('Zapier lead webhook failed:', { status: response.status, text });
+      return { ok: false, status: response.status };
+    }
+
+    return { ok: true };
+  } catch (error) {
+    console.error('Zapier lead webhook error:', error);
+    return { ok: false };
+  }
+}
+
 async function sendUltraMsg(to: string, body: string) {
   const instanceId = process.env.ULTRAMSG_INSTANCE_ID;
   const token = process.env.ULTRAMSG_TOKEN;
@@ -127,8 +161,16 @@ export async function POST(request: NextRequest) {
 
     const internalAlert = `New StationeryHub lead\nItem: ${savedProductName}\nQty: ${quantity}\nName: ${fullName}\nPhone: ${phone}\nArea: ${location}\nLead: ${leadId.slice(0, 8)}`;
     const alertResult = await sendUltraMsg(whatsappNumber, internalAlert);
+    const zapierResult = await sendZapierLead({
+      email,
+      name: fullName,
+      phone,
+      company: companyName,
+      location,
+      product: savedProductName,
+    });
 
-    return NextResponse.json({ ok: true, leadId, customerId, whatsappUrl, alertResult });
+    return NextResponse.json({ ok: true, leadId, customerId, whatsappUrl, alertResult, zapierResult });
   } catch (error) {
     console.error('Lead capture failed:', error);
     return NextResponse.json({ error: 'Failed to capture lead.' }, { status: 500 });
