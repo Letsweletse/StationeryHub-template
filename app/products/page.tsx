@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { products, type Product, getProductsByCategory } from '@/lib/products';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import LeadCaptureButton from '@/app/components/LeadCaptureButton';
 
 // Product Grid Component
 function ProductGrid({ products }: { products: Product[] }) {
@@ -44,14 +45,12 @@ function ProductGrid({ products }: { products: Product[] }) {
                 <span className="text-lg text-gray-500 line-through">{product.originalPrice}</span>
               )}
             </div>
-            <a 
-              href={`https://wa.me/26775560140?text=${encodeURIComponent(product.whatsappMessage)}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <LeadCaptureButton
+              productName={product.name}
+              price={product.price}
+              buttonText="Order on WhatsApp"
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold text-center block transition-all duration-200 hover:scale-105"
-            >
-              Order on WhatsApp
-            </a>
+            />
           </div>
         </div>
       ))}
