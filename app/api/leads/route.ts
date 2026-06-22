@@ -27,6 +27,33 @@ function whatsappText(text: string) {
   return encodeURIComponent(text.slice(0, 850));
 }
 
+async function sendUltraMsg(to: string, body: string) {
+  const instanceId = process.env.ULTRAMSG_INSTANCE_ID;
+  const token = process.env.ULTRAMSG_TOKEN;
+
+  if (!instanceId || !token) {
+    return { skipped: true, reason: 'UltraMsg env vars missing' };
+  }
+
+  const response = await fetch(`https://api.ultramsg.com/${instanceId}/messages/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      token,
+      to: phoneDigits(to),
+      body: body.slice(0, 950),
+      priority: '10',
+    }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    return { ok: false, status: response.status, text };
+  }
+
+  return { ok: true };
+}
+
 export async function POST(request: NextRequest) {
   try {
     if (!process.env.DATABASE_URL) {
@@ -71,6 +98,22 @@ export async function POST(request: NextRequest) {
     `;
     const leadId = leadRows[0].id as string;
 
+    await sql`
+      insert into stationery_conversations (phone, channel, user_message, ai_response, intent, product_id, product_name, lead_id)
+      values (${phone}, 'website', ${message}, 'Lead captured. Sales team will respond on WhatsApp.', 'product_inquiry', ${savedProductId}, ${savedProductName}, ${leadId})
+    `;
+
+    await sql`
+      insert into stationery_followups (lead_id, followup_type, message, scheduled_for, status)
+      values (
+        ${leadId},
+        'sales_followup',
+        ${`Follow up with ${fullName} about ${savedProductName}. Phone: ${phone}`},
+        now() + interval '1 hour',
+        'pending'
+      )
+    `;
+
     const settingsRows = await sql`
       select whatsapp_number, sales_email
       from stationery_business_settings
@@ -82,7 +125,10 @@ export async function POST(request: NextRequest) {
     const text = `StationeryHub order. Item: ${savedProductName}. Qty: ${quantity}. Name: ${fullName}. Phone: ${phone}. Area: ${location}. Lead: ${leadId.slice(0, 8)}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText(text)}`;
 
-    return NextResponse.json({ ok: true, leadId, customerId, whatsappUrl });
+    const internalAlert = `New StationeryHub lead\nItem: ${savedProductName}\nQty: ${quantity}\nName: ${fullName}\nPhone: ${phone}\nArea: ${location}\nLead: ${leadId.slice(0, 8)}`;
+    const alertResult = await sendUltraMsg(whatsappNumber, internalAlert);
+
+    return NextResponse.json({ ok: true, leadId, customerId, whatsappUrl, alertResult });
   } catch (error) {
     console.error('Lead capture failed:', error);
     return NextResponse.json({ error: 'Failed to capture lead.' }, { status: 500 });
