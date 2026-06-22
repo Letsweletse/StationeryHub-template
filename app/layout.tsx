@@ -1,18 +1,16 @@
 import './globals.css';
+import SalesContactStrip from './components/SalesContactStrip';
 
 export const metadata = {
-  title: 'StationeryHub — Enterprise Office Solutions Botswana',
-  description: 'Premium stationery, cartridges, office furniture, print supplies and technology for Botswana businesses with fast WhatsApp ordering.',
+  title: 'StationeryHub Botswana',
+  description: 'Office supplies, cartridges, furniture and technology ordering in Botswana.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <SalesContactStrip />
         {children}
       </body>
     </html>
