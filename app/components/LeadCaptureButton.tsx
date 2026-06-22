@@ -80,16 +80,16 @@ export default function LeadCaptureButton({
             <form onSubmit={submitLead} className="mt-6 grid gap-3">
               <input name="fullName" required placeholder="Your name" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
               <input name="phone" required placeholder="Phone / WhatsApp e.g. +267..." className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
-              <input name="companyName" placeholder="Company / school / office (optional)" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
-              <input name="location" placeholder="Location e.g. Gaborone" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
+              <input name="companyName" required placeholder="Company / school / office" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
+              <input name="location" required placeholder="Location e.g. Gaborone" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
               <input name="email" type="email" placeholder="Email (optional)" className="w-full border border-black/15 px-4 py-3 text-sm outline-none focus:border-[#c8481a]" />
 
               {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
 
               <button disabled={loading} className="mt-2 bg-[#0e0e0e] px-5 py-4 text-sm font-black uppercase tracking-widest text-white transition hover:bg-[#c8481a] disabled:cursor-not-allowed disabled:opacity-60">
-                {loading ? 'Saving...' : 'Save lead & open WhatsApp'}
+                {loading ? 'Preparing...' : 'Continue to WhatsApp'}
               </button>
-              <p className="text-xs leading-5 text-black/45">Your details are saved so StationeryHub can follow up even if WhatsApp is closed.</p>
+              <p className="text-xs leading-5 text-black/45">Your details help StationeryHub respond quickly with availability and pricing.</p>
             </form>
           </div>
         </div>

@@ -42,6 +42,13 @@ const categories = [
   ['Technology', 'Laptops, accessories, gadgets and business devices'],
 ];
 
+const strengths = [
+  ['01', 'WhatsApp-first ordering', 'Customers can order directly from any product card with a ready-made WhatsApp message.'],
+  ['02', 'Built for Botswana businesses', 'Clear pricing, local contact details, and a business-focused product catalogue.'],
+  ['03', 'Bulk and corporate supply', 'Designed for offices, schools, clinics, companies and procurement teams.'],
+  ['04', 'Fast quote workflow', 'Reduce friction by moving interested buyers straight into a sales conversation.'],
+];
+
 function waLink(message: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -70,7 +77,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-5 pb-10 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:pb-16">
           <div className="flex flex-col justify-end">
             <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#e8622e]"><span className="h-px w-9 bg-[#e8622e]" /> Botswana enterprise office supplier</p>
-            <h1 className="max-w-4xl text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">Enterprise office <span className="text-[#e8622e]">solutions.</span> Delivered.</h1>
+            <h1 className="hero-jump max-w-4xl text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl break-words">Enterprise office <span className="text-[#e8622e]">solutions.</span> Delivered.</h1>
             <p className="mt-7 max-w-xl text-base leading-8 text-white/70">Premium stationery, cartridges, office furniture, print supplies and technology for teams that need quick quotes and reliable supply.</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a href="#products" className="inline-flex items-center justify-center bg-[#c8481a] px-7 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#e8622e]">View products</a>
@@ -161,7 +168,7 @@ export default function Home() {
         </div>
         <div className="relative min-h-[420px] overflow-hidden bg-[#e8e4dd]">
           <img src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png" alt="StationeryHub office setup" className="h-full w-full object-cover" />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-white"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">Direct support</p><h3 className="mt-2 text-3xl font-black uppercase">Call or WhatsApp +267 755 60140</h3></div>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-white"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">Direct support</p><h3 className="mt-2 text-3xl font-black uppercase">Call or WhatsApp +267 75 560 140 / +267 72 347 712</h3></div>
         </div>
       </section>
 
@@ -175,14 +182,31 @@ export default function Home() {
       <footer className="bg-[#1c1c1c] px-5 py-12 text-[#f0ede8] lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div><div className="text-3xl font-black uppercase tracking-[0.18em]">Stationery<span className="text-[#e8622e]">Hub</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/45">Botswana's premier enterprise office solutions provider. Quality you can count on, service you remember.</p></div>
-          <div><h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Contact</h3><div className="mt-4 space-y-2 text-sm text-white/60"><p>+267 755 60140</p><p>sales@stationeryhub.co.bw</p><p>Gaborone, Botswana</p></div></div>
+          <div><h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Contact</h3><div className="mt-4 space-y-2 text-sm text-white/60"><p>+267 75 560 140 / +267 72 347 712</p><p>sales@stationeryhub.co.bw</p><p>Gaborone, Botswana</p></div></div>
           <div><h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Quick links</h3><div className="mt-4 grid gap-2 text-sm text-white/60"><a href="#products">Products</a><a href="/price-list">Price list</a><a href="/quote">Request quote</a><a href={waLink('Hello StationeryHub, I need help.')} target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div>
         </div>
       </footer>
 
-      <a href={waLink('Hello StationeryHub, I need help with an order.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp StationeryHub" className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-2xl shadow-green-500/30 transition hover:scale-110">WA</a>
+      <a href={waLink('Hello StationeryHub, I need help with an order.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp StationeryHub" className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-2xl shadow-green-500/30 transition hover:scale-110 sm:bottom-6 sm:right-6">WA</a>
 
-      <style jsx global>{`@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+      <style jsx global>{`
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes heroJump {
+          0%, 100% { transform: translateY(0) scale(1); }
+          18% { transform: translateY(-12px) scale(1.01); }
+          34% { transform: translateY(0) scale(1); }
+          46% { transform: translateY(-6px) scale(1.005); }
+          58% { transform: translateY(0) scale(1); }
+        }
+        .hero-jump {
+          animation: heroJump 3.8s ease-in-out infinite;
+          transform-origin: center bottom;
+          will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-jump { animation: none; }
+        }
+      `}</style>
     </main>
   );
 }

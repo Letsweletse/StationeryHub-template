@@ -1,17 +1,45 @@
-import { neon } from '@neondatabase/serverless';
+import StockPriceListWidget, { type StockItem } from '../components/StockPriceListWidget';
 
-export const dynamic = 'force-dynamic';
+const stockItems: StockItem[] = [
+  {
+    name: 'HP 3YP17A Colour Printhead',
+    code: '3YP17A',
+    brand: 'HP',
+    category: 'Print Supplies',
+    price: 'P 780',
+    stock: 'In stock',
+  },
+  {
+    name: 'HP 47 Black Ink Cartridge',
+    code: '6ZD61AE',
+    brand: 'HP',
+    category: 'Print Supplies',
+    price: 'P 280',
+    stock: 'Fast moving',
+  },
+  {
+    name: 'Canon 486 Colour Ink Cartridge',
+    code: 'CL-486',
+    brand: 'Canon',
+    category: 'Print Supplies',
+    price: 'P 756',
+    stock: 'Available',
+  },
+  {
+    name: 'HP 154A Neverstop Toner Reload',
+    code: 'W1540A',
+    brand: 'HP',
+    category: 'Toner',
+    price: 'P 450',
+    stock: 'Bulk ready',
+  },
+];
 
-export default async function PriceListPage() {
-  const products = process.env.DATABASE_URL
-    ? await neon(process.env.DATABASE_URL)`
-        select name, category, price, stock
-        from products
-        order by category, name
-        limit 200
-      `
-    : [];
+const brandCounts = Array.from(
+  stockItems.reduce((counts, item) => counts.set(item.brand, (counts.get(item.brand) || 0) + 1), new Map<string, number>()),
+);
 
+export default function PriceListPage() {
   return (
     <main className="min-h-screen bg-[#f0ede8] px-5 py-10 text-[#0e0e0e] lg:px-10">
       <div className="mx-auto max-w-6xl">
@@ -26,35 +54,32 @@ export default async function PriceListPage() {
 
         <div className="mb-6 grid gap-3 text-sm font-bold text-black/70 md:grid-cols-3">
           <a href="mailto:sales@stationeryhub.co.bw" className="border border-black/10 bg-white p-4">sales@stationeryhub.co.bw</a>
-          <a href="mailto:letsweletseseatla@stationeryhub.co.bw" className="border border-black/10 bg-white p-4">letsweletseseatla@stationeryhub.co.bw</a>
           <a href="https://wa.me/26775560140" className="border border-black/10 bg-white p-4">WhatsApp +267 75 560 140</a>
+          <a href="https://wa.me/26772347712" className="border border-black/10 bg-white p-4">WhatsApp +267 72 347 712</a>
         </div>
 
-        <div className="overflow-x-auto border border-black/10 bg-white">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-[#0e0e0e] text-xs uppercase tracking-widest text-white">
-              <tr>
-                <th className="px-4 py-3">Product</th>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3">Price</th>
-                <th className="px-4 py-3">Stock</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-black/10">
-              {(products as any[]).map((product) => (
-                <tr key={`${product.name}-${product.category}`}>
-                  <td className="px-4 py-3 font-bold">{product.name}</td>
-                  <td className="px-4 py-3 text-black/60">{product.category}</td>
-                  <td className="px-4 py-3 font-black">{product.price || 'Request quote'}</td>
-                  <td className="px-4 py-3">{product.stock ?? ''}</td>
-                </tr>
-              ))}
-              {(products as any[]).length === 0 && (
-                <tr><td colSpan={4} className="px-4 py-8 text-center text-black/50">No products found. Check DATABASE_URL.</td></tr>
-              )}
-            </tbody>
-          </table>
+        <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {brandCounts.map(([brand, count]) => (
+            <div key={brand} className="border border-black/10 bg-white p-4">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-black/45">{brand}</p>
+              <p className="mt-2 text-3xl font-black text-[#c8481a]">{count}</p>
+              <p className="text-sm text-black/55">listed product{count === 1 ? '' : 's'}</p>
+            </div>
+          ))}
         </div>
+
+        <StockPriceListWidget items={stockItems} />
+
+        <section className="mt-8 border border-black/10 bg-[#0e0e0e] p-6 text-white md:flex md:items-center md:justify-between md:gap-6">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#e8622e]">Need a formal quote?</p>
+            <h2 className="mt-2 text-2xl font-black uppercase">Send your list on WhatsApp</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-white/60">Share item names, cartridge codes, quantities and delivery location. StationeryHub will confirm availability and pricing.</p>
+          </div>
+          <a href="https://wa.me/26775560140?text=Hello%20StationeryHub%2C%20I%20need%20a%20quote%20from%20the%20price%20list." target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex bg-[#25d366] px-6 py-4 text-sm font-black uppercase tracking-widest text-white md:mt-0">
+            WhatsApp quote
+          </a>
+        </section>
       </div>
     </main>
   );
