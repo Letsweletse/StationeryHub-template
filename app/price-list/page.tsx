@@ -1,39 +1,33 @@
+import { products } from '../../lib/products';
 import StockPriceListWidget, { type StockItem } from '../components/StockPriceListWidget';
 
-const stockItems: StockItem[] = [
-  {
-    name: 'HP 3YP17A Colour Printhead',
-    code: '3YP17A',
-    brand: 'HP',
-    category: 'Print Supplies',
-    price: 'P 780',
-    stock: 'In stock',
-  },
-  {
-    name: 'HP 47 Black Ink Cartridge',
-    code: '6ZD61AE',
-    brand: 'HP',
-    category: 'Print Supplies',
-    price: 'P 280',
-    stock: 'Fast moving',
-  },
-  {
-    name: 'Canon 486 Colour Ink Cartridge',
-    code: 'CL-486',
-    brand: 'Canon',
-    category: 'Print Supplies',
-    price: 'P 756',
-    stock: 'Available',
-  },
-  {
-    name: 'HP 154A Neverstop Toner Reload',
-    code: 'W1540A',
-    brand: 'HP',
-    category: 'Toner',
-    price: 'P 450',
-    stock: 'Bulk ready',
-  },
-];
+function productCode(name: string, id: string) {
+  const knownCodes: Record<string, string> = {
+    'HP 3YP17A Colour Printhead': '3YP17A',
+    'HP 47 Black Ink Cartridge': '6ZD61AE',
+    'Canon 486 Colour Ink Cartridge': 'CL-486',
+    'Canon PG-485 Standard Black Ink': 'PG-485',
+    'HP 154A Neverstop Toner Reload': 'W1540A',
+    'HP 925e Evomore High Yield Magenta': '925E',
+  };
+
+  return knownCodes[name] || id.toUpperCase();
+}
+
+function productBrand(name: string) {
+  if (name.startsWith('HP ')) return 'HP';
+  if (name.startsWith('Canon ')) return 'Canon';
+  return 'StationeryHub';
+}
+
+const stockItems: StockItem[] = products.map((product) => ({
+  name: product.name,
+  code: productCode(product.name, product.id),
+  brand: productBrand(product.name),
+  category: product.category,
+  price: product.price,
+  stock: product.price === 'Request Quote' ? 'Quote available' : 'Available',
+}));
 
 const brandCounts = Array.from(
   stockItems.reduce((counts, item) => counts.set(item.brand, (counts.get(item.brand) || 0) + 1), new Map<string, number>()),
