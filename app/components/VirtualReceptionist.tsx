@@ -163,14 +163,15 @@ export default function VirtualReceptionist() {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 z-[998] max-w-[calc(100vw-2rem)] sm:bottom-6 sm:left-6">
+    <div className="fixed bottom-24 right-4 z-[1000] max-w-[calc(100vw-2rem)] sm:bottom-24 sm:right-6">
       {!open && (
         <button
           type="button"
           onClick={openPanel}
-          className="rounded-full bg-[#0e0e0e] px-5 py-4 text-sm font-black uppercase tracking-widest text-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-[#c8481a]"
+          className="flex items-center gap-2 rounded-full bg-[#c8481a] px-5 py-4 text-sm font-black uppercase tracking-widest text-white shadow-2xl shadow-orange-500/30 ring-4 ring-white/80 transition hover:-translate-y-0.5 hover:bg-[#0e0e0e]"
           aria-label="Ask StationeryHub receptionist"
         >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-base" aria-hidden="true">?</span>
           Ask StationeryHub
         </button>
       )}
