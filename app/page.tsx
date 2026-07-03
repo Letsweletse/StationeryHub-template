@@ -74,6 +74,13 @@ export default function Home() {
           <source src="https://res.cloudinary.com/dseimivxo/video/upload/v1762764005/Hero_Section_clip_mazwgq.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/70 to-transparent" />
+        <div className="pointer-events-none absolute right-4 top-24 z-20 rotate-[-8deg] rounded-full border-2 border-[#e8622e]/90 bg-[#0e0e0e]/75 px-5 py-4 text-center shadow-2xl shadow-black/30 backdrop-blur-sm sm:right-8 sm:top-28 sm:px-7 sm:py-5 lg:right-14 lg:top-32">
+          <div className="rounded-full border border-[#e8622e]/60 px-4 py-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-[#e8622e] sm:text-xs">Authorised</p>
+            <p className="mt-1 text-xl font-black uppercase leading-none tracking-tight text-white sm:text-2xl">Distributor</p>
+            <p className="mt-2 text-[9px] font-bold uppercase tracking-[0.22em] text-white/55 sm:text-[10px]">Trusted supply partner</p>
+          </div>
+        </div>
         <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-5 pb-10 pt-28 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:pb-16">
           <div className="flex flex-col justify-end">
             <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#e8622e]"><span className="h-px w-9 bg-[#e8622e]" /> Botswana enterprise office supplier</p>
