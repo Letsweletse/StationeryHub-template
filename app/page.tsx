@@ -173,8 +173,8 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="relative min-h-[420px] overflow-hidden bg-[#e8e4dd]">
-          <img src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png" alt="StationeryHub office setup" className="h-full w-full object-cover" />
+        <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden bg-[#e8e4dd] p-4 sm:p-6">
+          <img src="https://res.cloudinary.com/dseimivxo/image/upload/v1761665745/Hero_6_lu4wuu.png" alt="StationeryHub delivery service" className="max-h-[520px] w-full object-contain" />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-white"><p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">Direct support</p><h3 className="mt-2 text-3xl font-black uppercase">Call or WhatsApp +267 75 560 140 / +267 72 347 712</h3></div>
         </div>
       </section>
