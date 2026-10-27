@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cheka Kalahari Domes</title>
+<meta name="description" content="Elevated glamping domes on the Trans-Kalahari Highway near Jwaneng, Botswana. Opening 2027. Join the founding guest list.">
+<link rel="icon" href="/cheka/mark.svg" type="image/svg+xml">
+<meta property="og:title" content="Cheka Kalahari Domes">
+<meta property="og:description" content="Elevated glamping domes on the Trans-Kalahari Highway near Jwaneng. Opening 2027.">
+<meta property="og:image" content="/cheka/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141228">
+<style>*,*::before,*::after{box-sizing:border-box}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: a scroll from late afternoon to starlight. Sand-lit day sections give way to a dusk hero colour and a night-sky finale. One deliberate look, so no theme switch. */
+:root{
+  --sand:#efe4d2; --sand-deep:#e3d3ba; --dune:#b8743f; --ember:#d9822b; --ember-soft:#f2b46a;
+  --ink:#2a1d1a; --ink-soft:#5d4a42; --night:#141228; --night-2:#1f1b3d; --star:#f6ead6; --line:rgba(42,29,26,.14);
+  --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --body:"Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--sand);color:var(--ink);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--dune)}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(20,18,40,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--star)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{font-family:var(--display);font-size:22px;letter-spacing:.04em;text-decoration:none;white-space:nowrap}
+.brand em{font-style:italic;color:var(--ember-soft)}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand-mark{width:36px;height:36px;flex:none}
+/* Live interest */
+.pulse{background:var(--night);color:var(--star);padding-block:clamp(56px,8vw,100px);position:relative;overflow:hidden}
+.pulse::before{content:"";position:absolute;inset:auto -10% -60% -10%;height:120%;background:radial-gradient(closest-side,rgba(217,130,43,.22),transparent);pointer-events:none}
+.pulse .wrap{position:relative}
+.pulse .eyebrow{color:var(--ember-soft);display:inline-flex;align-items:center;gap:8px}
+.pulse .dot{width:8px;height:8px;border-radius:50%;background:#5fd38a;box-shadow:0 0 0 0 rgba(95,211,138,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(95,211,138,.55)}80%,100%{box-shadow:0 0 0 10px rgba(95,211,138,0)}}
+.pulse h2{font-size:clamp(36px,5vw,62px);font-weight:400;margin-top:14px}
+.stats{margin-top:40px;display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:1px;background:rgba(246,234,214,.14);border:1px solid rgba(246,234,214,.14)}
+.stat{background:var(--night);padding:26px 22px;min-width:0}
+.stat b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(44px,5vw,64px);line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.stat.main b{color:var(--ember-soft);font-size:clamp(56px,7vw,92px)}
+.stat span{display:block;margin-top:10px;font-size:13px;letter-spacing:.06em;color:rgba(246,234,214,.7)}
+.pulse-foot{margin-top:22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;color:rgba(246,234,214,.7);font-size:15px}
+.thanks{background:var(--night);color:var(--star);padding:22px;display:grid;gap:10px}
+.thanks h3{font-size:30px}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.stat.main{grid-column:span 2}}
+.nav-links{display:flex;gap:28px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.nav-links a{text-decoration:none;opacity:.75}
+.nav-links a:hover{opacity:1}
+.pill{border:1px solid rgba(246,234,214,.35);border-radius:999px;padding:6px 14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+@media (max-width:1060px){.nav-links{display:none}}
+@media (max-width:440px){.pill{display:none}}
+
+/* Hero */
+.hero{position:relative;background:var(--night);color:var(--star);overflow:hidden}
+.hero canvas{display:block;width:100%;height:clamp(560px,86vh,820px)}
+.hero-copy{position:absolute;inset:0;display:flex;align-items:flex-start}
+.hero-copy .wrap{width:100%;padding-block:clamp(48px,9vh,110px)}
+.hero h1{font-size:clamp(44px,6.4vw,86px);font-weight:400;max-width:14ch;letter-spacing:-.01em}
+.hero h1 em{color:var(--ember-soft)}
+.hero .lede{margin-top:22px;max-width:30rem;font-size:clamp(16px,1.6vw,19px);color:rgba(246,234,214,.82)}
+.cta-row{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-block;background:var(--ember);color:#fff8ee;text-decoration:none;font-weight:500;font-size:14px;letter-spacing:.12em;text-transform:uppercase;padding:16px 26px;border-radius:2px;border:0;cursor:pointer;font-family:var(--body);transition:background .25s}
+.btn:hover{background:#c26f1f}
+.btn.ghost{background:transparent;border:1px solid rgba(246,234,214,.45);color:var(--star)}
+.btn.ghost:hover{background:rgba(246,234,214,.08)}
+.impression{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:16px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(246,234,214,.55)}
+
+/* Intro band */
+.intro{padding-block:clamp(72px,10vw,130px)}
+.intro-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:end}
+.intro h2{font-size:clamp(36px,5vw,64px);font-weight:400}
+.intro h2 em{color:var(--dune)}
+.intro p{color:var(--ink-soft);max-width:34rem}
+.intro p+p{margin-top:16px}
+.facts{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.fact{padding:22px 18px 0 0}
+.fact b{display:block;font-family:var(--display);font-size:40px;font-weight:500;line-height:1;color:var(--ink);font-variant-numeric:lining-nums tabular-nums}
+.fact span{font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+@media (max-width:820px){.intro-grid{grid-template-columns:1fr}.facts{grid-template-columns:repeat(2,1fr);row-gap:24px}}
+
+/* A night at the domes: a real sequence through the evening */
+.evening{background:linear-gradient(180deg,var(--sand) 0%,var(--sand-deep) 100%);padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:48px}
+.sec-head h2{font-size:clamp(34px,4.6vw,58px);font-weight:400;max-width:16ch}
+.sec-head p{max-width:26rem;color:var(--ink-soft)}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:linear-gradient(90deg,var(--ember-soft),var(--dune),var(--night-2))}
+.moment{position:relative;padding:36px 22px 0 0;min-width:0}
+.moment::before{content:"";position:absolute;top:3px;left:0;width:13px;height:13px;border-radius:50%;background:var(--sand);border:2px solid var(--dune)}
+.moment time{font-family:var(--display);font-style:italic;font-size:22px;color:var(--dune)}
+.moment h3{font-size:26px;margin-top:6px}
+.moment p{margin-top:10px;font-size:15px;color:var(--ink-soft)}
+@media (max-width:900px){
+  .timeline{grid-template-columns:1fr;padding-left:28px}
+  .timeline::before{left:6px;right:auto;top:0;bottom:0;width:1px;height:auto;background:linear-gradient(180deg,var(--ember-soft),var(--dune),var(--night-2))}
+  .moment{padding:0 0 34px}
+  .moment::before{left:-28px;top:6px}
+}
+
+/* Domes */
+.domes{padding-block:clamp(64px,9vw,120px)}
+.dome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.dome{display:flex;flex-direction:column;min-width:0}
+.dome .art{aspect-ratio:4/3;max-width:100%;border-radius:2px;overflow:hidden;position:relative}
+.dome .art canvas{width:100%;height:100%;display:block}
+.dome .meta{padding-top:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.dome .tag{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--dune);font-weight:500}
+.dome h3{font-size:34px}
+.dome p{font-size:15px;color:var(--ink-soft)}
+.dome ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-soft)}
+.dome ul li::before{content:"·";margin-right:8px;color:var(--dune)}
+.dome ul li:first-child::before{content:none}
+.rate{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.rate b{font-family:var(--display);font-size:30px;font-weight:500;font-variant-numeric:lining-nums tabular-nums}
+.rate small{font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+.note{margin-top:28px;font-size:13px;color:var(--ink-soft)}
+@media (max-width:900px){.dome-grid{grid-template-columns:1fr;gap:44px}}
+
+/* Night section */
+.night{position:relative;background:var(--night);color:var(--star);overflow:hidden}
+.night canvas{position:absolute;inset:0;width:100%;height:100%}
+.night .wrap{position:relative;padding-block:clamp(80px,12vw,150px)}
+.night h2{font-size:clamp(38px,6vw,78px);font-weight:400;max-width:14ch}
+.night h2 em{color:var(--ember-soft)}
+.night .lede{margin-top:20px;max-width:32rem;color:rgba(246,234,214,.78)}
+.who{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(246,234,214,.14);border:1px solid rgba(246,234,214,.14)}
+.who div{background:rgba(20,18,40,.72);padding:28px 26px;min-width:0}
+.who .eyebrow{color:var(--ember-soft)}
+.who h3{font-size:28px;margin-top:10px}
+.who p{margin-top:10px;font-size:15px;color:rgba(246,234,214,.72)}
+@media (max-width:820px){.who{grid-template-columns:1fr}}
+
+/* Route */
+.route{padding-block:clamp(64px,9vw,120px)}
+.route-box{overflow-x:auto}
+.route svg{display:block;width:100%;min-width:640px;height:auto}
+.route-legend{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 28px;font-size:14px;color:var(--ink-soft)}
+
+/* Founding guests */
+.join{background:var(--sand-deep);padding-block:clamp(64px,9vw,120px)}
+.join-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,80px)}
+.join h2{font-size:clamp(36px,5vw,62px);font-weight:400}
+.perks{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:18px}
+.perks li{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start}
+.perks svg{width:28px;height:28px}
+.perks b{display:block;font-weight:500}
+.perks span{font-size:15px;color:var(--ink-soft)}
+form{background:var(--sand);padding:clamp(24px,4vw,40px);display:grid;gap:16px;border:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:grid;gap:6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--ink-soft)}
+input,select{font:inherit;font-size:16px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--ink);background:#fbf6ee;border:1px solid var(--line);border-radius:2px;padding:13px 14px;width:100%}
+input:focus,select:focus{outline:none;border-color:var(--dune)}
+.ready{background:var(--night);color:var(--star);padding:20px;display:grid;gap:12px}
+.ready p{font-size:15px}
+.ready .num{font-family:var(--display);font-size:24px;user-select:all}
+.fine{font-size:12px;color:var(--ink-soft)}
+@media (max-width:820px){.join-grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+
+footer{background:var(--night);color:rgba(246,234,214,.7);font-size:14px}
+footer .wrap{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+footer .brand{color:var(--star)}
+footer p+p{margin-top:6px}
+
+/* 3D site model */
+.site3d-sec{background:var(--night);color:var(--star);padding-block:clamp(56px,8vw,100px)}
+.site3d-sec .sec-head p{color:rgba(246,234,214,.72)}
+.site3d-sec .eyebrow{color:var(--ember-soft)}
+.viewer{position:relative;height:clamp(440px,72vh,760px);border:1px solid rgba(246,234,214,.16);overflow:hidden;background:linear-gradient(180deg,#9ec3dd 0%,#e8d2ae 62%,#e9c9a0 100%);touch-action:none}
+.viewer[data-mode="night"]{background:linear-gradient(180deg,#0b0a1c 0%,#1e1a3c 55%,#3a2440 100%)}
+.viewer canvas{display:block;width:100%;height:100%}
+.viewer .labels{position:absolute;inset:0;pointer-events:none}
+.viewer .lbl{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;font-size:12px;letter-spacing:.06em;background:rgba(20,18,40,.78);color:var(--star);padding:4px 9px 4px 4px;border-radius:999px;display:flex;align-items:center;gap:6px}
+.viewer .lbl b{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--ember);color:#fff;font-size:10px;font-weight:600}
+.viewer.nolabels .labels{display:none}
+.vbar{position:absolute;left:12px;right:12px;top:12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;pointer-events:none}
+.vbar>div{display:flex;flex-wrap:wrap;gap:6px;pointer-events:auto}
+.vbtn{font:500 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;background:rgba(20,18,40,.8);color:var(--star);border:1px solid rgba(246,234,214,.22);padding:9px 12px;border-radius:999px;cursor:pointer}
+.vbtn[aria-pressed="true"]{background:var(--ember);border-color:var(--ember)}
+.vhint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-size:12px;letter-spacing:.08em;background:rgba(20,18,40,.7);padding:7px 14px;border-radius:999px;pointer-events:none;transition:opacity .4s;white-space:nowrap}
+.viewer.live .vhint{opacity:0}
+.no3d-msg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--ink)}
+
+/* Plans */
+.plans{padding-block:clamp(64px,9vw,120px)}
+.plan-main{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.sheet{background:#f8f1e4;border:1px solid var(--line);padding:clamp(12px,2vw,22px);min-width:0}
+.sheet svg{display:block;width:100%;height:auto}
+.sheet-title{display:flex;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.legend{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.legend li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:15px;color:var(--ink-soft)}
+.legend li b{display:block;color:var(--ink);font-weight:500}
+.legend .n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--sand);font-size:11px;font-weight:600}
+.plan-pair{margin-top:clamp(28px,4vw,48px);display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(24px,4vw,40px);align-items:start}
+@media (max-width:900px){.plan-main,.plan-pair{grid-template-columns:1fr}}
+
+/* Facilities */
+.facilities{background:var(--sand-deep);padding-block:clamp(64px,9vw,120px)}
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.fac{background:var(--sand-deep);padding:26px 22px;display:grid;gap:10px;align-content:start;min-width:0}
+.fac svg{width:34px;height:34px;stroke:var(--dune);fill:none;stroke-width:1.4}
+.fac h3{font-size:24px}
+.fac p{font-size:14.5px;color:var(--ink-soft)}
+@media (max-width:980px){.fac-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.fac-grid{grid-template-columns:1fr}}
+
+/* Photo spot */
+.photospot{padding-block:clamp(64px,9vw,120px);background:linear-gradient(180deg,#f2c58a 0%,#e09a5c 55%,#a6553a 100%);color:var(--ink);overflow:hidden}
+.photo-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.arch{position:relative;height:clamp(260px,34vw,380px);max-width:100%}
+.arch .post{position:absolute;bottom:0;width:clamp(26px,3.2vw,40px);height:100%;border-radius:14px 14px 4px 4px;background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 3px,transparent 3px 11px),linear-gradient(90deg,#4a2e1a,#7a5030 45%,#5a3820)}
+.arch .post.l{left:6%}.arch .post.r{right:6%}
+.arch .beam{position:absolute;left:0;right:0;top:9%;height:clamp(64px,8vw,96px);border-radius:8px;display:grid;place-items:center;
+  background:repeating-linear-gradient(178deg,rgba(60,32,14,.22) 0 2px,transparent 2px 9px),repeating-linear-gradient(181deg,rgba(255,220,170,.08) 0 1px,transparent 1px 13px),linear-gradient(180deg,#9a6638,#7b4e2a 60%,#5e3a1f);box-shadow:0 10px 24px rgba(40,20,10,.35)}
+.arch .beam span{font-family:var(--display);font-weight:600;font-size:clamp(15px,2.5vw,32px);letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;color:#3a2010;text-shadow:0 1px 0 rgba(255,214,160,.45),0 -1px 0 rgba(0,0,0,.45);padding-inline:12px;text-align:center}
+.arch .top{position:absolute;left:-2%;right:-2%;top:2%;height:14px;border-radius:7px;background:linear-gradient(180deg,#6a4426,#3e2614)}
+.arch .lamp{position:absolute;top:calc(9% + clamp(64px,8vw,96px) + 8px);width:14px;height:20px;border-radius:3px;background:#ffd38a;box-shadow:0 0 22px 8px rgba(255,200,120,.6)}
+.arch .lamp.l{left:calc(6% + clamp(26px,3.2vw,40px) + 6px)}.arch .lamp.r{right:calc(6% + clamp(26px,3.2vw,40px) + 6px)}
+.photospot h2{font-size:clamp(34px,4.6vw,58px);font-weight:400}
+.photospot p{margin-top:16px;max-width:30rem;color:#3d2a22}
+.photospot .btn{margin-top:24px}
+@media (max-width:820px){.photo-grid{grid-template-columns:1fr}}
+
+
+/* Look & feel mood board */
+.look{padding-block:clamp(64px,9vw,120px);background:var(--sand)}
+.mood{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mood figure,.inside figure{margin:0;position:relative;min-width:0}
+.mood img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:2px}
+.mood figure.wide{grid-column:span 2}
+.mood figure.wide img{aspect-ratio:auto;height:100%}
+figcaption{margin-top:10px;font-size:14px;color:var(--ink-soft)}
+figcaption b{display:block;color:var(--ink);font-weight:500}
+.insp{position:absolute;top:10px;left:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:rgba(20,18,40,.72);color:var(--star);padding:5px 9px;border-radius:999px}
+.inside{margin-top:clamp(48px,7vw,90px);display:grid;grid-template-columns:1fr 1fr .9fr;gap:20px;align-items:start}
+.inside img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:2px}
+.inside h3{font-size:clamp(30px,3.4vw,44px)}
+.inside ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+.inside li{display:grid;grid-template-columns:14px 1fr;gap:10px;font-size:15px;color:var(--ink-soft)}
+.inside li::before{content:"";width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--dune)}
+.inside li b{color:var(--ink);font-weight:500}
+.swatches{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.swatches span{display:grid;gap:4px;font-size:11px;color:var(--ink-soft);text-align:center}
+.swatches i{display:block;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)}
+@media (max-width:900px){.mood{grid-template-columns:1fr 1fr}.mood figure.wide{grid-column:span 2}.inside{grid-template-columns:1fr 1fr}.inside>div:last-child{grid-column:span 2}}
+@media (max-width:520px){.mood{grid-template-columns:1fr}.mood figure.wide{grid-column:auto}.inside{grid-template-columns:1fr}.inside>div:last-child{grid-column:auto}}
+
+textarea{font:inherit;font-size:16px;color:var(--ink);background:#fbf6ee;border:1px solid var(--line);border-radius:2px;padding:13px 14px;width:100%;resize:vertical;letter-spacing:0;text-transform:none;font-weight:400}
+textarea:focus{outline:none;border-color:var(--dune)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ckgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4bd74"/><stop offset="1" stop-color="#c25a22"/></linearGradient></defs>
+  <circle cx="32" cy="35" r="23" fill="url(#ckgA)"/>
+  <path d="M13 44 A19 19 0 0 1 51 44 Z" fill="#141228"/>
+  <path d="M13 44 A19 19 0 0 1 51 44 M13 44L17.6 35 M17.6 35L22.5 44 M22.5 44L27.2 35 M27.2 35L32 44 M32 44L36.8 35 M36.8 35L41.5 44 M41.5 44L46.4 35 M46.4 35L51 44 M17.6 35L27.2 35 M27.2 35L36.8 35 M36.8 35L46.4 35 M17.6 35L24 29 M27.2 35L24 29 M36.8 35L40 29 M46.4 35L40 29 M24 29L40 29 M24 29L32 25 M40 29L32 25 M27.2 35L32 25 M36.8 35L32 25" stroke="#f2b46a" stroke-width="1.15" stroke-linecap="round" fill="none"/>
+  <path d="M8 44.5 H56" stroke="#f6ead6" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M16 46 V53 M32 46 V53 M48 46 V53" stroke="#f6ead6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M52 9 l1.3 3.2 3.2 1.3 -3.2 1.3 -1.3 3.2 -1.3 -3.2 -3.2 -1.3 3.2 -1.3Z" fill="#f6ead6"/></svg><span>Cheka <em>Kalahari</em> Domes</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#site">3D site</a><a href="#plans">Plans</a><a href="#domes">Domes</a><a href="#look">Look</a><a href="#facilities">Facilities</a><a href="#interest">Interest</a><a href="#join">Enquire</a>
+    </nav>
+    <span class="pill">Opening 2027</span>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <canvas id="heroScene" aria-label="Artist's impression: raised geodesic domes glowing on timber decks among acacia trees at Kalahari dusk"></canvas>
+  <div class="hero-copy">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--ember-soft)">Trans-Kalahari Highway · just past Jwaneng</p>
+      <h1 style="margin-top:18px">Pull over. The <em>Kalahari</em> is waiting.</h1>
+      <p class="lede">Elevated glamping domes on timber decks, a fire under a sky full of stars, and coffee at sunrise. A night worth stopping for on the road west.</p>
+      <div class="cta-row">
+        <a class="btn" href="#join">Join the founding guest list</a>
+        <a class="btn ghost" href="#domes">See the domes</a>
+      </div>
+    </div>
+  </div>
+  <span class="impression">Artist's impression</span>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <h2>Two hours from Gaborone, <em>a world away</em> from it.</h2>
+      <div>
+        <p>Cheka Kalahari Domes is a small glamping retreat taking shape beside the A2, the Trans-Kalahari Highway, just beyond Jwaneng. Each dome sits raised on its own deck, facing west into the sunset, with real beds, air conditioning, a private bathroom and nothing between you and the sky.</p>
+        <p>It is built for the people who already travel this road: families on the way to Ghanzi and Namibia, teams working in Jwaneng, and couples from Gaborone who need one quiet night away.</p>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>≈160 km</b><span>from Gaborone on the A2</span></div>
+      <div class="fact"><b>6</b><span>raised domes on private decks</span></div>
+      <div class="fact"><b>90 × 65 m</b><span>gated, log-fenced site</span></div>
+      <div class="fact"><b>2027</b><span>planned opening season</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="site3d-sec" id="site">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">The site in 3D</p>
+        <h2 style="margin-top:14px">Walk the grounds before they're built</h2>
+      </div>
+      <p>Six raised domes, the bar deck and braai boma, the gate with our name on the arch, floodlights, water tanks and parking, all inside a log-pole fence. Drag to look around and switch to night to see it lit up.</p>
+    </div>
+    <div class="viewer" id="viewer" data-mode="night">
+      <canvas id="site3d" aria-label="Interactive 3D model of the Cheka Kalahari Domes site"></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="vbar">
+        <div id="views">
+          <button class="vbtn" type="button" data-view="aerial" aria-pressed="true">Aerial</button>
+          <button class="vbtn" type="button" data-view="gate" aria-pressed="false">Gate &amp; arch</button>
+          <button class="vbtn" type="button" data-view="domes" aria-pressed="false">Domes</button>
+          <button class="vbtn" type="button" data-view="bar" aria-pressed="false">Bar &amp; braai</button>
+          <button class="vbtn" type="button" data-view="water" aria-pressed="false">Showers &amp; water</button>
+        </div>
+        <div>
+          <button class="vbtn" type="button" id="modeDay" aria-pressed="false">Day</button>
+          <button class="vbtn" type="button" id="modeNight" aria-pressed="true">Night</button>
+          <button class="vbtn" type="button" id="toggleLabels" aria-pressed="true">Labels</button>
+        </div>
+      </div>
+      <div class="vhint">Drag to turn · pinch or scroll to zoom after you tap</div>
+    </div>
+    <p class="note" style="color:rgba(246,234,214,.55)">3D concept model. Final layout depends on the plot, Land Board approval and engineering.</p>
+  </div>
+</section>
+
+<section class="plans" id="plans">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Layout &amp; plans</p>
+        <h2 style="margin-top:14px">How the site fits together</h2>
+      </div>
+      <p>Guests arrive from the A2 through the gate, park inside the fence, and walk lit paths to the bar, the braai and their dome. Water, showers and power sit to the side, out of the way.</p>
+    </div>
+    <div class="plan-main">
+      <div class="sheet">
+        <svg id="sitePlan" viewBox="0 0 800 790" role="img" aria-label="Site plan showing gate, parking, bar deck, braai boma, six domes, ablutions, water tower, solar and floodlights inside a log fence"></svg>
+        <div class="sheet-title"><span>Site plan · concept</span><span>Drawing 01</span></div>
+      </div>
+      <ol class="legend">
+        <li><span class="n">1</span><div><b>Gate &amp; name arch</b>Log gate with "Cheka Kalahari Domes" carved into a wooden plank. Our photo spot.</div></li>
+        <li><span class="n">2</span><div><b>Guard house</b>Manned gate, 24-hour security and visitor check-in.</div></li>
+        <li><span class="n">3</span><div><b>Parking</b>Room for about 20 vehicles, including trailers and overland rigs.</div></li>
+        <li><span class="n">4</span><div><b>Reception &amp; bar deck</b>Thatched timber deck with a bar, check-in and sundowner seating.</div></li>
+        <li><span class="n">5</span><div><b>Braai boma</b>Communal fire pit with log seating, inside a low pole boma.</div></li>
+        <li><span class="n">6</span><div><b>Domes 1–6</b>Raised on timber decks, each with its own bathroom pod and water tank.</div></li>
+        <li><span class="n">7</span><div><b>Showers &amp; ablutions</b>Hot showers for day visitors and staff.</div></li>
+        <li><span class="n">8</span><div><b>JoJo tower &amp; donkey boiler</b>Three large JoJo tanks on a stand and a wood-fired boiler for hot water.</div></li>
+        <li><span class="n">9</span><div><b>Solar power</b>Solar panels and batteries for lights, fridges and air conditioning.</div></li>
+        <li><span class="n" style="background:var(--ember)">✦</span><div><b>Floodlights</b>Tall floodlights on the perimeter and parking, plus low path lights.</div></li>
+      </ol>
+    </div>
+
+    <div class="plan-pair">
+      <div class="sheet">
+        <svg viewBox="0 0 400 520" role="img" aria-label="Floor plan of one dome: 6 metre dome with queen bed, lounge chairs, wardrobe and air conditioning, a bathroom pod behind, and a 8.6 by 10.2 metre deck with loungers and steps">
+          <defs>
+            <pattern id="planks" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#ead9bd"/><path d="M0 11.5H12" stroke="#d2bb95" stroke-width="1"/></pattern>
+          </defs>
+          <g font-family="Jost, sans-serif" fill="#2a1d1a">
+            <rect x="28" y="26" width="344" height="408" fill="url(#planks)" stroke="#8a6a4a" stroke-width="1.5"/>
+            <path d="M30 28V432M370 28V432M30 432H160M240 432H370" stroke="#5d4a42" stroke-width="3" fill="none"/>
+            <g fill="#e2cba6" stroke="#8a6a4a"><rect x="164" y="434" width="72" height="16"/><rect x="164" y="450" width="72" height="16"/><rect x="164" y="466" width="72" height="16"/><rect x="164" y="482" width="72" height="16"/></g>
+            <text x="200" y="514" text-anchor="middle" font-size="11" fill="#5d4a42">STEPS</text>
+            <rect x="228" y="30" width="88" height="72" fill="#f3e6d0" stroke="#2a1d1a" stroke-width="2"/>
+            <rect x="234" y="36" width="30" height="30" fill="none" stroke="#5d4a42"/><text x="249" y="55" text-anchor="middle" font-size="9">SHWR</text>
+            <ellipse cx="292" cy="50" rx="10" ry="13" fill="none" stroke="#5d4a42"/><text x="292" y="78" text-anchor="middle" font-size="9">WC</text>
+            <rect x="238" y="80" width="26" height="14" rx="4" fill="none" stroke="#5d4a42"/><text x="251" y="76" text-anchor="middle" font-size="8">BASIN</text>
+            <circle cx="96" cy="54" r="24" fill="#cfe0cf" stroke="#2e6a3c" stroke-width="2"/><text x="96" y="58" text-anchor="middle" font-size="9" fill="#2e6a3c">JOJO</text>
+            <circle cx="200" cy="210" r="120" fill="#fbf6ee" stroke="#2a1d1a" stroke-width="2.5"/>
+            <path d="M140 314 A120 120 0 0 0 260 314" fill="none" stroke="#5d86a3" stroke-width="5"/>
+            <path d="M184 330 V300 A18 18 0 0 1 202 318" fill="none" stroke="#5d4a42" stroke-width="1" stroke-dasharray="3 3"/>
+            <rect x="168" y="102" width="64" height="80" rx="3" fill="#f3e6d0" stroke="#2a1d1a"/>
+            <rect x="172" y="106" width="26" height="14" rx="3" fill="#fff" stroke="#8a6a4a"/><rect x="202" y="106" width="26" height="14" rx="3" fill="#fff" stroke="#8a6a4a"/>
+            <rect x="146" y="104" width="18" height="18" fill="#e2cba6" stroke="#8a6a4a"/><rect x="236" y="104" width="18" height="18" fill="#e2cba6" stroke="#8a6a4a"/>
+            <text x="200" y="160" text-anchor="middle" font-size="10">QUEEN BED</text>
+            <rect x="94" y="176" width="20" height="62" fill="#e2cba6" stroke="#8a6a4a"/><text x="104" y="250" text-anchor="middle" font-size="9">WARDROBE</text>
+            <rect x="300" y="186" width="12" height="34" fill="#dfe8ee" stroke="#5d86a3"/><text x="296" y="206" text-anchor="end" font-size="9">AC</text>
+            <rect x="140" y="252" width="30" height="30" rx="6" fill="#efe0c4" stroke="#8a6a4a"/><rect x="230" y="252" width="30" height="30" rx="6" fill="#efe0c4" stroke="#8a6a4a"/>
+            <circle cx="200" cy="268" r="11" fill="#e2cba6" stroke="#8a6a4a"/>
+            <text x="200" y="346" text-anchor="middle" font-size="9" fill="#5d86a3">PANORAMIC WINDOW · DOOR</text>
+            <rect x="86" y="324" width="28" height="72" rx="4" fill="#fff" stroke="#8a6a4a"/><rect x="286" y="324" width="28" height="72" rx="4" fill="#fff" stroke="#8a6a4a"/>
+            <text x="200" y="400" text-anchor="middle" font-size="10" fill="#5d4a42">PRIVATE DECK · LOUNGERS</text>
+            <g stroke="#b8743f" stroke-width="1"><path d="M80 210H320"/><path d="M80 204V216M320 204V216"/></g>
+            <rect x="172" y="200" width="56" height="16" fill="#fbf6ee"/><text x="200" y="212" text-anchor="middle" font-size="11" fill="#b8743f">Ø 6.0 m</text>
+            <text x="200" y="18" text-anchor="middle" font-size="11" fill="#b8743f">8.6 m</text>
+            <text x="388" y="232" text-anchor="middle" font-size="11" fill="#b8743f" transform="rotate(90 388 232)">10.2 m</text>
+          </g>
+        </svg>
+        <div class="sheet-title"><span>Dome floor plan</span><span>Drawing 02</span></div>
+      </div>
+      <div class="sheet">
+        <svg viewBox="0 0 660 380" role="img" aria-label="Side elevation of a dome: deck raised 1.5 metres on timber stilts, 6 metre geodesic dome reaching 4.5 metres above ground, bathroom pod and JoJo tank behind, steps down at the front">
+          <g font-family="Jost, sans-serif">
+            <path d="M0 330H660" stroke="#8a6a4a" stroke-width="2"/>
+            <path d="M0 330H660V380H0Z" fill="#e7d3b0"/>
+            <g fill="#5a3420"><rect x="143" y="271" width="8" height="59"/><rect x="345" y="271" width="8" height="59"/><rect x="548" y="271" width="8" height="59"/><rect x="246" y="271" width="8" height="59"/><rect x="448" y="271" width="8" height="59"/></g>
+            <rect x="120" y="262" width="459" height="10" fill="#7a4a2c"/>
+            <rect x="165" y="150" width="81" height="112" fill="#8a6040" stroke="#5a3420"/>
+            <path d="M159 148H252" stroke="#3e2614" stroke-width="5"/>
+            <rect x="124" y="190" width="54" height="72" rx="8" fill="#2e6a3c"/>
+            <path d="M124 202H178M124 226H178M124 250H178" stroke="#245530" stroke-width="2"/>
+            <path d="M192 262 A135 135 0 0 1 462 262 Z" fill="#fbf6ee" stroke="#2a1d1a" stroke-width="2"/>
+            <g stroke="#b9ad99" stroke-width="1" fill="none">
+              <path d="M210 205 Q327 170 444 205"/><path d="M240 160 Q327 140 414 160"/><path d="M192 262 L240 160 L282 262 L327 128 L372 262 L414 160 L462 262"/><path d="M210 205 L282 262 M444 205 L372 262 M240 160 L327 128 L414 160"/>
+            </g>
+            <path d="M400 150 A135 135 0 0 1 458 236 L420 262 L392 262 Z" fill="#9fc0d6" opacity=".75"/>
+            <g stroke="#5d4a42" stroke-width="2"><path d="M470 222V262M500 222V262M530 222V262M560 222V262M578 222V262M470 222H578"/></g>
+            <g fill="#7a4a2c"><rect x="579" y="276" width="20" height="6"/><rect x="595" y="291" width="20" height="6"/><rect x="611" y="306" width="20" height="6"/><rect x="627" y="321" width="20" height="6"/></g>
+            <g stroke="#b8743f" stroke-width="1" fill="#b8743f" font-size="12">
+              <path d="M60 330V127M54 330H66M54 127H66" fill="none"/><text x="52" y="232" text-anchor="end" stroke="none">4.5 m</text>
+              <path d="M96 330V262M90 262H102" fill="none"/><text x="92" y="302" text-anchor="end" stroke="none" font-size="11">1.5 m</text>
+              <path d="M192 352H462M192 346V358M462 346V358" fill="none"/><text x="327" y="372" text-anchor="middle" stroke="none">Dome Ø 6.0 m</text>
+            </g>
+            <path d="M60 127H327" stroke="#b8743f" stroke-dasharray="3 4" stroke-width="1"/>
+            <g fill="#5d4a42" font-size="11"><text x="118" y="230" text-anchor="end">JoJo tank</text><text x="168" y="142">Bathroom pod</text><text x="340" y="320" text-anchor="middle">Timber stilts</text><text x="525" y="214" text-anchor="middle">Railing</text></g>
+          </g>
+        </svg>
+        <div class="sheet-title"><span>Dome side elevation</span><span>Drawing 03</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facilities" id="facilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Everything a road-weary traveller needs</h2>
+      <p>Safe, warm and comfortable, with the wild Kalahari right outside the fence.</p>
+    </div>
+    <div class="fac-grid">
+      <div class="fac"><svg viewBox="0 0 34 34"><path d="M17 4v26M11 30h12M9 8l8-4 8 4"/><path d="M12 10l-5 9h20l-5-9"/><path d="M8 24l-4 4M26 24l4 4"/></svg><h3>Floodlit at night</h3><p>Tall floodlights around the fence and parking, warm path lights to every dome.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><path d="M5 30V12M29 30V12M5 14h24M5 22h24M11 14v16M17 14v16M23 14v16"/><path d="M3 12l14-8 14 8"/></svg><h3>Gated &amp; guarded</h3><p>One gate in and out, a guard house, and a log-pole fence around the whole site.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><path d="M8 18c0-6 9-14 9-14s9 8 9 14a9 9 0 0 1-18 0Z"/><path d="M13 20a4 4 0 0 0 4 4"/></svg><h3>Hot water, always</h3><p>A wood-fired donkey boiler and solar geysers for proper hot showers, even in July.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><rect x="8" y="6" width="18" height="22" rx="4"/><path d="M8 12h18M8 18h18M8 24h18M13 28v3M21 28v3"/></svg><h3>Big JoJo tanks</h3><p>Large JoJo tanks on a raised stand, plus a private tank at every dome for showers.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><rect x="3" y="5" width="28" height="24" rx="2"/><path d="M12 22V12h5a3.5 3.5 0 0 1 0 7h-5"/></svg><h3>Plenty of parking</h3><p>Space for cars, bakkies, trailers and overland rigs, inside the secured fence.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><path d="M4 16L17 6l13 10"/><path d="M8 14v14M26 14v14M4 28h26"/><path d="M12 22h10M14 22v6M20 22v6"/></svg><h3>Bar deck</h3><p>A thatched deck bar for sundowners, cold drinks and coffee, facing the sunset.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><path d="M17 6c3 4-2 6 1 10 2-1 3-3 3-5 3 3 3 8 0 11a7 7 0 0 1-10-1c-2-3-1-7 2-9 0 2 1 3 2 3-1-4 1-7 2-9Z"/><path d="M6 30l22-4M6 26l22 4"/></svg><h3>Braai boma</h3><p>A communal fire pit with log seating, braai packs and firewood from the kitchen.</p></div>
+      <div class="fac"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="5"/><path d="M17 4v4M17 26v4M4 17h4M26 17h4M8 8l3 3M23 23l3 3M8 26l3-3M23 11l3-3"/></svg><h3>Solar powered</h3><p>Solar panels and batteries keep lights, fridges and air conditioning running.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="evening" id="evening">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>One evening at the domes</h2>
+      <p>The best part of the Kalahari happens between five in the afternoon and six the next morning. This is how we want your stay to feel.</p>
+    </div>
+    <div class="timeline">
+      <div class="moment"><time>16:30</time><h3>Turn off the A2</h3><p>A short sand track, secure parking, and a cold welcome drink before you have even unpacked.</p></div>
+      <div class="moment"><time>18:15</time><h3>Sunset from your deck</h3><p>Every dome faces west. The sky goes gold, then copper, then violet over the acacias.</p></div>
+      <div class="moment"><time>19:30</time><h3>Fire and braai</h3><p>Your own fire pit, a braai pack from the kitchen, and the quiet only the desert can make.</p></div>
+      <div class="moment"><time>22:00</time><h3>The Milky Way</h3><p>No city glow for miles. Lie back on the deck, or watch the stars through the dome's clear panel.</p></div>
+      <div class="moment"><time>06:00</time><h3>Coffee at sunrise</h3><p>Birdsong, cool air, and the day's first light on the sand before you hit the road again.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="domes" id="domes">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Three ways to stay</h2>
+      <p>Each dome is fully insulated against the Kalahari heat and the winter cold, with air conditioning, solar power and an en-suite bathroom pod.</p>
+    </div>
+    <div class="dome-grid">
+      <article class="dome">
+        <div class="art"><canvas data-dome="sunset" aria-label="Artist's impression of the Sunset Dome"></canvas></div>
+        <div class="meta">
+          <span class="tag">Domes 1 &amp; 2 · For two</span>
+          <h3>Sunset Dome</h3>
+          <p>Queen bed facing a wide west window, a private deck with loungers, and an outdoor shower under the sky.</p>
+          <ul><li>Sleeps 2</li><li>Outdoor shower</li><li>Private fire pit</li></ul>
+          <div class="rate"><small>Planned rate per night, from</small><b>P1,450</b></div>
+        </div>
+      </article>
+      <article class="dome">
+        <div class="art"><canvas data-dome="stargazer" aria-label="Artist's impression of the Stargazer Dome"></canvas></div>
+        <div class="meta">
+          <span class="tag">Domes 3 &amp; 4 · For the night sky</span>
+          <h3>Stargazer Dome</h3>
+          <p>A clear panel above the bed so you fall asleep under the stars, with a deck telescope and a star map for the evening.</p>
+          <ul><li>Sleeps 2</li><li>Clear sky panel</li><li>Telescope</li></ul>
+          <div class="rate"><small>Planned rate per night, from</small><b>P1,750</b></div>
+        </div>
+      </article>
+      <article class="dome">
+        <div class="art"><canvas data-dome="family" aria-label="Artist's impression of the Family Dome"></canvas></div>
+        <div class="meta">
+          <span class="tag">Domes 5 &amp; 6 · For families &amp; teams</span>
+          <h3>Family Dome</h3>
+          <p>A queen bed and two singles, a larger deck and a shaded lounge. Easy for road-trip families and small work crews.</p>
+          <ul><li>Sleeps 4</li><li>Large deck</li><li>Early checkout</li></ul>
+          <div class="rate"><small>Planned rate per night, from</small><b>P1,950</b></div>
+        </div>
+      </article>
+    </div>
+    <p class="note">Rates are planned opening prices and may change before launch. Breakfast and braai packs will be available from the kitchen.</p>
+  </div>
+</section>
+
+<section class="look" id="look">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Look &amp; feel</p>
+        <h2 style="margin-top:14px">The domes we're bringing to the Kalahari</h2>
+      </div>
+      <p>Soft canvas-coloured shells, a wall of triangular glass facing the view, and decks raised off the sand among the grasses. These photos are our inspiration for how Cheka Kalahari Domes will look and feel.</p>
+    </div>
+    <div class="mood">
+      <figure><span class="insp">Inspiration</span><img src="/cheka/img/look-shell-glass.jpg" alt="Tan geodesic dome with a large triangular glass front among dry grasses, a timber cabana beside it"><figcaption><b>Sand-coloured shell, glass front</b>Blends into the Kalahari and frames the sunset.</figcaption></figure>
+      <figure><span class="insp">Inspiration</span><img src="/cheka/img/look-raised-deck.jpg" alt="White dome with a glass panel front on a raised timber deck with black steel railings"><figcaption><b>Raised deck with railings</b>Lifted off the sand, safe and private, with room for loungers.</figcaption></figure>
+      <figure><span class="insp">Inspiration</span><img src="/cheka/img/look-boardwalk.jpg" alt="Two white domes with clear fronts joined by a timber boardwalk through dune grass"><figcaption><b>Boardwalk between domes</b>Timber walkways linking the domes, with grasses left wild.</figcaption></figure>
+    </div>
+
+    <div class="inside">
+      <figure><span class="insp">Inspiration</span><img src="/cheka/img/inside-earthy.jpg" alt="Dome interior with a terracotta-linen bed, rattan hanging chair, floor cushions, green velvet sofa and a large triangular window"><figcaption><b>Warm, earthy and calm</b>Terracotta linen, rattan and green velvet.</figcaption></figure>
+      <figure><span class="insp">Inspiration</span><img src="/cheka/img/inside-skylight.jpg" alt="Dome interior with a double bed, sofa, wooden floor, wall-mounted air conditioner and a skylight above"><figcaption><b>Cool and comfortable</b>Air conditioning, wooden floors and a skylight above the bed.</figcaption></figure>
+      <div>
+        <p class="eyebrow">Inside the dome</p>
+        <h3 style="margin-top:12px">A proper room, not a tent</h3>
+        <ul>
+          <li><span><b>Queen bed facing the glass</b> so you wake up to the Kalahari sunrise.</span></li>
+          <li><span><b>Skylight above the bed</b> for the stars, with a blackout cover for sleep.</span></li>
+          <li><span><b>Rattan hanging chair and velvet sofa</b> by the panoramic window.</span></li>
+          <li><span><b>Air conditioning and insulation</b> for hot summers and cold July nights.</span></li>
+          <li><span><b>Woven pendant light and warm lamps</b> instead of harsh bulbs.</span></li>
+          <li><span><b>Wooden floor, rugs and floor cushions</b>, with blackout curtains all round.</span></li>
+          <li><span><b>Private bathroom pod</b> with a hot shower, basin and WC.</span></li>
+        </ul>
+        <div class="swatches" aria-label="Interior colour palette">
+          <span><i style="background:#c7653a"></i>Terracotta</span>
+          <span><i style="background:#2f5a43"></i>Bush green</span>
+          <span><i style="background:#d9c7a3"></i>Kalahari sand</span>
+          <span><i style="background:#b88a54"></i>Rattan</span>
+          <span><i style="background:#f3eee4"></i>Canvas</span>
+        </div>
+      </div>
+    </div>
+    <p class="note">Inspiration photos show other glamping sites and are used here only to show the style we're planning. They will be replaced with photos of Cheka Kalahari Domes once it is built.</p>
+  </div>
+</section>
+
+<section class="photospot" id="photo">
+  <div class="wrap">
+    <div class="photo-grid">
+      <div class="arch" aria-label="Illustration of the log gate with the name carved into a wooden plank">
+        <div class="post l"></div><div class="post r"></div>
+        <div class="top"></div>
+        <div class="beam"><span>Cheka Kalahari Domes</span></div>
+        <div class="lamp l"></div><div class="lamp r"></div>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:#5e2f16">The photo spot</p>
+        <h2 style="margin-top:14px">Your first photo starts at the gate.</h2>
+        <p>Our name is carved into a heavy wooden plank across two log posts, with lanterns that glow at dusk. It's built for the picture every guest takes on arrival, and the one they post before they leave.</p>
+        <button class="btn" type="button" id="seeArch">See the arch in 3D</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="night" id="who">
+  <canvas id="nightSky" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--ember-soft)">Who we are building it for</p>
+    <h2 style="margin-top:16px">A stop on the road. <em>A reason</em> to come back.</h2>
+    <p class="lede">The Trans-Kalahari carries travellers between Gauteng, Gaborone and Walvis Bay every day. We want the best night of that journey to be here.</p>
+    <div class="who">
+      <div><span class="eyebrow">On the road</span><h3>Overland travellers</h3><p>Self-drive families and tourists heading to Kang, Ghanzi, the Central Kalahari or Namibia. Arrive late, leave early, sleep well.</p></div>
+      <div><span class="eyebrow">In Jwaneng for work</span><h3>Business stays</h3><p>Contractors, consultants and visiting teams. Stay near Jwaneng and sleep in the Kalahari, with Wi-Fi and invoicing for companies.</p></div>
+      <div><span class="eyebrow">From Gaborone</span><h3>Weekend escapes</h3><p>Couples, birthdays and small groups. Two hours of driving for a sunset, a fire and a sky full of stars.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="route" id="getting-here">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Getting here</h2>
+      <p>Follow the A2 west from Gaborone through Kanye and Jwaneng. The retreat sits just beyond Jwaneng, on the road towards Sekoma and Kang.</p>
+    </div>
+    <div class="route-box">
+      <svg viewBox="0 0 1000 220" role="img" aria-label="Route along the A2: Gaborone to Jwaneng about 160 km, the domes just past Jwaneng, then Kang and Ghanzi further west">
+        <path d="M60 130 C 200 110, 300 150, 420 128 S 640 100, 760 126 S 900 150, 950 130" fill="none" stroke="#b8743f" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <g font-family="Jost, sans-serif" font-size="14" fill="#5d4a42">
+          <circle cx="950" cy="130" r="6" fill="#2a1d1a"/>
+          <text x="950" y="170" text-anchor="end">Gaborone</text>
+          <text x="950" y="188" text-anchor="end" font-size="12">start</text>
+          <circle cx="760" cy="126" r="5" fill="#5d4a42"/>
+          <text x="760" y="166" text-anchor="middle">Kanye</text>
+          <circle cx="470" cy="124" r="6" fill="#2a1d1a"/>
+          <text x="470" y="166" text-anchor="middle">Jwaneng</text>
+          <text x="470" y="184" text-anchor="middle" font-size="12">≈160 km · 2 h</text>
+          <circle cx="60" cy="130" r="5" fill="#5d4a42"/>
+          <text x="60" y="166" text-anchor="start">Kang · Ghanzi · Namibia</text>
+          <text x="60" y="184" text-anchor="start" font-size="12">further west on the A2</text>
+        </g>
+        <g transform="translate(400 128)">
+          <circle r="22" fill="#d9822b" opacity=".18"/>
+          <path d="M-13 4 A13 13 0 0 1 13 4 Z" fill="#d9822b"/>
+          <rect x="-16" y="4" width="32" height="3" fill="#2a1d1a"/>
+          <text y="-34" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="22" font-style="italic" fill="#2a1d1a">Cheka Kalahari Domes</text>
+        </g>
+      </svg>
+    </div>
+    <div class="route-legend"><span>Exact location shared with guests at booking</span><span>Tarred road all the way to the turn-off</span><span>Secure parking on site</span></div>
+  </div>
+</section>
+
+<section class="pulse" id="interest">
+  <div class="wrap">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Live interest</p>
+    <h2>The list is growing</h2>
+    <div class="stats" aria-live="polite">
+      <div class="stat main"><b data-k="people">–</b><span>people have registered interest</span></div>
+      <div class="stat"><b data-k="open">–</b><span>want to stay first</span></div>
+      <div class="stat"><b data-k="invite">–</b><span>asked for an opening-night invite</span></div>
+      <div class="stat"><b data-k="group">–</b><span>companies &amp; groups</span></div>
+      <div class="stat"><b data-k="partner">–</b><span>partners &amp; investors</span></div>
+    </div>
+    <div class="pulse-foot"><p id="pulseNote">Counting real enquiries as they come in.</p><a class="btn" href="#join">Add my name</a></div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <div class="join-grid">
+      <div>
+        <p class="eyebrow">Enquire · founding guests</p>
+        <h2 style="margin-top:14px">Can't wait? Talk to us.</h2>
+        <p style="margin-top:18px;color:var(--ink-soft);max-width:30rem">Ask us anything, ask for an invitation to opening night, or put your name down to stay first. No payment now. Founding guests get our best opening offer.</p>
+        <ul class="perks">
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#b8743f"/><text x="14" y="18.5" text-anchor="middle" font-size="11" font-family="Jost, sans-serif" fill="#b8743f">%</text></svg><div><b>20% off your first stay</b><span>during the opening season</span></div></li>
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#b8743f"/><path d="M8 14h12M14 8v12" stroke="#b8743f"/></svg><div><b>First pick of dates</b><span>before bookings open to the public</span></div></li>
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12" fill="none" stroke="#b8743f"/><path d="M14 7l2 5h5l-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3h5z" fill="none" stroke="#b8743f"/></svg><div><b>An invitation to opening night</b><span>sunset, fire and the first night under the stars</span></div></li>
+        </ul>
+      </div>
+      <form id="joinForm" novalidate>
+        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+        <div class="row">
+          <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" required></label>
+          <label for="f-phone">Phone / WhatsApp<input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+267 7…" required></label>
+        </div>
+        <label for="f-reason">I'd like to
+          <select id="f-reason" name="reason">
+            <option value="open">Be told the moment you open</option>
+            <option value="invite">Get an invitation to opening night</option>
+            <option value="question">Ask a question</option>
+            <option value="group">Book for a company or group</option>
+            <option value="partner">Partner or invest in the project</option>
+          </select>
+        </label>
+        <div class="row">
+          <label for="f-type">I'm travelling as
+            <select id="f-type" name="type">
+              <option>A couple</option><option>A family</option><option>On business in Jwaneng</option><option>An overland traveller</option><option>A company or group</option>
+            </select>
+          </label>
+          <label for="f-when">When would you visit?
+            <select id="f-when" name="when">
+              <option>As soon as you open</option><option>Winter 2027 (May–Aug)</option><option>Spring 2027 (Sep–Nov)</option><option>December holidays</option><option>Not sure yet</option>
+            </select>
+          </label>
+        </div>
+        <label for="f-email">Email (optional)<input id="f-email" name="email" type="email" autocomplete="email"></label>
+        <label for="f-msg">Your message (optional)<textarea id="f-msg" name="msg" rows="3" placeholder="Questions, dates, group size…"></textarea></label>
+        <p id="formError" class="fine" style="color:#a3431c" hidden></p>
+        <button class="btn" type="submit">Send my enquiry</button>
+        <div id="thanks" class="thanks" hidden>
+          <h3>You're on the list.</h3>
+          <p id="thanksText">Thank you. We'll be in touch on WhatsApp.</p>
+        </div>
+        <div id="ready" class="ready" hidden>
+          <p>Your message is ready. Tap below to send it to us on WhatsApp.</p>
+          <a id="waLink" class="btn" href="#" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>
+          <p class="fine" style="color:rgba(246,234,214,.65)">If WhatsApp does not open, message us at <span class="num">+267 75 560 140</span></p>
+        </div>
+        <p class="fine">We only use your details to tell you about Cheka Kalahari Domes.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ckgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4bd74"/><stop offset="1" stop-color="#c25a22"/></linearGradient></defs>
+  <circle cx="32" cy="35" r="23" fill="url(#ckgB)"/>
+  <path d="M13 44 A19 19 0 0 1 51 44 Z" fill="#141228"/>
+  <path d="M13 44 A19 19 0 0 1 51 44 M13 44L17.6 35 M17.6 35L22.5 44 M22.5 44L27.2 35 M27.2 35L32 44 M32 44L36.8 35 M36.8 35L41.5 44 M41.5 44L46.4 35 M46.4 35L51 44 M17.6 35L27.2 35 M27.2 35L36.8 35 M36.8 35L46.4 35 M17.6 35L24 29 M27.2 35L24 29 M36.8 35L40 29 M46.4 35L40 29 M24 29L40 29 M24 29L32 25 M40 29L32 25 M27.2 35L32 25 M36.8 35L32 25" stroke="#f2b46a" stroke-width="1.15" stroke-linecap="round" fill="none"/>
+  <path d="M8 44.5 H56" stroke="#f6ead6" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M16 46 V53 M32 46 V53 M48 46 V53" stroke="#f6ead6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M52 9 l1.3 3.2 3.2 1.3 -3.2 1.3 -1.3 3.2 -1.3 -3.2 -3.2 -1.3 3.2 -1.3Z" fill="#f6ead6"/></svg><span>Cheka <em style="color:var(--ember-soft)">Kalahari</em> Domes</span></a>
+      <p style="margin-top:10px">Trans-Kalahari Highway (A2), near Jwaneng, Botswana</p>
+      <p>A project of IBLIM Enterprise (Pty) Ltd</p>
+    </div>
+    <div>
+      <p>Opening 2027. Images are artist's impressions.</p>
+      <p>WhatsApp <span style="user-select:all">+267 75 560 140</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rng(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }; }
+
+  function fit(c){
+    const r = c.getBoundingClientRect(), d = Math.min(window.devicePixelRatio||1, 2);
+    const w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+    if (c.width !== w*d || c.height !== h*d){ c.width = w*d; c.height = h*d; }
+    const x = c.getContext('2d'); x.setTransform(d,0,0,d,0,0); return {x,w,h};
+  }
+
+  function makeStars(n, seed){ const R = rng(seed), s=[]; for(let i=0;i<n;i++) s.push({x:R(), y:R(), r:R()*1.3+.2, p:R()*6.28, a:R()*.7+.3}); return s; }
+
+  function drawStars(x,w,h,stars,t,limit){
+    for(const s of stars){
+      const yy = s.y*h*limit; const fade = 1 - (yy/(h*limit));
+      const tw = reduce ? 1 : .65 + .35*Math.sin(t*.0012 + s.p);
+      x.globalAlpha = s.a * fade * tw; x.fillStyle = '#f6ead6';
+      x.beginPath(); x.arc(s.x*w, yy, s.r, 0, 6.283); x.fill();
+    }
+    x.globalAlpha = 1;
+  }
+
+  function dune(x,w,h,base,amp,freq,phase,color){
+    x.fillStyle = color; x.beginPath(); x.moveTo(0,h);
+    for(let i=0;i<=w;i+=6){ x.lineTo(i, base + Math.sin(i*freq+phase)*amp + Math.sin(i*freq*2.3+phase*1.7)*amp*.35); }
+    x.lineTo(w,h); x.closePath(); x.fill();
+  }
+
+  function acacia(x,cx,gy,s){
+    x.fillStyle = '#1a0f17'; x.strokeStyle = '#1a0f17'; x.lineWidth = 2.2*s; x.lineCap='round';
+    x.beginPath(); x.moveTo(cx,gy); x.lineTo(cx-2*s,gy-26*s); x.lineTo(cx-14*s,gy-40*s); x.moveTo(cx-2*s,gy-26*s); x.lineTo(cx+12*s,gy-42*s); x.stroke();
+    x.beginPath(); x.ellipse(cx-2*s, gy-46*s, 34*s, 8*s, 0, 0, 6.283); x.fill();
+    x.beginPath(); x.ellipse(cx-18*s, gy-42*s, 16*s, 5*s, 0, 0, 6.283); x.fill();
+    x.beginPath(); x.ellipse(cx+16*s, gy-43*s, 18*s, 5.5*s, 0, 0, 6.283); x.fill();
+  }
+
+  // A raised geodesic dome on a timber deck, lit from within.
+  function dome(x,cx,gy,r,opts){
+    opts = opts||{};
+    const deckH = r*.42, dy = gy - deckH;
+    // halo
+    const hg = x.createRadialGradient(cx, dy-r*.4, r*.2, cx, dy-r*.4, r*2.6);
+    hg.addColorStop(0,'rgba(255,190,110,.45)'); hg.addColorStop(1,'rgba(255,190,110,0)');
+    x.fillStyle = hg; x.beginPath(); x.arc(cx, dy-r*.4, r*2.6, 0, 6.283); x.fill();
+    // stilts
+    x.fillStyle = '#2b1810';
+    for(const k of [-1.15,-.4,.4,1.15]) x.fillRect(cx + k*r - r*.035, dy, r*.07, deckH);
+    // deck
+    x.fillStyle = '#5a3420'; x.fillRect(cx - r*1.45, dy - r*.06, r*2.9, r*.1);
+    x.fillStyle = '#7a4a2c'; x.fillRect(cx - r*1.45, dy - r*.1, r*2.9, r*.05);
+    // railing
+    x.strokeStyle = 'rgba(40,22,14,.9)'; x.lineWidth = Math.max(1, r*.025);
+    x.beginPath(); x.moveTo(cx - r*1.45, dy - r*.32); x.lineTo(cx - r*1.05, dy - r*.32);
+    for(let i=0;i<4;i++){ const px = cx - r*1.45 + i*r*.13; x.moveTo(px, dy - r*.1); x.lineTo(px, dy - r*.32); }
+    x.stroke();
+    // dome body
+    const g = x.createRadialGradient(cx - r*.15, dy - r*.25, r*.1, cx, dy - r*.3, r*1.1);
+    g.addColorStop(0, opts.inner || '#ffe2b0'); g.addColorStop(.55, '#f0b46c'); g.addColorStop(1, '#9a5a35');
+    x.fillStyle = g; x.beginPath(); x.arc(cx, dy - r*.1, r, Math.PI, 0); x.closePath(); x.fill();
+    // geodesic frame
+    x.save(); x.beginPath(); x.arc(cx, dy - r*.1, r, Math.PI, 0); x.closePath(); x.clip();
+    x.strokeStyle = 'rgba(255,245,225,.55)'; x.lineWidth = Math.max(.7, r*.012);
+    const rows = 4, base = dy - r*.1;
+    const pts = [];
+    for(let j=0;j<=rows;j++){
+      const ang = (j/rows)*(Math.PI/2); const yy = base - Math.sin(ang)*r; const rr = Math.cos(ang)*r;
+      const n = Math.max(1, 8 - j*2); const row=[];
+      for(let i=0;i<=n;i++){ const a = Math.PI - (i/n)*Math.PI + (j%2 ? Math.PI/(2*n) : 0)*0; row.push([cx + Math.cos(a)*rr, yy - Math.sin(a)*rr*.08]); }
+      pts.push(row);
+    }
+    for(let j=0;j<pts.length;j++){
+      const row = pts[j];
+      x.beginPath(); row.forEach((p,i)=> i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1])); x.stroke();
+      if (j < pts.length-1){
+        const up = pts[j+1];
+        for(let i=0;i<row.length;i++){
+          const k = Math.round(i*(up.length-1)/Math.max(1,row.length-1));
+          x.beginPath(); x.moveTo(row[i][0],row[i][1]); x.lineTo(up[k][0],up[k][1]); x.stroke();
+          if (i < row.length-1){ x.beginPath(); x.moveTo(row[i+1][0],row[i+1][1]); x.lineTo(up[k][0],up[k][1]); x.stroke(); }
+        }
+      }
+    }
+    if (opts.skyPanel){
+      x.fillStyle = 'rgba(30,26,70,.55)'; x.beginPath(); x.ellipse(cx + r*.15, dy - r*.82, r*.32, r*.16, -.2, 0, 6.283); x.fill();
+      x.fillStyle = '#f6ead6'; for(let i=0;i<5;i++){ x.fillRect(cx + r*(-.05 + i*.1), dy - r*(.78 + (i%2)*.08), 1.2, 1.2); }
+    }
+    x.restore();
+    // door / window
+    const dg = x.createLinearGradient(0, dy - r*.7, 0, dy);
+    dg.addColorStop(0,'#fff4d6'); dg.addColorStop(1,'#ffc77a');
+    x.fillStyle = dg; x.beginPath();
+    const dw = r*(opts.wide ? .62 : .36);
+    x.moveTo(cx + r*.12 - dw/2, dy - r*.1); x.lineTo(cx + r*.12 - dw/2, dy - r*.48);
+    x.quadraticCurveTo(cx + r*.12, dy - r*.78, cx + r*.12 + dw/2, dy - r*.48); x.lineTo(cx + r*.12 + dw/2, dy - r*.1); x.closePath(); x.fill();
+    // steps
+    x.fillStyle = '#5a3420';
+    for(let i=0;i<3;i++) x.fillRect(cx + r*1.45 + i*r*.12, dy + i*deckH/3, r*.14, r*.05);
+  }
+
+  function fire(x,cx,gy,s,t){
+    const f = reduce ? 1 : 1 + .15*Math.sin(t*.01) + .08*Math.sin(t*.023);
+    const g = x.createRadialGradient(cx, gy-4*s, 1, cx, gy-4*s, 40*s*f);
+    g.addColorStop(0,'rgba(255,170,80,.75)'); g.addColorStop(1,'rgba(255,120,40,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(cx, gy-4*s, 40*s*f, 0, 6.283); x.fill();
+    x.fillStyle = '#ffd38a'; x.beginPath(); x.moveTo(cx-5*s, gy); x.quadraticCurveTo(cx, gy-16*s*f, cx+5*s, gy); x.fill();
+    x.fillStyle = '#2b1810'; x.fillRect(cx-9*s, gy, 18*s, 2.5*s);
+  }
+
+  // Hero scene
+  const hero = document.getElementById('heroScene');
+  const heroStars = makeStars(260, 7);
+  function drawHero(t){
+    const {x,w,h} = fit(hero);
+    const horizon = h*.70;
+    const sky = x.createLinearGradient(0,0,0,horizon);
+    sky.addColorStop(0,'#141228'); sky.addColorStop(.38,'#2d2350'); sky.addColorStop(.66,'#7b3b5a'); sky.addColorStop(.86,'#d9692f'); sky.addColorStop(1,'#f5b25e');
+    x.fillStyle = sky; x.fillRect(0,0,w,h);
+    drawStars(x,w,h,heroStars,t,.6);
+    // setting sun
+    const sx = w*.80, sr = Math.max(40, h*.07);
+    const sg = x.createRadialGradient(sx,horizon,sr*.4,sx,horizon,sr*5);
+    sg.addColorStop(0,'rgba(255,214,140,.9)'); sg.addColorStop(.25,'rgba(255,160,80,.35)'); sg.addColorStop(1,'rgba(255,140,60,0)');
+    x.fillStyle = sg; x.beginPath(); x.arc(sx,horizon,sr*5,0,6.283); x.fill();
+    x.fillStyle = '#ffd590'; x.beginPath(); x.arc(sx,horizon+sr*.25,sr,Math.PI,0); x.fill();
+    dune(x,w,h,horizon,6,.004,1.2,'#8a4535');
+    dune(x,w,h,horizon+h*.05,10,.003,3.1,'#5a2a30');
+    // trees on the mid dune
+    const s = Math.max(.7, Math.min(1.4, w/1100));
+    acacia(x,w*.08,horizon+h*.06,s*1.1); acacia(x,w*.33,horizon+h*.055,s*.8); acacia(x,w*.71,horizon+h*.06,s*1.2); acacia(x,w*.95,horizon+h*.07,s*.9);
+    dune(x,w,h,horizon+h*.13,8,.0025,.4,'#2e1720');
+    // domes on the near ground
+    const gy = horizon + h*.21; const r = Math.max(34, Math.min(70, w*.05));
+    const xs = w < 700 ? [w*.30, w*.70] : [w*.38, w*.56, w*.74];
+    xs.forEach((cx,i)=> dome(x, cx, gy + (i%2)*h*.012, r*(1 - i*.06), {skyPanel: i===1}));
+    fire(x, (w < 700 ? w*.50 : w*.47), gy + h*.05, s, t);
+    dune(x,w,h,gy + h*.06,5,.002,2.2,'rgba(24,12,18,.92)');
+  }
+
+  // Night sky with a soft Milky Way band
+  const night = document.getElementById('nightSky');
+  const nightStars = makeStars(520, 21);
+  function drawNight(t){
+    const {x,w,h} = fit(night);
+    const bg = x.createLinearGradient(0,0,0,h); bg.addColorStop(0,'#0f0e22'); bg.addColorStop(1,'#1f1b3d');
+    x.fillStyle = bg; x.fillRect(0,0,w,h);
+    x.save(); x.translate(w*.5,h*.5); x.rotate(-.42);
+    const mw = x.createLinearGradient(0,-h*.22,0,h*.22);
+    mw.addColorStop(0,'rgba(200,180,230,0)'); mw.addColorStop(.5,'rgba(220,200,240,.12)'); mw.addColorStop(1,'rgba(200,180,230,0)');
+    x.fillStyle = mw; x.fillRect(-w,-h*.22,w*2,h*.44); x.restore();
+    drawStars(x,w,h,nightStars,t,1);
+  }
+
+  // Dome type cards
+  function drawCard(c){
+    const kind = c.dataset.dome; const {x,w,h} = fit(c);
+    const palettes = {
+      sunset:['#3a2448','#c4553a','#f4a75a'],
+      stargazer:['#0f0e22','#2a2452','#5a3d6e'],
+      family:['#4a7aa0','#e7a86a','#f4d29a'],
+    };
+    const p = palettes[kind];
+    const g = x.createLinearGradient(0,0,0,h*.72); g.addColorStop(0,p[0]); g.addColorStop(.7,p[1]); g.addColorStop(1,p[2]);
+    x.fillStyle = g; x.fillRect(0,0,w,h);
+    if (kind !== 'family') drawStars(x,w,h,makeStars(kind==='stargazer'?160:50, kind.length*13),0,kind==='stargazer'?.7:.4);
+    if (kind === 'family'){ x.fillStyle='rgba(255,236,190,.95)'; x.beginPath(); x.arc(w*.22,h*.24,h*.06,0,6.283); x.fill(); }
+    dune(x,w,h,h*.72,4,.01,1,kind==='family'?'#c98a52':'#5a2a30');
+    acacia(x,w*.86,h*.74,Math.max(.6,w/520));
+    dune(x,w,h,h*.84,3,.008,2,kind==='family'?'#a8683a':'#2e1720');
+    dome(x,w*.46,h*.9,Math.min(w*.17,h*.24),{skyPanel:kind==='stargazer',wide:kind==='sunset',inner:kind==='family'?'#fff1d6':undefined});
+    if (kind !== 'family') fire(x,w*.18,h*.9,Math.max(.6,w/520),0);
+  }
+  const cards = [...document.querySelectorAll('canvas[data-dome]')];
+
+  function drawAll(t){ drawHero(t); drawNight(t); }
+  function redrawStatic(){ cards.forEach(drawCard); drawAll(performance.now()); }
+  redrawStatic();
+  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(redrawStatic, 120); });
+  if (!reduce){ (function loop(t){ drawAll(t); requestAnimationFrame(loop); })(performance.now()); }
+
+  // Live interest counter: real counts from the website's database
+  const REASON = {open:'Be told the moment you open',invite:'Get an invitation to opening night',question:'Ask a question',group:'Book for a company or group',partner:'Partner or invest in the project'};
+  function ago(iso){ const m = Math.max(1, Math.round((Date.now()-Date.parse(iso))/60000)); if (m<60) return m+' min ago'; const h=Math.round(m/60); if (h<48) return h+(h===1?' hour ago':' hours ago'); return Math.round(h/24)+' days ago'; }
+  function countUp(el, to){ const from = Number(el.dataset.v||0); el.dataset.v = to; if (reduce || to===from){ el.textContent = to.toLocaleString(); return; } const t0=performance.now(); (function step(t){ const k=Math.min(1,(t-t0)/1200); el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))).toLocaleString(); if(k<1) requestAnimationFrame(step); })(t0); }
+  async function loadCounts(){
+    const note = document.getElementById('pulseNote');
+    try{
+      const r = await fetch('/api/cheka', {cache:'no-store'}); if(!r.ok) throw 0; const d = await r.json(); if (d.people==null) throw 0;
+      countUp(document.querySelector('[data-k=people]'), d.people);
+      for (const k of ['open','invite','group','partner']) countUp(document.querySelector(`[data-k=${k}]`), d.by[k]||0);
+      note.textContent = d.people ? `Latest enquiry ${ago(d.latest)}. Every number here is a real person.` : 'Be the first name on the list.';
+    }catch(_){ note.textContent = 'Live counts show on our website.'; }
+  }
+  loadCounts(); setInterval(()=>{ if(!document.hidden) loadCounts(); }, 60000);
+
+  // Enquiry form: saved to our list, with WhatsApp as a fallback
+  const form = document.getElementById('joinForm');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const err = document.getElementById('formError'), btn = form.querySelector('button[type=submit]');
+    const name = form.name.value.trim(), phone = form.phone.value.trim();
+    if (!name || phone.replace(/\D/g,'').length < 7){ err.textContent = 'Please add your name and a phone number we can reach you on.'; err.hidden = false; return; }
+    err.hidden = true; btn.disabled = true; btn.textContent = 'Sending…';
+    const data = {name, phone, email:form.email.value.trim(), reason:form.reason.value, type:form.type.value, when:form.when.value, msg:form.msg.value.trim(), website:form.website.value};
+    try{
+      const r = await fetch('/api/cheka', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+      const d = await r.json().catch(()=>({}));
+      if (r.status===400){ err.textContent = d.error || 'Please check your details.'; err.hidden = false; btn.disabled=false; btn.textContent='Send my enquiry'; return; }
+      if (!r.ok) throw 0;
+      document.getElementById('thanksText').textContent = `Thank you, ${name.split(' ')[0]}. We've saved your request (${REASON[data.reason].toLowerCase()}) and will be in touch on WhatsApp.`;
+      document.getElementById('thanks').hidden = false; btn.hidden = true; loadCounts();
+    }catch(_){
+      const msg = `Hello Cheka Kalahari Domes, I'd like to: ${REASON[data.reason]}.\nName: ${name}\nPhone: ${phone}\nTravelling as: ${data.type}\nWhen: ${data.when}` + (data.email ? `\nEmail: ${data.email}` : '') + (data.msg ? `\nMessage: ${data.msg}` : '');
+      document.getElementById('waLink').href = 'https://wa.me/26775560140?text=' + encodeURIComponent(msg);
+      document.getElementById('ready').hidden = false; btn.hidden = true;
+    }
+  });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// Shared layout in metres: x runs east, z runs south towards the A2. Used by both the 3D model and the site plan.
+const L = {
+  fence:{x0:-45,x1:45,z0:-35,z1:30}, gateHalf:4.6, road:50,
+  parking:{x:-20,z:22.5,w:30,d:13}, bar:{x:14,z:18,w:16,d:11}, boma:{x:28,z:6,r:6},
+  guard:{x:8,z:26.5}, ablution:{x:-36,z:-1,w:8,d:4.5}, tower:{x:-37,z:-9}, boiler:{x:-31,z:-6}, solar:{x:34,z:-28},
+  domes:[[-27,-16],[-16,-21.5],[-5,-24.5],[7,-24.5],[18,-21.5],[29,-16]],
+  domeKinds:['sunset','sunset','stargazer','stargazer','family','family'],
+  floods:[[-44,-34],[44,-34],[-44,29],[44,29],[-20,15.5],[0,-12],[38,15],[-38,-15]],
+  domeTarget:[1,4],
+};
+L.domes.forEach((d,i)=>{ const a=Math.atan2(L.domeTarget[0]-d[0], L.domeTarget[1]-d[1]); d.push(a); d.push([d[0]+Math.sin(a)*7.2, d[1]+Math.cos(a)*7.2]); });
+const PATHS = (()=>{ const p=[[0,30,0,-11],[0,15,8,15],[20,12,25,9],[0,-4,-31,-3]]; const f=L.domes.map(d=>d[3]);
+  for(let i=0;i<f.length-1;i++) p.push([f[i][0],f[i][1],f[i+1][0],f[i+1][1]]); p.push([0,-11,(f[2][0]+f[3][0])/2,(f[2][1]+f[3][1])/2]); return p; })();
+function rng(seed){ return function(){ seed=(seed*16807)%2147483647; return (seed-1)/2147483646; }; }
+
+/* ---------- Site plan (SVG) ---------- */
+(function(){
+  const svg=document.getElementById('sitePlan'); if(!svg) return;
+  const S=8, X=x=>(x+50)*S, Z=z=>(z+40)*S, NS='http://www.w3.org/2000/svg';
+  const el=(t,a,parent=svg)=>{ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); parent.appendChild(e); return e; };
+  el('rect',{x:0,y:0,width:800,height:790,fill:'#efe2c9'});
+  const R=rng(11); for(let i=0;i<70;i++){ const x=-50+R()*100, z=-40+R()*84; const f=L.fence; if(x>f.x0-2&&x<f.x1+2&&z>f.z0-2&&z<f.z1+2) continue; el('circle',{cx:X(x),cy:Z(z),r:6+R()*10,fill:'#8b8f5a',opacity:.25}); }
+  el('rect',{x:X(L.fence.x0),y:Z(L.fence.z0),width:(L.fence.x1-L.fence.x0)*S,height:(L.fence.z1-L.fence.z0)*S,fill:'#e8d6b4'});
+  el('rect',{x:0,y:Z(L.road-4),width:800,height:8*S,fill:'#4a4643'});
+  el('path',{d:`M0 ${Z(L.road)}H800`,stroke:'#f1e6cf','stroke-width':2,'stroke-dasharray':'18 14'});
+  el('rect',{x:X(-4.5),y:Z(L.fence.z1),width:9*S,height:(L.road-4-L.fence.z1)*S,fill:'#cdb38a'});
+  const t=el('text',{x:400,y:Z(L.road+4)+22,'text-anchor':'middle','font-family':'Jost, sans-serif','font-size':13,'letter-spacing':'2',fill:'#4a3a30'}); t.textContent='A2 TRANS-KALAHARI HIGHWAY  ·  ← KANG · GHANZI      JWANENG · GABORONE →';
+  PATHS.forEach(p=>el('path',{d:`M${X(p[0])} ${Z(p[1])}L${X(p[2])} ${Z(p[3])}`,stroke:'#f6ecd8','stroke-width':2.4*S,'stroke-linecap':'round'}));
+  const pk=L.parking; el('rect',{x:X(pk.x-pk.w/2),y:Z(pk.z-pk.d/2),width:pk.w*S,height:pk.d*S,fill:'#d4bc94',stroke:'#a68b62'});
+  for(let i=0;i<=10;i++){ const x=pk.x-pk.w/2+i*3; el('path',{d:`M${X(x)} ${Z(pk.z-pk.d/2)}V${Z(pk.z-pk.d/2+5)}M${X(x)} ${Z(pk.z+pk.d/2)}V${Z(pk.z+pk.d/2-5)}`,stroke:'#fff','stroke-width':1.5}); }
+  const b=L.bar; el('rect',{x:X(b.x-b.w/2),y:Z(b.z-b.d/2),width:b.w*S,height:b.d*S,fill:'#c89a62',stroke:'#7a4a2c','stroke-width':2});
+  el('rect',{x:X(b.x-4),y:Z(b.z+1),width:8*S,height:1*S,fill:'#7a4a2c'});
+  el('circle',{cx:X(L.boma.x),cy:Z(L.boma.z),r:L.boma.r*S,fill:'#e2c99d',stroke:'#6e4a2c','stroke-width':3,'stroke-dasharray':'3 2'});
+  el('circle',{cx:X(L.boma.x),cy:Z(L.boma.z),r:1.1*S,fill:'#d9822b'});
+  const g=L.guard; el('rect',{x:X(g.x-1.6),y:Z(g.z-1.5),width:3.2*S,height:3*S,fill:'#cbb08a',stroke:'#5d4a42'});
+  const a=L.ablution; el('rect',{x:X(a.x-a.w/2),y:Z(a.z-a.d/2),width:a.w*S,height:a.d*S,fill:'#cbb08a',stroke:'#5d4a42','stroke-width':2});
+  [[-1.3,-.8],[1.3,-.8],[0,1.2]].forEach(o=>el('circle',{cx:X(L.tower.x+o[0]),cy:Z(L.tower.z+o[1]),r:1.05*S,fill:'#cfe0cf',stroke:'#2e6a3c','stroke-width':2}));
+  el('rect',{x:X(L.boiler.x-1),y:Z(L.boiler.z-.5),width:2*S,height:1*S,fill:'#2a2a2a'});
+  for(let r=0;r<3;r++) for(let c=0;c<5;c++) el('rect',{x:X(L.solar.x-4.5+c*1.9),y:Z(L.solar.z-2+r*1.6),width:1.7*S,height:1*S,fill:'#2b3a5c'});
+  L.domes.forEach((d,i)=>{
+    const gg=el('g',{transform:`translate(${X(d[0])} ${Z(d[1])}) rotate(${-d[2]*180/Math.PI})`});
+    el('rect',{x:-4.3*S,y:-4.6*S,width:8.6*S,height:10.2*S,fill:'#d9b98c',stroke:'#7a4a2c'},gg);
+    el('rect',{x:.7*S,y:-4.5*S,width:2.2*S,height:1.8*S,fill:'#8a6040'},gg);
+    el('circle',{cx:0,cy:0,r:3*S,fill:'#fbf6ee',stroke:'#2a1d1a','stroke-width':2},gg);
+    const tx=el('text',{x:0,y:4,'text-anchor':'middle','font-family':'Jost, sans-serif','font-size':12,'font-weight':600,fill:'#2a1d1a',transform:`rotate(${d[2]*180/Math.PI})`},gg); tx.textContent=i+1;
+  });
+  const f=L.fence; const fd=`M${X(-L.gateHalf)} ${Z(f.z1)}H${X(f.x0)}V${Z(f.z0)}H${X(f.x1)}V${Z(f.z1)}H${X(L.gateHalf)}`;
+  el('path',{d:fd,fill:'none',stroke:'#6e4a2c','stroke-width':5,'stroke-dasharray':'2 2'});
+  el('path',{d:`M${X(-L.gateHalf)} ${Z(f.z1)}h-6M${X(L.gateHalf)} ${Z(f.z1)}h6`,stroke:'#3e2614','stroke-width':9});
+  L.floods.forEach(p=>{ el('circle',{cx:X(p[0]),cy:Z(p[1]),r:14,fill:'#d9822b',opacity:.18}); el('circle',{cx:X(p[0]),cy:Z(p[1]),r:4,fill:'#d9822b'}); });
+  const badges=[[1,0,33.5],[2,g.x+3.4,g.z],[3,pk.x,pk.z],[4,b.x,b.z-1.5],[5,L.boma.x,L.boma.z-3],[6,1,-14.5],[7,a.x,a.z],[8,L.tower.x+4.2,L.tower.z+.5],[9,L.solar.x,L.solar.z+4]];
+  badges.forEach(([n,x,z])=>{ el('circle',{cx:X(x),cy:Z(z),r:13,fill:'#2a1d1a'}); const t=el('text',{x:X(x),y:Z(z)+4.5,'text-anchor':'middle','font-family':'Jost, sans-serif','font-size':13,'font-weight':600,fill:'#efe4d2'}); t.textContent=n; });
+  const nx=752, ny=48; el('path',{d:`M${nx} ${ny-22}L${nx+9} ${ny+8}L${nx} ${ny+2}L${nx-9} ${ny+8}Z`,fill:'#2a1d1a'}); const nt=el('text',{x:nx,y:ny+26,'text-anchor':'middle','font-family':'Jost, sans-serif','font-size':13,fill:'#2a1d1a'}); nt.textContent='N';
+  el('path',{d:`M24 40H${24+10*S}M24 34V46M${24+5*S} 37V43M${24+10*S} 34V46`,stroke:'#2a1d1a','stroke-width':1.5,fill:'none'});
+  const st=el('text',{x:24,y:28,'font-family':'Jost, sans-serif','font-size':12,fill:'#2a1d1a'}); st.textContent='0        5       10 m';
+})();
+
+/* ---------- 3D site model ---------- */
+(function(){
+  const viewer=document.getElementById('viewer'), canvas=document.getElementById('site3d');
+  if(!viewer) return;
+  if(!window.THREE || !THREE.OrbitControls){ viewer.insertAdjacentHTML('beforeend','<div class="no3d-msg">The 3D model could not load in this browser. The site plan below shows the full layout.</div>'); return; }
+  let renderer;
+  try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ viewer.insertAdjacentHTML('beforeend','<div class="no3d-msg">3D is not available on this device. The site plan below shows the full layout.</div>'); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.localClippingEnabled=true; renderer.setClearColor(0x000000,0);
+  const scene=new THREE.Scene(); scene.fog=new THREE.Fog(0x1b1a36,140,460);
+  const camera=new THREE.PerspectiveCamera(40,1,0.5,1500); camera.position.set(72,70,98);
+  const controls=new THREE.OrbitControls(camera,canvas); controls.enableDamping=true; controls.maxPolarAngle=1.45; controls.minDistance=5; controls.maxDistance=240; controls.enableZoom=false; controls.target.set(0,0,-2);
+  canvas.addEventListener('pointerdown',()=>{ controls.enableZoom=true; viewer.classList.add('live'); },{once:true});
+
+  const glow=[], nightLights=[];
+  const M=(color,o={})=>new THREE.MeshStandardMaterial(Object.assign({color,roughness:.85,metalness:0},o));
+  const G=(color,emissive,n,o={})=>{ const m=M(color,Object.assign({emissive,emissiveIntensity:0},o)); glow.push([m,n]); return m; };
+  function add(geo,mat,x,y,z,parent=scene,shadow=true){ const m=new THREE.Mesh(geo,mat); m.position.set(x,y,z); if(shadow){m.castShadow=true;m.receiveShadow=true;} parent.add(m); return m; }
+  const box=(w,h,d)=>new THREE.BoxGeometry(w,h,d), cyl=(rt,rb,h,s=12)=>new THREE.CylinderGeometry(rt,rb,h,s);
+
+  // textures
+  function sandTex(){ const c=document.createElement('canvas'); c.width=c.height=256; const x=c.getContext('2d'); x.fillStyle='#d4b383'; x.fillRect(0,0,256,256); const R=rng(5);
+    for(let i=0;i<5000;i++){ const v=R(); x.fillStyle=v>.5?'rgba(255,240,210,.18)':'rgba(120,80,40,.12)'; x.fillRect(R()*256,R()*256,1+R()*2,1+R()*2); }
+    const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(80,80); t.encoding=THREE.sRGBEncoding; return t; }
+  function plankTex(){ const c=document.createElement('canvas'); c.width=2048; c.height=224; const x=c.getContext('2d');
+    const g=x.createLinearGradient(0,0,0,224); g.addColorStop(0,'#a06a3a'); g.addColorStop(.55,'#82522c'); g.addColorStop(1,'#603b1f'); x.fillStyle=g; x.fillRect(0,0,2048,224);
+    const R=rng(9); for(let i=0;i<140;i++){ x.strokeStyle=`rgba(${R()>.5?'60,32,14':'255,215,165'},${.06+R()*.12})`; x.lineWidth=1+R()*2.5; x.beginPath(); const y=R()*224; x.moveTo(0,y); for(let k=0;k<=2048;k+=64) x.lineTo(k,y+Math.sin(k*.004+i)*6*R()); x.stroke(); }
+    for(let i=0;i<4;i++){ x.fillStyle='rgba(50,26,10,.35)'; x.beginPath(); x.ellipse(200+R()*1650,40+R()*140,18+R()*14,7+R()*5,0,0,6.283); x.fill(); }
+    x.font='600 100px "Cormorant Garamond", Georgia, serif'; x.textAlign='center'; x.textBaseline='middle';
+    if(x.letterSpacing!==undefined) x.letterSpacing='14px';
+    x.fillStyle='rgba(255,214,160,.45)'; x.fillText('CHEKA KALAHARI DOMES',1024,118);
+    x.fillStyle='#2e180a'; x.fillText('CHEKA KALAHARI DOMES',1024,114);
+    const t=new THREE.CanvasTexture(c); t.encoding=THREE.sRGBEncoding; t.anisotropy=8; return t; }
+
+  // light
+  const hemi=new THREE.HemisphereLight(0xfff1dc,0x8a6a45,.6); scene.add(hemi);
+  const sun=new THREE.DirectionalLight(0xffe0b0,1.6); sun.position.set(-90,70,30); sun.castShadow=true;
+  sun.shadow.mapSize.set(2048,2048); Object.assign(sun.shadow.camera,{left:-75,right:75,top:75,bottom:-75,near:1,far:320}); sun.shadow.bias=-0.0006; scene.add(sun); scene.add(sun.target);
+
+  // ground, road, paths
+  const ground=add(new THREE.PlaneGeometry(1200,1200),M(0xffffff,{map:sandTex(),roughness:1}),0,0,0,scene,false); ground.rotation.x=-Math.PI/2; ground.receiveShadow=true;
+  const flat=(w,d,color,x,z,y=.03,rot=0)=>{ const m=add(new THREE.PlaneGeometry(w,d),M(color,{roughness:1}),x,y,z,scene,false); m.rotation.x=-Math.PI/2; m.rotation.z=rot; m.receiveShadow=true; return m; };
+  flat(1200,8,0x3d3a37,0,L.road,.04);
+  for(let x=-300;x<300;x+=10) flat(4,.18,0xefe6d2,x,L.road,.05);
+  flat(9,L.road-4-L.fence.z1+.5,0xc4a77c,0,(L.fence.z1+L.road-4)/2,.035);
+  flat(L.parking.w,L.parking.d,0xc9ae85,L.parking.x,L.parking.z,.035);
+  for(let i=0;i<=10;i++){ const x=L.parking.x-L.parking.w/2+i*3; flat(.12,5,0xffffff,x,L.parking.z-L.parking.d/2+2.5,.05); flat(.12,5,0xffffff,x,L.parking.z+L.parking.d/2-2.5,.05); }
+  PATHS.forEach(p=>{ const dx=p[2]-p[0], dz=p[3]-p[1], len=Math.hypot(dx,dz); flat(2.4,len+2.4,0xead8b4,(p[0]+p[2])/2,(p[1]+p[3])/2,.045,Math.atan2(dx,dz)); });
+
+  // log-pole fence
+  const F=L.fence, pts=[], step=.34;
+  for(let x=F.x0;x<=F.x1;x+=step){ pts.push([x,F.z0]); if(Math.abs(x)>L.gateHalf+.4) pts.push([x,F.z1]); }
+  for(let z=F.z0+step;z<F.z1;z+=step){ pts.push([F.x0,z]); pts.push([F.x1,z]); }
+  const fence=new THREE.InstancedMesh(cyl(.11,.14,1,6),M(0x6b472a,{roughness:1}),pts.length); fence.castShadow=true; fence.receiveShadow=true;
+  const R=rng(3), m4=new THREE.Matrix4(), q=new THREE.Quaternion(), e=new THREE.Euler();
+  pts.forEach((p,i)=>{ const h=1.9+R()*.6; e.set((R()-.5)*.06,R()*3,(R()-.5)*.06); q.setFromEuler(e); m4.compose(new THREE.Vector3(p[0],h/2,p[1]),q,new THREE.Vector3(1,h,1)); fence.setMatrixAt(i,m4); });
+  scene.add(fence);
+
+  // gate and name arch
+  const logM=M(0x5e3c22,{roughness:1}), woodM=M(0x7a4d2a,{roughness:.9});
+  [-1,1].forEach(s=>{ add(cyl(.32,.38,5.8,12),logM,s*(L.gateHalf+.3),2.9,F.z1);
+    const lamp=add(box(.3,.45,.3),G(0x3a2a1a,0xffc070,3),s*(L.gateHalf-.2),3.6,F.z1+.35); });
+  const pm=plankTex(); const plank=add(box(11.6,1.25,.3),[woodM,woodM,woodM,woodM,M(0xffffff,{map:pm,roughness:.85}),M(0xffffff,{map:pm,roughness:.85})],0,4.95,F.z1);
+  const topLog=add(cyl(.2,.2,12.6,10),logM,0,5.95,F.z1); topLog.rotation.z=Math.PI/2;
+  [[-1,1.15],[1,-1.15]].forEach(([s,rot])=>{ const leaf=new THREE.Group(); leaf.position.set(s*L.gateHalf,0,F.z1); leaf.rotation.y=rot; scene.add(leaf);
+    for(let i=0;i<8;i++) add(cyl(.07,.08,2,6),logM,-s*(.3+i*.55),1.1,0,leaf); add(box(4.4,.14,.14),logM,-s*2.2,1.7,0,leaf); add(box(4.4,.14,.14),logM,-s*2.2,.5,0,leaf); });
+  const gateLight=new THREE.PointLight(0xffb866,0,16,2); gateLight.position.set(0,4,F.z1+2.5); gateLight.userData.on=1.6; scene.add(gateLight); nightLights.push(gateLight);
+
+  // guard house
+  const stoneM=M(0xcfb088,{roughness:.95}), roofM=M(0x3a2c24,{roughness:.8});
+  add(box(3.2,2.6,3),stoneM,L.guard.x,1.3,L.guard.z); add(box(3.8,.2,3.6),roofM,L.guard.x,2.7,L.guard.z);
+  add(new THREE.PlaneGeometry(1.4,.8),G(0x223038,0xffcf8a,1.2),L.guard.x-1.61,1.6,L.guard.z).rotation.y=-Math.PI/2;
+
+  // cars in parking
+  [[-31,18.5,0xb9433a],[-25,18.5,0xe8e4dc],[-16,26.5,0x2f4f6a],[-10,18.5,0x4d5a3a],[-28,26.5,0x8a8f96]].forEach(([x,z,c])=>{
+    const cm=M(c,{roughness:.4,metalness:.4}); add(box(1.9,1,4.4),cm,x,.75,z); add(box(1.7,.75,2.3),M(0x1d252c,{roughness:.2,metalness:.5}),x,1.6,z-.2); });
+
+  // reception & bar deck
+  const B=L.bar, deckM=M(0x8a5a34,{roughness:.9}), thatchM=M(0xb08a52,{roughness:1});
+  add(box(B.w,.5,B.d),deckM,B.x,.25,B.z);
+  [[-1,-1],[1,-1],[-1,1],[1,1],[0,-1],[0,1]].forEach(([a,b])=>add(cyl(.18,.2,3.4,8),logM,B.x+a*(B.w/2-.5),2.2,B.z+b*(B.d/2-.5)));
+  const roof=add(new THREE.ConeGeometry(11,3.4,4,1),thatchM,B.x,5.6,B.z); roof.rotation.y=Math.PI/4; roof.scale.set(1.02,1,.74);
+  add(box(8,1.1,.9),M(0x5a3420),B.x,1.05,B.z+1.5); add(box(8.4,.12,1.2),M(0x3a2214),B.x,1.66,B.z+1.5);
+  add(box(6,1.8,.4),M(0x4a2c18),B.x,1.4,B.z-3.6);
+  for(let i=0;i<5;i++) add(new THREE.SphereGeometry(.09,8,6),G(0x553322,0xffb060,2.5),B.x-2.4+i*1.2,1.9,B.z-3.35,scene,false);
+  for(let i=0;i<6;i++) add(cyl(.22,.22,.8,10),M(0x2a1a10),B.x-3+i*1.2,.9,B.z+2.6);
+  [[-5,4],[5,4],[-5.5,-1],[5.5,-1]].forEach(([a,b])=>{ add(cyl(.55,.55,.08,14),M(0x6a4024),B.x+a,1.3,B.z+b); add(cyl(.08,.08,.8,6),M(0x2a1a10),B.x+a,.9,B.z+b); });
+  const bulbM=G(0x553322,0xffc070,3);
+  for(let i=0;i<=16;i++){ add(new THREE.SphereGeometry(.1,8,6),bulbM,B.x-B.w/2+i*(B.w/16),3.8,B.z+B.d/2-.3,scene,false); add(new THREE.SphereGeometry(.1,8,6),bulbM,B.x-B.w/2+i*(B.w/16),3.8,B.z-B.d/2+.3,scene,false); }
+  const barLight=new THREE.PointLight(0xffb060,0,22,2); barLight.position.set(B.x,3.2,B.z); barLight.userData.on=2; scene.add(barLight); nightLights.push(barLight);
+
+  // braai boma
+  const O=L.boma; add(cyl(1,1.15,.45,18),M(0x8d8478,{roughness:1}),O.x,.22,O.z);
+  const flame=add(new THREE.ConeGeometry(.55,1.2,10),G(0xff8a2a,0xff7a1a,2.5,{transparent:true,opacity:.92}),O.x,.95,O.z,scene,false); glow.push([flame.material,2.5]);
+  for(let i=0;i<8;i++){ const a=i/8*Math.PI*2+.2; const lg=add(cyl(.26,.26,2.2,8),logM,O.x+Math.cos(a)*3.4,.3,O.z+Math.sin(a)*3.4); lg.rotation.z=Math.PI/2; lg.rotation.y=-a+Math.PI/2; }
+  const bp=[]; const gapA=Math.atan2(B.z-O.z,B.x-O.x); for(let a=0;a<Math.PI*2;a+=.07){ let d=Math.abs(((a-gapA+Math.PI*3)%(Math.PI*2))-Math.PI); if(d<.35) continue; bp.push(a); }
+  const boma=new THREE.InstancedMesh(cyl(.08,.1,1,6),logM,bp.length); bp.forEach((a,i)=>{ const h=1.2+R()*.4; m4.compose(new THREE.Vector3(O.x+Math.cos(a)*O.r,h/2,O.z+Math.sin(a)*O.r),q.identity(),new THREE.Vector3(1,h,1)); boma.setMatrixAt(i,m4); }); boma.castShadow=true; scene.add(boma);
+  const fireLight=new THREE.PointLight(0xff8a30,0,18,2); fireLight.position.set(O.x,1.6,O.z); fireLight.userData.on=2.4; scene.add(fireLight); nightLights.push(fireLight);
+
+  // ablutions, JoJo tower, donkey boiler
+  const A=L.ablution; add(box(A.w,3,A.d),stoneM,A.x,1.5,A.z); add(box(A.w+.6,.22,A.d+.6),roofM,A.x,3.1,A.z);
+  [-2.4,0,2.4].forEach(dx=>{ add(new THREE.PlaneGeometry(1,2.1),M(0x5a3420),A.x+dx,1.05,A.z+A.d/2+.01,scene,false); add(box(.3,.15,.15),G(0x333333,0xffd090,3),A.x+dx,2.45,A.z+A.d/2+.1); });
+  const T=L.tower, steel=M(0x6f6f6f,{metalness:.6,roughness:.5});
+  [[-1.9,-1.9],[1.9,-1.9],[-1.9,1.9],[1.9,1.9]].forEach(([a,b])=>add(box(.18,3.3,.18),steel,T.x+a,1.65,T.z+b));
+  add(box(4.4,.25,4.4),steel,T.x,3.4,T.z);
+  const jojoM=M(0x2e6a3c,{roughness:.6});
+  [[-1.3,-.8],[1.3,-.8],[0,1.2]].forEach(([a,b])=>{ add(cyl(1.05,1.05,2.4,24),jojoM,T.x+a,4.75,T.z+b); add(cyl(.35,.35,.15,12),jojoM,T.x+a,6.02,T.z+b); });
+  const pipe=add(cyl(.06,.06,7,6),steel,(T.x+A.x)/2+.5,.6,(T.z+A.z)/2); pipe.rotation.x=Math.PI/2;
+  const Bo=L.boiler; add(box(2.2,.8,1.1),M(0x9c5a3c,{roughness:1}),Bo.x,.4,Bo.z);
+  const drum=add(cyl(.45,.45,2,16),M(0x2a2a2a,{metalness:.5,roughness:.5}),Bo.x,1.25,Bo.z); drum.rotation.z=Math.PI/2;
+  add(cyl(.1,.1,2.6,8),M(0x333333,{metalness:.5}),Bo.x+.8,2.4,Bo.z);
+  add(new THREE.PlaneGeometry(.5,.35),G(0x221100,0xff6a1a,3),Bo.x-1.11,.42,Bo.z,scene,false).rotation.y=-Math.PI/2;
+  for(let i=0;i<6;i++){ const w=add(cyl(.09,.09,1.3,6),woodM,Bo.x-.4+(i%3)*.2,.12+Math.floor(i/3)*.18,Bo.z+1.3); w.rotation.z=Math.PI/2; }
+
+  // solar
+  const panelM=M(0x1f2d4d,{metalness:.5,roughness:.3});
+  for(let r=0;r<3;r++) for(let c=0;c<5;c++){ const x=L.solar.x-3.8+c*1.9, z=L.solar.z-1.6+r*2.4; const p=add(box(1.7,.05,1.1),panelM,x,1.1,z); p.rotation.x=-.45; add(box(.08,1,.08),steel,x,.5,z+.3); }
+
+  // floodlights
+  L.floods.forEach(([x,z],i)=>{ add(cyl(.1,.14,9,8),steel,x,4.5,z); const head=add(box(.9,.4,.35),G(0x444444,0xfff0d0,4),x,9,z); head.lookAt(0,0,0);
+    if(i<4){ const s=new THREE.SpotLight(0xfff1d8,0,110,.62,.55,1); s.position.set(x,9,z); s.target.position.set(x*.25,0,z*.25); scene.add(s); scene.add(s.target); s.userData.on=.95; nightLights.push(s); } });
+  // path bollards
+  const bolM=G(0x333333,0xffc77a,2.5);
+  PATHS.forEach(p=>{ const len=Math.hypot(p[2]-p[0],p[3]-p[1]); const n=Math.max(1,Math.floor(len/6)); for(let k=0;k<=n;k++){ const t=k/n, x=p[0]+(p[2]-p[0])*t, z=p[1]+(p[3]-p[1])*t; const nx=(p[3]-p[1])/len*1.6, nz=-(p[2]-p[0])/len*1.6; add(cyl(.08,.08,.6,6),bolM,x+nx,.3,z+nz,scene,false); } });
+
+  // domes
+  const clip=[new THREE.Plane(new THREE.Vector3(0,1,0),-1.52)];
+  const shellM=G(0xd8c8ad,0xffa850,.38,{roughness:.6,side:THREE.DoubleSide});
+  const frameGeo=new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.1,2),1);
+  const frameM=new THREE.LineBasicMaterial({color:0x8f8270,clippingPlanes:clip});
+  const glassM=G(0x2c2620,0xff9a3a,1.5,{roughness:.35,metalness:0,side:THREE.DoubleSide});
+  const railM=M(0x4a2c18), podM=M(0x7b5634,{roughness:.9}), cushM=M(0xf2ece0);
+  L.domes.forEach((d,i)=>{
+    const kind=L.domeKinds[i]; const g=new THREE.Group(); g.position.set(d[0],0,d[1]); g.rotation.y=d[2]; scene.add(g);
+    for(const px of [-3.8,0,3.8]) for(const pz of [-4,.5,5]) add(cyl(.12,.13,1.3,8),logM,px,.65,pz,g);
+    add(box(8.6,.2,10.2),deckM,0,1.4,.5,g);
+    for(let z=-4.5;z<=5.6;z+=1.26){ add(box(.08,.9,.08),railM,-4.25,1.95,z,g); add(box(.08,.9,.08),railM,4.25,1.95,z,g); }
+    add(box(.1,.1,10.2),railM,-4.25,2.4,.5,g); add(box(.1,.1,10.2),railM,4.25,2.4,.5,g);
+    add(box(3.2,.1,.1),railM,-2.65,2.4,5.55,g); add(box(3.2,.1,.1),railM,2.65,2.4,5.55,g);
+    for(let k=0;k<4;k++) add(box(1.8,.12,.42),deckM,0,1.22-k*.34,5.85+k*.42,g);
+    const shell=add(new THREE.SphereGeometry(3,40,20,0,Math.PI*2,0,Math.PI/2),shellM,0,1.5,0,g);
+    const fr=new THREE.LineSegments(frameGeo,frameM); fr.position.set(0,1.5,0); g.add(fr);
+    add(new THREE.SphereGeometry(3.02,24,12,Math.PI/2-(kind==='sunset'?.8:.58),kind==='sunset'?1.6:1.16,.9,.67),glassM,0,1.5,0,g,false);
+    if(kind==='stargazer') add(new THREE.SphereGeometry(3.02,20,10,0,Math.PI*2,0,.5),glassM,0,1.5,0,g,false);
+    add(box(2.2,2.5,1.8),podM,1.8,2.75,-3.6,g); add(box(2.5,.12,2.1),roofM,1.8,4.05,-3.6,g);
+    add(cyl(.6,.6,1.6,18),jojoM,-2.6,2.3,-3.9,g);
+    [-2.5,2.5].forEach(x=>add(box(.75,.22,1.8),cushM,x,1.62,3.6,g));
+    if(kind==='family') add(box(1.6,.6,1.6),M(0xd8c7aa),0,1.8,4.2,g);
+    const pl=new THREE.PointLight(0xffb866,0,10,2); pl.position.set(0,2.6,4); g.add(pl); pl.userData.on=1.3; nightLights.push(pl);
+  });
+
+  // acacias and scrub
+  const trunkM=M(0x3a2a1e,{roughness:1}), canopyM=M(0x5b6638,{roughness:1}), canopyM2=M(0x6d7342,{roughness:1});
+  const clear=(x,z)=>{ if(Math.abs(z-L.road)<9) return false; if(x>F.x0-1.5&&x<F.x1+1.5&&z>F.z0-1.5&&z<F.z1+1.5){ const near=[[0,15,6,18],[B.x,B.z,10,8],[O.x,O.z,8,8],[L.parking.x,L.parking.z,17,9],[A.x,A.z-4,8,9],[L.solar.x,L.solar.z,7,5],[L.guard.x,L.guard.z,4,4]]; if(near.some(([cx,cz,w,dd])=>Math.abs(x-cx)<w&&Math.abs(z-cz)<dd)) return false; if(L.domes.some(dd=>Math.hypot(x-dd[0],z-dd[1])<9)) return false; if(z>-12&&z<28&&Math.abs(x)<4) return false; } return true; };
+  function acacia(x,z,s){ const g=new THREE.Group(); g.position.set(x,0,z); g.rotation.y=R()*6; g.scale.setScalar(s); scene.add(g);
+    add(cyl(.14,.24,3,7),trunkM,0,1.5,0,g); const br=add(cyl(.08,.12,2,6),trunkM,.6,3,0,g); br.rotation.z=-.7; const br2=add(cyl(.08,.12,2,6),trunkM,-.5,3,.2,g); br2.rotation.z=.6;
+    const c=add(new THREE.SphereGeometry(1,12,8),R()>.5?canopyM:canopyM2,0,3.7,0,g); c.scale.set(3.6,.62,3.2); const c2=add(new THREE.SphereGeometry(1,10,6),canopyM,1.6,3.4,.6,g); c2.scale.set(1.8,.45,1.6); }
+  let placed=0, tries=0; while(placed<46 && tries<900){ tries++; const inside=placed<16; const x=inside?F.x0+R()*(F.x1-F.x0):-170+R()*340; const z=inside?F.z0+R()*(F.z1-F.z0):-170+R()*240; if(!clear(x,z)) continue; acacia(x,z,.8+R()*.6); placed++; }
+  const bushGeo=new THREE.IcosahedronGeometry(.7,0); const bushes=new THREE.InstancedMesh(bushGeo,M(0x7b7a48,{roughness:1,flatShading:true}),520); let bi=0;
+  while(bi<520){ const x=-220+R()*440, z=-220+R()*300; if(!clear(x,z)) continue; const s=.5+R()*1.4; m4.compose(new THREE.Vector3(x,s*.35,z),q.setFromEuler(e.set(0,R()*6,0)),new THREE.Vector3(s,s*.7,s)); bushes.setMatrixAt(bi++,m4); }
+  bushes.castShadow=true; scene.add(bushes);
+
+  // labels
+  const labelsEl=document.getElementById('labels');
+  const LBL=[['1','Gate & name arch',0,7.2,F.z1],['2','Guard house',L.guard.x,3.6,L.guard.z],['3','Parking',L.parking.x,2.2,L.parking.z],['4','Bar deck',B.x,7.8,B.z],['5','Braai boma',O.x,2.4,O.z],['7','Showers',A.x,3.8,A.z],['8','JoJo tanks & boiler',T.x,6.8,T.z],['9','Solar',L.solar.x,2.4,L.solar.z]]
+    .concat(L.domes.map((d,i)=>['6','Dome '+(i+1),d[0],5.4,d[1]]));
+  const lbls=LBL.map(([n,t,x,y,z])=>{ const div=document.createElement('div'); div.className='lbl'; const b=document.createElement('b'); b.textContent=n; div.appendChild(b); div.appendChild(document.createTextNode(t)); labelsEl.appendChild(div); return {div,v:new THREE.Vector3(x,y,z)}; });
+  const pv=new THREE.Vector3();
+  function placeLabels(w,h){ const lim=Math.max(45,camera.position.distanceTo(controls.target)*1.4); for(const l of lbls){ const far=camera.position.distanceTo(l.v)>lim; pv.copy(l.v).project(camera); const vis=!far&&pv.z<1&&Math.abs(pv.x)<1.05&&Math.abs(pv.y)<1.05; l.div.style.display=vis?'':'none'; if(vis){ l.div.style.left=((pv.x+1)/2*w)+'px'; l.div.style.top=((1-pv.y)/2*h)+'px'; } } }
+
+  // day / night
+  function setMode(night){
+    viewer.dataset.mode=night?'night':'day';
+    document.getElementById('modeDay').setAttribute('aria-pressed',String(!night)); document.getElementById('modeNight').setAttribute('aria-pressed',String(night));
+    sun.intensity=night?.28:1.7; sun.color.set(night?0x8fa4ff:0xffe0b0); sun.position.set(night?60:-90,night?90:70,night?-40:30);
+    hemi.intensity=night?.22:.62; hemi.color.set(night?0x6f7ab8:0xfff1dc); hemi.groundColor.set(night?0x2a2030:0x8a6a45);
+    scene.fog.color.set(night?0x1e1a3a:0xead2ae);
+    renderer.toneMappingExposure=night?1.15:1.0;
+    glow.forEach(([m,n])=>m.emissiveIntensity=night?n:(m===flame.material?1.2:0));
+    nightLights.forEach(l=>l.intensity=night?l.userData.on:0);
+  }
+  document.getElementById('modeDay').onclick=()=>setMode(false);
+  document.getElementById('modeNight').onclick=()=>setMode(true);
+  const lb=document.getElementById('toggleLabels'); lb.onclick=()=>{ const on=viewer.classList.toggle('nolabels'); lb.setAttribute('aria-pressed',String(!on)); };
+  setMode(true);
+
+  // camera views
+  const VIEWS={ aerial:[[72,70,98],[0,0,-2]], gate:[[0,3.2,47],[0,3.6,29]], domes:[[-8,7,0],[6,2,-22]], bar:[[42,11,36],[20,1.5,13]], water:[[-18,9,10],[-35,3,-5]] };
+  let fly=null;
+  function go(name){ const v=VIEWS[name]; fly={t0:performance.now(),p0:camera.position.clone(),t1:controls.target.clone(),p:new THREE.Vector3(...v[0]),t:new THREE.Vector3(...v[1])};
+    document.querySelectorAll('#views .vbtn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===name))); }
+  document.querySelectorAll('#views .vbtn').forEach(b=>b.onclick=()=>go(b.dataset.view));
+  const seeArch=document.getElementById('seeArch'); if(seeArch) seeArch.onclick=()=>{ viewer.scrollIntoView({behavior:'smooth',block:'center'}); go('gate'); };
+
+  // sizing and loop
+  let W=1,H=1; function resize(){ const r=viewer.getBoundingClientRect(); W=Math.max(1,r.width); H=Math.max(1,r.height); renderer.setSize(W,H,false); camera.aspect=W/H; camera.fov=W/H<1?62:40; camera.updateProjectionMatrix(); }
+  if(window.innerWidth<640){ viewer.classList.add('nolabels'); lb.setAttribute('aria-pressed','false'); }
+  new ResizeObserver(resize).observe(viewer); resize();
+  let visible=true; new IntersectionObserver(es=>{ visible=es[0].isIntersecting; },{rootMargin:'100px'}).observe(viewer);
+  function frame(now){
+    requestAnimationFrame(frame); if(!visible) return;
+    if(fly){ const k=Math.min(1,(now-fly.t0)/1500), s=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; camera.position.lerpVectors(fly.p0,fly.p,s); controls.target.lerpVectors(fly.t1,fly.t,s); if(k>=1) fly=null; }
+    fireLight.intensity = viewer.dataset.mode==='night' ? 2.2+Math.sin(now*.012)*.35+Math.sin(now*.031)*.2 : 0;
+    flame.scale.y=1+Math.sin(now*.015)*.12;
+    controls.update(); renderer.render(scene,camera); placeLabels(W,H);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
