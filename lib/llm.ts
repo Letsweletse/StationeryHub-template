@@ -5,6 +5,8 @@ import { headers } from 'next/headers';
 const GATEWAY = 'https://ai-gateway.vercel.sh/v1/chat/completions';
 const GATEWAY_MODEL = process.env.AI_MODEL || 'google/gemini-2.5-flash';
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+// Accept the key under GEMINI_API_KEY or the shorter names used in Vercel.
+const geminiKey = () => process.env.GEMINI_API_KEY || process.env.gemini || process.env.GEMINI || '';
 
 function gatewayToken(): string | null {
   if (process.env.AI_GATEWAY_API_KEY) return process.env.AI_GATEWAY_API_KEY;
@@ -12,7 +14,7 @@ function gatewayToken(): string | null {
   try { return headers().get('x-vercel-oidc-token'); } catch { return null; }
 }
 
-export const aiEnabled = () => process.env.AI_DISABLED !== '1' && (!!process.env.GEMINI_API_KEY || !!gatewayToken());
+export const aiEnabled = () => process.env.AI_DISABLED !== '1' && (!!geminiKey() || !!gatewayToken());
 
 function extractJson(text: string): any {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -30,10 +32,10 @@ export async function askAiJson(prompt: string, opts: { search?: boolean; timeou
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), opts.timeoutMs ?? 25000);
   try {
-    if (process.env.GEMINI_API_KEY) {
+    if (geminiKey()) {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
         method: 'POST', signal: ctrl.signal,
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey() },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           ...(opts.search ? { tools: [{ google_search: {} }] } : { generationConfig: { responseMimeType: 'application/json', temperature: 0.1 } }),
