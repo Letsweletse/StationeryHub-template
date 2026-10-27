@@ -39,8 +39,10 @@ export async function POST(req: NextRequest) {
     let supplierId: number;
     if (dup.length) supplierId = dup[0].id;
     else {
-      const [row] = await q(`insert into sh_suppliers (name, contact_person, phone, email, country, city, categories, about, plan)
-        values ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning id`,
+      // Free-plan suppliers are approved straight away so price requests and purchase orders can reach them.
+      // Featured (paid) listings and their public contact details still wait for payment and a manual check.
+      const [row] = await q(`insert into sh_suppliers (name, contact_person, phone, email, country, city, categories, about, plan, status)
+        values ($1,$2,$3,$4,$5,$6,$7,$8,$9,'approved') returning id`,
         [name, clean(b.contact_person, 80), phone, email, clean(b.country || 'Botswana', 60), clean(b.city, 60), clean(b.categories, 200), clean(b.about, 600), plan]);
       supplierId = row.id;
     }
@@ -57,7 +59,7 @@ export async function POST(req: NextRequest) {
       await q(`insert into sh_supplier_items (supplier_id, name, code, supplier_price, moq) values ($1,$2,$3,$4,$5)`, [supplierId, itemName, code, price, moq]);
       added++;
     }
-    await sendWhatsApp(SALES_WHATSAPP, `🏭 New StationeryHub supplier${dup.length ? ' (existing, added items)' : ''}: ${name}\n📞 ${phone}${email ? `\n✉️ ${email}` : ''}\nPlan: ${plan === 'listed' ? 'Paid listing' : 'Free (orders via StationeryHub)'}\nItems submitted: ${added}\nReview at /admin/hub`);
+    await sendWhatsApp(SALES_WHATSAPP, `🏭 New StationeryHub supplier${dup.length ? ' (existing, added items)' : ''}: ${name}\n📞 ${phone}${email ? `\n✉️ ${email}` : ''}\nPlan: ${plan === 'listed' ? 'Paid listing' : 'Free (orders via StationeryHub)'}\nItems submitted: ${added}\nAuto-approved for price requests${plan === 'listed' ? '; featured listing needs payment before contact details show' : ''}. Items wait for review at /admin/hub`);
     return NextResponse.json({ ok: true, items: added });
   } catch (e) {
     console.error('suppliers POST', e);

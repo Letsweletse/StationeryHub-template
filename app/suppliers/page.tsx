@@ -25,7 +25,7 @@ export default function SuppliersPage() {
       const r = await fetch('/api/hub/suppliers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...f, plan }) });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'Could not submit');
-      setDone(`Thank you. We received your details${d.items ? ` and ${d.items} item(s)` : ''}. Our team will review and contact you, usually within one working day.`);
+      setDone(`Thank you. We received your details${d.items ? ` and ${d.items} item(s)` : ''}. You are now on our supplier panel and will receive price requests and orders by WhatsApp and email. Products you listed go live after a quick check.`);
       e.currentTarget.reset();
     } catch (err: any) { setError(err.message); }
     setBusy(false);
