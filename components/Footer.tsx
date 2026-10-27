@@ -46,8 +46,10 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
             <div className="space-y-2 text-gray-300">
-              <p>📞 +267 75560140</p>
-              <p>📧 sales@stationeryhub.co.bw</p>
+              <p>📞 <a href="tel:+26775560140">+267 75 560 140</a> / <a href="tel:+26772347712">+267 72 347 712</a></p>
+              <p>📧 <a href="mailto:sales@stationeryhub.co.bw">sales@stationeryhub.co.bw</a></p>
+              <p>📦 <a href="mailto:operations@stationeryhub.co.bw">operations@stationeryhub.co.bw</a></p>
+              <p>👤 <a href="mailto:letsweletseseatla@stationeryhub.co.bw">letsweletseseatla@stationeryhub.co.bw</a></p>
               <p>🕒 Mon-Fri: 8AM-5PM</p>
               <p>📍 Gaborone, Botswana</p>
             </div>
@@ -55,7 +57,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 StationeryHub Business Solutions by iblimenterprise.com .All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} StationeryHub. All rights reserved.</p>
         </div>
       </div>
     </footer>

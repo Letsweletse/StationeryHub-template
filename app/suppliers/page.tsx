@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 
 type Supplier = { id: number; name: string; country: string; city: string | null; categories: string | null; about: string | null; items: number; listed: boolean; contact: { person: string | null; phone: string; email: string | null } | null };
 
@@ -101,6 +102,7 @@ export default function SuppliersPage() {
           </section>
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 }

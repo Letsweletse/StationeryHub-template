@@ -1,6 +1,7 @@
 'use client';
 
 import LeadCaptureButton from './components/LeadCaptureButton';
+import SiteFooter from './components/SiteFooter';
 
 const whatsappNumber = '26775560140';
 
@@ -209,13 +210,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#1c1c1c] px-5 py-12 text-[#f0ede8] lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
-          <div><div className="text-3xl font-black uppercase tracking-[0.18em]">Stationery<span className="text-[#e8622e]">Hub</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/45">Botswana's premier enterprise office solutions provider. Quality you can count on, service you remember.</p></div>
-          <div><h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Contact</h3><div className="mt-4 space-y-2 text-sm text-white/60"><p>+267 75 560 140 / +267 72 347 712</p><p>sales@stationeryhub.co.bw</p><p>Gaborone, Botswana</p></div></div>
-          <div><h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Quick links</h3><div className="mt-4 grid gap-2 text-sm text-white/60"><a href="#products">Products</a><a href="/price-list">Price list</a><a href="/quote">Request quote</a><a href={waLink('Hello StationeryHub, I need help.')} target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <a href={waLink('Hello StationeryHub, I need help with an order.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp StationeryHub" className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-2xl shadow-green-500/30 transition hover:scale-110 sm:bottom-6 sm:right-6">WA</a>
 

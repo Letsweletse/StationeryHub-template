@@ -170,13 +170,13 @@ export async function sendWhatsApp(to: string, body: string) {
 }
 export const SALES_WHATSAPP = process.env.SALES_WHATSAPP || '26775560140';
 
-export async function sendEmail(to: string, subject: string, html: string, text: string) {
+export async function sendEmail(to: string, subject: string, html: string, text: string, opts: { from?: string; replyTo?: string } = {}) {
   const key = process.env.RESEND_API_KEY;
   if (!key || !to) return { skipped: true };
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: process.env.QUOTE_FROM || 'StationeryHub <sales@stationeryhub.co.bw>', to: [to], reply_to: 'sales@stationeryhub.co.bw', subject, html, text }),
+      body: JSON.stringify({ from: opts.from || process.env.QUOTE_FROM || 'StationeryHub <sales@stationeryhub.co.bw>', to: [to], reply_to: opts.replyTo || 'sales@stationeryhub.co.bw', subject, html, text }),
     });
     return { ok: r.ok, status: r.status };
   } catch { return { ok: false }; }

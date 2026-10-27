@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import { addToBasket, clearBasket, fmtP, onBasket, readBasket, removeLine, setQty, type BasketLine } from '@/lib/basket';
 
 type Item = { id: number; code: string | null; name: string; brand: string | null; price: number | null };
@@ -158,6 +159,7 @@ export default function QuotePage() {
           </div>
         </section>
       </div>
+      <SiteFooter />
     </main>
   );
 }

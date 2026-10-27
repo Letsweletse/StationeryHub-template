@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 import { addToBasket, fmtP } from '@/lib/basket';
 
 type Item = { id: number; code: string | null; name: string; brand: string | null; category: string | null; status: string; price: number | null };
@@ -107,6 +108,7 @@ export default function PriceListPage() {
           <a href="/quote" className="bg-[#c8481a] px-5 py-3 text-center text-sm font-black uppercase tracking-widest text-white">Open my quote</a>
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 }

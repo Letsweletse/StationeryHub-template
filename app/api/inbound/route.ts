@@ -78,7 +78,7 @@ Press Reply to answer the sender directly.</div>`;
     body: JSON.stringify({
       from: FORWARD_FROM,
       to: FORWARD_TO,
-      reply_to: from || undefined,
+      reply_to: addr(list(email.reply_to)[0] || email.headers?.['reply-to'] || '') || from || undefined,
       subject: `[${(list(email.to)[0] || "sales@stationeryhub.co.bw").toLowerCase()}] ${subject}`.slice(0, 990),
       html,
       text,
