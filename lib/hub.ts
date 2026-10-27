@@ -2,7 +2,7 @@
 // Tables are created on first use, so no manual SQL step is needed.
 import { Pool } from 'pg';
 import crypto from 'crypto';
-import { MARKET_ZAR, SEED_ITEMS } from './catalog-seed';
+import { COMPAT, MARKET_ZAR, SEED_ITEMS } from './catalog-seed';
 import { etaFor, type Area } from './eta';
 
 let pool: Pool | null = null;
@@ -97,6 +97,13 @@ async function migrate() {
     const zpb = Number(st.zar_per_bwp) || 1.33; const landing = Number(st.landing_pct) || 0;
     await q(`update sh_items set cost_price = round((market_zar / $1::numeric) * (1 + $2::numeric / 100), 2), updated_at = now() where market_zar is not null and price_source like 'market%'`, [zpb, landing]);
     await q(`insert into sh_settings (key, value) values ('market_seed_v2', now()::text) on conflict (key) do nothing`);
+  }
+  const v3 = await q(`select 1 from sh_settings where key = 'compat_seed_v1'`);
+  if (!v3.length) {
+    for (const [prefix, fits] of COMPAT) {
+      await q(`update sh_items set compat = $2 where upper(code) like upper($1) || '%' and (compat is null or compat = '')`, [prefix, fits]);
+    }
+    await q(`insert into sh_settings (key, value) values ('compat_seed_v1', now()::text) on conflict (key) do nothing`);
   }
 }
 

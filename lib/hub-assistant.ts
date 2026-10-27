@@ -22,7 +22,7 @@ export async function answer(message: string, channel: 'web' | 'whatsapp', sende
       `Our catalogue (id|name|code|fits):\n${list}\n` +
       'Return JSON {"ids":[up to 4 catalogue ids that answer the request, best first]}. Only use ids from the catalogue. ' +
       'If the customer names a printer model, pick the cartridges that printer uses. If nothing fits, return {"ids":[]}.',
-      { timeoutMs: 12000 },
+      { timeoutMs: 15000, search: /[a-z]*\d{3,}/i.test(msg) },
     );
     if (ai && Array.isArray(ai.ids)) {
       const byId = new Map(items.map((i) => [i.id, i]));

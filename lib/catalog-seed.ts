@@ -103,3 +103,31 @@ export const MARKET_ZAR: Record<string, number> = {
   'HP4S6X9PE': 1150, 'HP4S6Y0PE': 1150, 'HP4S6Y1PE': 1150, 'HP4S6Y2PE': 1500,
   'H1VV21AE': 220, 'H3JA27AE': 800, 'H3JA28AE': 800, 'H3JA29AE': 800,
 };
+
+// Printers each item fits, so customers can search by printer model (prefix match on item code).
+export const COMPAT: [string, string][] = [
+  ['H6ZD', 'HP DeskJet Ink Advantage Ultra 4800 4826 4828 4829'],
+  ['H7FP', 'HP DeskJet Ink Advantage 2900 4200 6000 series'],
+  ['HP4K0', 'HP OfficeJet Pro 8120 8122 8123 8130 8132 8135'],
+  ['HP4S6', 'HP OfficeJet Pro 9110 9120 9130 9720 9730'],
+  ['H3JA', 'HP OfficeJet Pro 9010 9012 9013 9014 9015 9016 9019 9020 9022 9023 9025'],
+  ['H1VV21', 'HP Smart Tank Ink Tank 115 315 415 500 515 516 615 720 750'],
+  ['H3YP17', 'HP Smart Tank 500 515 615 720 750 Ink Tank 115 315 415 printhead'],
+  ['CCRG051', 'Canon i-SENSYS LBP162dw MF264dw MF267dw MF269dw'],
+  ['CCRG064', 'Canon i-SENSYS LBP722Cdw MF832Cdw'],
+  ['CCRG067', 'Canon i-SENSYS LBP631Cw LBP633Cdw MF651Cw MF655Cdw MF657Cdw'],
+  ['CCRG069', 'Canon i-SENSYS LBP673Cdw MF752Cdw MF754Cdw'],
+  ['CCRH071', 'Canon i-SENSYS LBP122dw MF272dw MF275dw'],
+  ['CWT-201', 'Canon imageRUNNER ADVANCE C250 C255 C350 C355 waste toner'],
+  ['C-EXV48', 'Canon imageRUNNER C1325iF C1335iF'],
+  ['C716', 'Canon i-SENSYS LBP5050 MF8030 MF8040 MF8050 MF8080'],
+  ['C725', 'Canon i-SENSYS LBP6000 LBP6020 LBP6030 MF3010'],
+  ['C728', 'Canon i-SENSYS MF4410 MF4430 MF4450 MF4550 MF4570 MF4580 MF4730 MF4750 MF4870 MF4890'],
+  ['C737', 'Canon i-SENSYS MF211 MF212w MF216n MF226dn MF229dw MF231 MF232w MF237w MF244dw MF247dw MF249dw'],
+  ['BLC-3719', 'Brother MFC-J2330DW MFC-J2730DW MFC-J3530DW MFC-J3930DW'],
+  ['BLC-472', 'Brother MFC-J2340DW MFC-J3540DW MFC-J3940DW'],
+  ['BLC-535', 'Brother DCP-J100 DCP-J105 MFC-J200'],
+  ['BLC-539', 'Brother DCP-J100 DCP-J105 MFC-J200'],
+  ['BT-5000', 'Brother DCP-T300 DCP-T500W DCP-T700W MFC-T800W ink tank'],
+  ['BT-6000', 'Brother DCP-T300 DCP-T500W DCP-T700W MFC-T800W ink tank'],
+];
