@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { clean, ensureSchema, getSettings, isAdminCookie, q, sellingPrice, type Item } from '@/lib/hub';
+import { competitorMins, clean, ensureSchema, getSettings, isAdminCookie, q, sellingPrice, type Item } from '@/lib/hub';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
   await ensureSchema();
   const s = await getSettings();
   const dm = Number(s.default_markup) || 25;
+  const comp = await competitorMins(); const ctx = { settings: s, comp };
   const [items, suppliers, supplierItems, quotes, chats] = await Promise.all([
     q<Item>(`select * from sh_items order by active desc, brand nulls last, category, name`),
     q(`select s.*, (select count(*)::int from sh_supplier_items x where x.supplier_id = s.id and x.status = 'pending') as pending_items from sh_suppliers s order by s.created_at desc`),
@@ -27,7 +28,8 @@ export async function GET(req: NextRequest) {
   ]);
   return NextResponse.json({
     settings: s,
-    items: items.map((i) => ({ ...i, selling: sellingPrice(i, dm) })),
+    items: items.map((i) => ({ ...i, selling: sellingPrice(i, dm, ctx), rival: comp.get(String(i.code || '').toLowerCase()) ?? null })),
+    competitors: await q(`select code, shop, price_bwp, url, checked_at from sh_competitor_prices order by checked_at desc limit 300`),
     suppliers, supplierItems, quotes, chats,
   });
 }
@@ -65,7 +67,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, updated, missing });
     }
     case 'save_settings': {
-      const allowed = ['default_markup', 'usd_per_bwp', 'zar_per_bwp', 'listing_fee_bwp', 'quote_valid_days', 'landing_pct'];
+      const allowed = ['default_markup', 'usd_per_bwp', 'zar_per_bwp', 'listing_fee_bwp', 'quote_valid_days', 'landing_pct', 'beat_pct', 'min_margin_pct'];
       for (const k of allowed) {
         const v = num(b.settings?.[k]);
         if (v != null && v >= 0) await q(`insert into sh_settings (key, value) values ($1,$2) on conflict (key) do update set value=excluded.value`, [k, String(v)]);

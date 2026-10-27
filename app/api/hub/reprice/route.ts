@@ -31,17 +31,26 @@ export async function GET(req: NextRequest) {
   for (let i = 0; i < items.length; i += 6) {
     const batch = items.slice(i, i + 6);
     const ai = await askGeminiJson(
-      'Find the current typical retail price in South Africa (ZAR, including VAT) for each GENUINE/original item below. ' +
-      'Use South African retailers (e.g. Takealot, Makro, PriceCheck, Waltons, Incredible Connection). Ignore compatible/generic cartridges. ' +
-      'Return ONLY JSON: [{"code":"...","zar":number,"source":"shop name"}]. Use null for zar if you cannot find a reliable price.\n' +
+      'For each GENUINE/original printer consumable below find (1) the current typical retail price in South Africa in ZAR incl. VAT ' +
+      '(Takealot, Makro, PriceCheck, Waltons, Incredible Connection) and (2) any current price in Botswana in BWP from local shops ' +
+      '(Home Corp homecorp.co.bw, BMS bmsonline.co.bw, Century Office Supplies century.bw, Cyberstore cyberstore.co.bw, Game Botswana, Northern Fixtures). ' +
+      'Ignore compatible/generic cartridges. Return ONLY JSON: [{"code":"...","zar":number|null,"source":"shop","bw":[{"shop":"...","bwp":number,"url":"..."}]}].\n' +
       batch.map((b: any) => `- ${b.code}: ${b.name}`).join('\n'),
       { search: true, timeoutMs: 25000 },
     );
     if (!Array.isArray(ai)) continue;
     for (const row of ai) {
       const it = batch.find((b: any) => String(b.code).toLowerCase() === String(row?.code || '').toLowerCase());
+      if (!it) continue;
+      for (const c of Array.isArray(row?.bw) ? row.bw.slice(0, 5) : []) {
+        const bwp = Number(c?.bwp); const shop = String(c?.shop || '').slice(0, 60);
+        if (!shop || !Number.isFinite(bwp) || bwp < 20 || bwp > 50000) continue;
+        await q(`insert into sh_competitor_prices (code, shop, price_bwp, url) values ($1,$2,$3,$4)
+          on conflict (code, shop) do update set price_bwp = excluded.price_bwp, url = excluded.url, checked_at = now()`, [it.code, shop, bwp, String(c?.url || '').slice(0, 400) || null]);
+        results.push({ code: it.code, competitor: shop, bwp });
+      }
       const zar = Number(row?.zar);
-      if (!it || !Number.isFinite(zar) || zar < 20 || zar > 50000) continue;
+      if (!Number.isFinite(zar) || zar < 20 || zar > 50000) continue;
       const prev = Number(it.market_zar) || 0;
       if (prev && (zar < prev * 0.5 || zar > prev * 2)) { results.push({ code: it.code, skipped: 'change too large', prev, zar }); continue; }
       await q(`update sh_items set market_zar=$2, cost_price=$3, price_source='market_za_ai', price_checked_at=now(), updated_at=now() where id=$1`,

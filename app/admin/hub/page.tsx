@@ -109,7 +109,7 @@ export default function HubAdmin() {
                         <td className="px-2 py-1"><input value={v('cost_price')} onChange={(x) => set('cost_price', x.target.value)} className="w-20 border border-black/10 px-1 py-1" /></td>
                         <td className="px-2 py-1"><input value={v('markup_pct')} onChange={(x) => set('markup_pct', x.target.value)} placeholder={s.default_markup} className="w-14 border border-black/10 px-1 py-1" /></td>
                         <td className="px-2 py-1"><input value={v('fixed_price')} onChange={(x) => set('fixed_price', x.target.value)} className="w-20 border border-black/10 px-1 py-1" /></td>
-                        <td className="px-2 py-1 font-black">{i.selling != null ? P(i.selling) : <span className="text-xs text-[#c8481a]">no price</span>}{i.market_zar != null && <span className="block text-[10px] font-normal text-black/45">SA R{Number(i.market_zar).toFixed(0)}{i.price_source === 'market_za_ai' ? ' · AI' : ''}</span>}</td>
+                        <td className="px-2 py-1 font-black">{i.selling != null ? P(i.selling) : <span className="text-xs text-[#c8481a]">no price</span>}{i.market_zar != null && <span className="block text-[10px] font-normal text-black/45">SA R{Number(i.market_zar).toFixed(0)}{i.price_source === 'market_za_ai' ? ' · AI' : ''}</span>}{i.rival != null && <span className="block text-[10px] font-bold text-[#c8481a]">Local rival P{Number(i.rival).toFixed(0)}</span>}</td>
                         <td className="px-2 py-1"><select value={v('status')} onChange={(x) => set('status', x.target.value)} className="border border-black/10 px-1 py-1 text-xs"><option>Available</option><option>Low stock</option><option>On order</option><option>Out of stock</option></select></td>
                         <td className="px-2 py-1"><input value={v('compat')} onChange={(x) => set('compat', x.target.value)} className="w-36 border border-black/10 px-1 py-1 text-xs" /></td>
                         <td className="px-2 py-1"><input type="checkbox" checked={v('active') !== false} onChange={(x) => set('active', x.target.checked)} /></td>
@@ -207,7 +207,7 @@ function SupplierCard({ sp, act }: { sp: any; act: (b: any, n?: string) => Promi
 
 function Settings({ s, act }: { s: Record<string, string>; act: (b: any, n?: string) => Promise<any> }) {
   const [v, setV] = useState(s);
-  const f = [['default_markup', 'Default markup % on supplier cost'], ['landing_pct', 'Landing cost % on SA market prices (freight, duty, clearing)'], ['usd_per_bwp', 'USD per 1 BWP (e.g. 0.073)'], ['zar_per_bwp', 'ZAR per 1 BWP (e.g. 1.33)'], ['listing_fee_bwp', 'Featured supplier listing fee (P/month)'], ['quote_valid_days', 'Quotation valid for (days)']];
+  const f = [['default_markup', 'Default markup % on supplier cost'], ['landing_pct', 'Landing cost % on SA market prices (freight, duty, clearing)'], ['beat_pct', 'Beat cheapest local competitor by %'], ['min_margin_pct', 'Never go below cost + this margin %'], ['usd_per_bwp', 'USD per 1 BWP (e.g. 0.073)'], ['zar_per_bwp', 'ZAR per 1 BWP (e.g. 1.33)'], ['listing_fee_bwp', 'Featured supplier listing fee (P/month)'], ['quote_valid_days', 'Quotation valid for (days)']];
   return (
     <div className="max-w-xl border border-black/10 bg-white p-5">
       {f.map(([k, l]) => (

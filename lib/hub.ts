@@ -52,7 +52,7 @@ async function migrate() {
     id serial primary key, channel text, sender text, message text, matched int, created_at timestamptz not null default now())`);
   const defaults: Record<string, string> = {
     default_markup: '25', usd_per_bwp: '0.073', zar_per_bwp: '1.33', listing_fee_bwp: '300',
-    quote_valid_days: '7', landing_pct: '12',
+    quote_valid_days: '7', landing_pct: '12', beat_pct: '3', min_margin_pct: '5',
   };
   for (const [k, v] of Object.entries(defaults)) {
     await q(`insert into sh_settings (key, value) values ($1, $2) on conflict (key) do nothing`, [k, v]);
@@ -62,6 +62,9 @@ async function migrate() {
   await q(`alter table sh_items add column if not exists price_checked_at timestamptz`);
   await q(`alter table sh_quotes add column if not exists delivery_area text`);
   await q(`alter table sh_quotes add column if not exists ordered_at timestamptz`);
+  await q(`create table if not exists sh_competitor_prices (
+    id serial primary key, code text not null, shop text not null, price_bwp numeric(12,2) not null, url text,
+    checked_at timestamptz not null default now(), unique (code, shop))`);
   const [{ n }] = await q<{ n: number }>(`select count(*)::int as n from sh_items`);
   if (n === 0) {
     for (const it of SEED_ITEMS) {
@@ -79,6 +82,35 @@ async function migrate() {
     }
     await q(`insert into sh_settings (key, value) values ('market_seed_v1', now()::text) on conflict (key) do nothing`);
   }
+  // v2: local competitor prices (Home Corp Botswana, 27 Oct 2026) and competitive pricing defaults.
+  const v2 = await q(`select 1 from sh_settings where key = 'market_seed_v2'`);
+  if (!v2.length) {
+    for (const [code, shop, price, url] of COMPETITOR_SEED) {
+      await q(`insert into sh_competitor_prices (code, shop, price_bwp, url) values ($1,$2,$3,$4) on conflict (code, shop) do update set price_bwp = excluded.price_bwp, url = excluded.url, checked_at = now()`, [code, shop, price, url]);
+    }
+    await q(`update sh_settings set value = '5' where key = 'landing_pct'`);
+    await q(`update sh_settings set value = '20' where key = 'default_markup' and value = '25'`);
+    // Old-site fixed prices that local competitors now beat move to automatic pricing.
+    await q(`update sh_items set fixed_price = null, market_zar = coalesce(market_zar, $2), price_source = 'market_za' where lower(code) = lower($1) and fixed_price is not null`, ['H6ZD21AE', 130]);
+    await q(`update sh_items set fixed_price = null, market_zar = coalesce(market_zar, $2), price_source = 'market_za' where lower(code) = lower($1) and fixed_price is not null`, ['HP4K0W1PE', 500]);
+    const st = Object.fromEntries((await q<{ key: string; value: string }>(`select key, value from sh_settings`)).map((r) => [r.key, r.value]));
+    const zpb = Number(st.zar_per_bwp) || 1.33; const landing = Number(st.landing_pct) || 0;
+    await q(`update sh_items set cost_price = round((market_zar / $1::numeric) * (1 + $2::numeric / 100), 2), updated_at = now() where market_zar is not null and price_source like 'market%'`, [zpb, landing]);
+    await q(`insert into sh_settings (key, value) values ('market_seed_v2', now()::text) on conflict (key) do nothing`);
+  }
+}
+
+const COMPETITOR_SEED: [string, string, number, string][] = [
+  ['H6ZD21AE', 'Home Corp', 109, 'https://www.homecorp.co.bw/product/hp-47-black-original-cartridge-6zd21a-840'],
+  ['HP4K0V7PE', 'Home Corp', 239, 'https://www.homecorp.co.bw/product/hp-925-magenta-original-ink-cartridge-4k0v7pe-829'],
+  ['HP4K0W1PE', 'Home Corp', 459, 'https://www.homecorp.co.bw/product/hp-925e-evomore-magenta-original-ink-cartridge-4k0w1pe-833'],
+  ['HP4K0W3PE', 'Home Corp', 949, 'https://www.homecorp.co.bw/electronics/printers-and-ink/ink'],
+];
+
+/** Lowest known local competitor price per item code (lower-cased). */
+export async function competitorMins(): Promise<Map<string, number>> {
+  const rows = await q<{ code: string; p: string }>(`select lower(code) as code, min(price_bwp) as p from sh_competitor_prices where checked_at > now() - interval '60 days' group by lower(code)`);
+  return new Map(rows.map((r) => [r.code, Number(r.p)]));
 }
 
 /** Landed cost in Pula for an item bought at a South African retail price. */
@@ -97,15 +129,27 @@ export async function getSettings(): Promise<Record<string, string>> {
 export type Item = {
   id: number; code: string | null; name: string; brand: string | null; category: string | null;
   cost_price: string | null; markup_pct: string | null; fixed_price: string | null; status: string;
-  compat: string | null; supplier_id: number | null; active: boolean;
+  compat: string | null; supplier_id: number | null; active: boolean; price_source?: string | null; market_zar?: string | null;
 };
 
-export function sellingPrice(it: Pick<Item, 'cost_price' | 'markup_pct' | 'fixed_price'>, defaultMarkup: number): number | null {
+export type PriceCtx = { settings?: Record<string, string>; comp?: Map<string, number> };
+
+export function sellingPrice(it: Pick<Item, 'cost_price' | 'markup_pct' | 'fixed_price'> & { code?: string | null; price_source?: string | null }, defaultMarkup: number, ctx: PriceCtx = {}): number | null {
   if (it.fixed_price != null && Number(it.fixed_price) > 0) return round(Number(it.fixed_price));
   if (it.cost_price != null && Number(it.cost_price) > 0) {
+    const cost = Number(it.cost_price);
     const m = it.markup_pct != null ? Number(it.markup_pct) : defaultMarkup;
     // Round up to the nearest P5 so prices look clean.
-    return Math.ceil((Number(it.cost_price) * (1 + m / 100)) / 5) * 5;
+    let price = Math.ceil((cost * (1 + m / 100)) / 5) * 5;
+    // Beat the cheapest local competitor, but never below cost + minimum margin.
+    const rival = it.code ? ctx.comp?.get(it.code.toLowerCase()) : undefined;
+    if (rival && (it.price_source || '').startsWith('market') && it.markup_pct == null) {
+      const beat = Number(ctx.settings?.beat_pct ?? 3) / 100;
+      const floor = Math.ceil((cost * (1 + Number(ctx.settings?.min_margin_pct ?? 5) / 100)) / 5) * 5;
+      const target = Math.floor((rival * (1 - beat)) / 5) * 5;
+      if (target < price) price = Math.max(target, floor);
+    }
+    return price;
   }
   return null;
 }
@@ -117,7 +161,8 @@ export async function publicCatalogue(area: Area = 'Gaborone'): Promise<PublicIt
   const s = await getSettings();
   const dm = Number(s.default_markup) || 25;
   const rows = await q<Item>(`select * from sh_items where active order by brand nulls last, category, name`);
-  return rows.map((r) => ({ id: r.id, code: r.code, name: r.name, brand: r.brand, category: r.category, status: r.status, price: sellingPrice(r, dm), compat: r.compat, eta: etaFor(r.status, area).label }));
+  const ctx = { settings: s, comp: await competitorMins() };
+  return rows.map((r) => ({ id: r.id, code: r.code, name: r.name, brand: r.brand, category: r.category, status: r.status, price: sellingPrice(r, dm, ctx), compat: r.compat, eta: etaFor(r.status, area).label }));
 }
 
 // ---------- search (used by the chat assistant and WhatsApp) ----------

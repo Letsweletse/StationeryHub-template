@@ -1,8 +1,18 @@
-// Optional AI layer (Google Gemini). Everything works without it; with GEMINI_API_KEY set,
-// the assistant understands free-text questions and the daily job refreshes market prices.
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+// AI layer. Uses Vercel AI Gateway with the project's built-in OIDC identity (no API key to manage),
+// or Google Gemini directly if GEMINI_API_KEY is set. Everything still works if neither is available.
+import { headers } from 'next/headers';
 
-export const aiEnabled = () => !!process.env.GEMINI_API_KEY;
+const GATEWAY = 'https://ai-gateway.vercel.sh/v1/chat/completions';
+const GATEWAY_MODEL = process.env.AI_MODEL || 'google/gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+
+function gatewayToken(): string | null {
+  if (process.env.AI_GATEWAY_API_KEY) return process.env.AI_GATEWAY_API_KEY;
+  if (process.env.VERCEL_OIDC_TOKEN) return process.env.VERCEL_OIDC_TOKEN;
+  try { return headers().get('x-vercel-oidc-token'); } catch { return null; }
+}
+
+export const aiEnabled = () => process.env.AI_DISABLED !== '1' && (!!process.env.GEMINI_API_KEY || !!gatewayToken());
 
 function extractJson(text: string): any {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -13,28 +23,51 @@ function extractJson(text: string): any {
   try { return JSON.parse(raw.slice(start, end + 1)); } catch { return null; }
 }
 
-/** Ask Gemini for JSON. With search=true the model can use Google Search (grounding). */
-export async function askGeminiJson(prompt: string, opts: { search?: boolean; timeoutMs?: number } = {}): Promise<any> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) return null;
+export type AiResult = { data: any; provider: string; error?: string };
+
+/** Ask the model for JSON. With search=true the model can search the web first. */
+export async function askAiJson(prompt: string, opts: { search?: boolean; timeoutMs?: number } = {}): Promise<AiResult> {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), opts.timeoutMs ?? 25000);
   try {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-      signal: ctrl.signal,
+    if (process.env.GEMINI_API_KEY) {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+        method: 'POST', signal: ctrl.signal,
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          ...(opts.search ? { tools: [{ google_search: {} }] } : { generationConfig: { responseMimeType: 'application/json', temperature: 0.1 } }),
+        }),
+      });
+      if (!r.ok) return { data: null, provider: 'gemini', error: `${r.status} ${(await r.text()).slice(0, 200)}` };
+      const d: any = await r.json();
+      return { data: extractJson((d.candidates?.[0]?.content?.parts || []).map((p: any) => p.text || '').join('')), provider: 'gemini' };
+    }
+    const token = gatewayToken();
+    if (!token) return { data: null, provider: 'none', error: 'no AI credentials' };
+    const r = await fetch(GATEWAY, {
+      method: 'POST', signal: ctrl.signal,
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        ...(opts.search ? { tools: [{ google_search: {} }] } : { generationConfig: { responseMimeType: 'application/json', temperature: 0.1 } }),
+        model: GATEWAY_MODEL,
+        messages: [{ role: 'user', content: prompt + '\nRespond with JSON only.' }],
+        max_tokens: 1500,
+        ...(opts.search
+          ? { tools: [{ type: 'vercel:perplexity_search', config: { max_results: 8 } }], tool_choice: 'required' }
+          : { response_format: { type: 'json_object' }, temperature: 0.1 }),
       }),
     });
-    if (!r.ok) { console.error('gemini', r.status, (await r.text()).slice(0, 300)); return null; }
+    if (!r.ok) return { data: null, provider: 'gateway', error: `${r.status} ${(await r.text()).slice(0, 300)}` };
     const d: any = await r.json();
-    const text = (d.candidates?.[0]?.content?.parts || []).map((p: any) => p.text || '').join('');
-    return extractJson(text);
-  } catch (e) {
-    console.error('gemini error', e);
-    return null;
+    return { data: extractJson(String(d.choices?.[0]?.message?.content || '')), provider: 'gateway' };
+  } catch (e: any) {
+    return { data: null, provider: 'error', error: String(e?.message || e).slice(0, 200) };
   } finally { clearTimeout(t); }
+}
+
+/** Back-compat helper used by the assistant and price job. */
+export async function askGeminiJson(prompt: string, opts: { search?: boolean; timeoutMs?: number } = {}) {
+  const r = await askAiJson(prompt, opts);
+  if (r.error) console.error('ai', r.provider, r.error);
+  return r.data;
 }

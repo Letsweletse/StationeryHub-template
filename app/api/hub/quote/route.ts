@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { etaFor, branchFor, AREAS } from '@/lib/eta';
-import { clean, ensureSchema, esc, getSettings, money, newRef, q, quoteUrl, SALES_WHATSAPP, sellingPrice, sendEmail, sendWhatsApp, type Item } from '@/lib/hub';
+import { competitorMins, clean, ensureSchema, esc, getSettings, money, newRef, q, quoteUrl, SALES_WHATSAPP, sellingPrice, sendEmail, sendWhatsApp, type Item } from '@/lib/hub';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,11 +29,12 @@ export async function POST(req: NextRequest) {
     const ids = lines.map((l) => l.id);
     const rows = ids.length ? await q<Item>(`select * from sh_items where id = any($1::int[]) and active`, [ids]) : [];
     const byId = new Map(rows.map((r) => [r.id, r]));
+    const ctx = { settings: s, comp: await competitorMins() };
 
     const priced: any[] = []; const unpriced: any[] = [];
     for (const l of lines) {
       const it = byId.get(l.id); if (!it) continue;
-      const unit = sellingPrice(it, dm);
+      const unit = sellingPrice(it, dm, ctx);
       const eta = etaFor(it.status, area);
       const base = { id: it.id, code: it.code, name: it.name, qty: l.qty, eta: eta.label, eta_max: eta.max };
       if (unit == null) unpriced.push(base);
