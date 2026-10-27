@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter, { CONTACTS } from '../components/SiteFooter';
+import { BRANCHES } from '@/lib/eta';
 
 export default function ContactPage() {
   const [busy, setBusy] = useState(false);
@@ -29,10 +30,14 @@ export default function ContactPage() {
         <h1 className="mt-2 text-4xl font-black uppercase tracking-tight sm:text-6xl">Talk to StationeryHub</h1>
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <section className="grid content-start gap-3">
-            {CONTACTS.phones.map((p) => (
-              <div key={p.tel} className="flex items-center justify-between gap-3 border border-black/10 bg-white p-4">
-                <a href={`tel:${p.tel}`} className="text-lg font-black">{p.label}</a>
-                <a href={`https://wa.me/${p.wa}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-3 py-2 text-xs font-black uppercase tracking-widest text-black">WhatsApp</a>
+            {BRANCHES.map((b) => (
+              <div key={b.town} className="border border-black/10 bg-white p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div><p className="text-xs font-black uppercase tracking-[0.2em] text-[#c8481a]">{b.role}</p><p className="text-xl font-black uppercase">{b.town}</p></div>
+                  <a href={`https://wa.me/${b.wa}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-3 py-2 text-xs font-black uppercase tracking-widest text-black">WhatsApp</a>
+                </div>
+                <a href={`tel:${b.tel}`} className="mt-1 block font-bold">{b.phone}</a>
+                <p className="mt-1 text-xs text-black/50">Serves {b.serves}</p>
               </div>
             ))}
             {CONTACTS.emails.map((e) => (
@@ -41,7 +46,7 @@ export default function ContactPage() {
                 <span className="break-all font-bold">{e.email}</span>
               </a>
             ))}
-            <p className="text-sm text-black/60">Gaborone, Botswana · Mon–Fri 8:00–17:00</p>
+            <p className="text-sm text-black/60">Mon–Fri 8:00–17:00 · instant quotes online 24/7</p>
           </section>
 
           <form onSubmit={submit} className="border border-black/10 bg-white p-5">

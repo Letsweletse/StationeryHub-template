@@ -63,7 +63,7 @@ export default function HubAdmin() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <p className="text-lg font-black uppercase tracking-[0.12em]">Stationery<span className="text-[#c8481a]">Hub</span> · Admin</p>
           <div className="flex flex-wrap gap-1 text-xs font-black uppercase tracking-widest">
-            {([['items', `Items (${unpricedCount} unpriced)`], ['quotes', `Quotes (${data.quotes.filter((q) => q.status === 'new').length} new)`], ['suppliers', `Suppliers (${pendingSup + data.supplierItems.length})`], ['settings', 'Settings'], ['chats', 'Chats']] as const).map(([k, l]) => (
+            {([['items', `Items (${unpricedCount} unpriced)`], ['quotes', `Quotes (${data.quotes.filter((q) => q.status === 'ordered').length} orders · ${data.quotes.filter((q) => q.status === 'new').length} new)`], ['suppliers', `Suppliers (${pendingSup + data.supplierItems.length})`], ['settings', 'Settings'], ['chats', 'Chats']] as const).map(([k, l]) => (
               <button key={k} onClick={() => setTab(k)} className={`px-3 py-2 ${tab === k ? 'bg-[#0e0e0e] text-white' : 'bg-[#f0ede8]'}`}>{l}</button>
             ))}
             <button onClick={async () => { await fetch('/api/hub/admin/login', { method: 'DELETE' }); setAuthed(false); }} className="px-3 py-2 text-black/50">Sign out</button>
@@ -109,7 +109,7 @@ export default function HubAdmin() {
                         <td className="px-2 py-1"><input value={v('cost_price')} onChange={(x) => set('cost_price', x.target.value)} className="w-20 border border-black/10 px-1 py-1" /></td>
                         <td className="px-2 py-1"><input value={v('markup_pct')} onChange={(x) => set('markup_pct', x.target.value)} placeholder={s.default_markup} className="w-14 border border-black/10 px-1 py-1" /></td>
                         <td className="px-2 py-1"><input value={v('fixed_price')} onChange={(x) => set('fixed_price', x.target.value)} className="w-20 border border-black/10 px-1 py-1" /></td>
-                        <td className="px-2 py-1 font-black">{i.selling != null ? P(i.selling) : <span className="text-xs text-[#c8481a]">no price</span>}</td>
+                        <td className="px-2 py-1 font-black">{i.selling != null ? P(i.selling) : <span className="text-xs text-[#c8481a]">no price</span>}{i.market_zar != null && <span className="block text-[10px] font-normal text-black/45">SA R{Number(i.market_zar).toFixed(0)}{i.price_source === 'market_za_ai' ? ' · AI' : ''}</span>}</td>
                         <td className="px-2 py-1"><select value={v('status')} onChange={(x) => set('status', x.target.value)} className="border border-black/10 px-1 py-1 text-xs"><option>Available</option><option>Low stock</option><option>On order</option><option>Out of stock</option></select></td>
                         <td className="px-2 py-1"><input value={v('compat')} onChange={(x) => set('compat', x.target.value)} className="w-36 border border-black/10 px-1 py-1 text-xs" /></td>
                         <td className="px-2 py-1"><input type="checkbox" checked={v('active') !== false} onChange={(x) => set('active', x.target.checked)} /></td>
@@ -129,9 +129,9 @@ export default function HubAdmin() {
             {data.quotes.map((qq) => (
               <div key={qq.id} className="border border-black/10 bg-white p-4 text-sm">
                 <div className="flex flex-wrap items-start justify-between gap-2">
-                  <div><p className="font-black">{qq.ref} · {qq.customer_name}{qq.company ? ` (${qq.company})` : ''}</p><p className="text-xs text-black/50">{new Date(qq.created_at).toLocaleString('en-GB')} · {qq.country} · {qq.currency} · {[qq.phone, qq.email].filter(Boolean).join(' · ')}</p></div>
+                  <div><p className="font-black">{qq.ref} · {qq.customer_name}{qq.company ? ` (${qq.company})` : ''}</p><p className="text-xs text-black/50">{qq.ordered_at ? '✅ ORDERED · ' : ''}{new Date(qq.created_at).toLocaleString('en-GB')} · deliver to {qq.delivery_area || qq.country} · {qq.currency} · {[qq.phone, qq.email].filter(Boolean).join(' · ')}</p></div>
                   <div className="flex items-center gap-2"><strong>{P(qq.subtotal_bwp)}</strong>
-                    <select value={qq.status} onChange={(e) => act({ action: 'quote_status', id: qq.id, status: e.target.value })} className="border border-black/15 px-2 py-1 text-xs"><option value="new">New</option><option value="contacted">Contacted</option><option value="won">Won</option><option value="lost">Lost</option></select>
+                    <select value={qq.status} onChange={(e) => act({ action: 'quote_status', id: qq.id, status: e.target.value })} className="border border-black/15 px-2 py-1 text-xs"><option value="new">New</option><option value="ordered">Ordered</option><option value="contacted">Contacted</option><option value="won">Won</option><option value="lost">Lost</option></select>
                     {qq.phone && <a href={`https://wa.me/${String(qq.phone).replace(/\D/g, '').replace(/^(7\d{7})$/, '267$1')}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-2 py-1 text-[10px] font-black uppercase">WhatsApp</a>}
                   </div>
                 </div>
@@ -207,7 +207,7 @@ function SupplierCard({ sp, act }: { sp: any; act: (b: any, n?: string) => Promi
 
 function Settings({ s, act }: { s: Record<string, string>; act: (b: any, n?: string) => Promise<any> }) {
   const [v, setV] = useState(s);
-  const f = [['default_markup', 'Default markup % on supplier cost'], ['usd_per_bwp', 'USD per 1 BWP (e.g. 0.073)'], ['zar_per_bwp', 'ZAR per 1 BWP (e.g. 1.33)'], ['listing_fee_bwp', 'Featured supplier listing fee (P/month)'], ['quote_valid_days', 'Quotation valid for (days)']];
+  const f = [['default_markup', 'Default markup % on supplier cost'], ['landing_pct', 'Landing cost % on SA market prices (freight, duty, clearing)'], ['usd_per_bwp', 'USD per 1 BWP (e.g. 0.073)'], ['zar_per_bwp', 'ZAR per 1 BWP (e.g. 1.33)'], ['listing_fee_bwp', 'Featured supplier listing fee (P/month)'], ['quote_valid_days', 'Quotation valid for (days)']];
   return (
     <div className="max-w-xl border border-black/10 bg-white p-5">
       {f.map(([k, l]) => (
@@ -215,7 +215,12 @@ function Settings({ s, act }: { s: Record<string, string>; act: (b: any, n?: str
           <input value={v[k] || ''} onChange={(e) => setV({ ...v, [k]: e.target.value })} className="mt-1 w-full border border-black/15 px-3 py-2 text-sm font-normal text-black" />
         </label>
       ))}
-      <button onClick={() => act({ action: 'save_settings', settings: v })} className="bg-[#0e0e0e] px-4 py-2 text-xs font-black uppercase tracking-widest text-white">Save settings</button>
+      <div className="flex flex-wrap gap-2">
+        <button onClick={() => act({ action: 'save_settings', settings: v })} className="bg-[#0e0e0e] px-4 py-2 text-xs font-black uppercase tracking-widest text-white">Save settings</button>
+        <button onClick={async () => { await act({ action: 'save_settings', settings: v }); await act({ action: 'recalc_market' }, 'Market-based prices recalculated'); }} className="bg-[#c8481a] px-4 py-2 text-xs font-black uppercase tracking-widest text-white">Save &amp; recalculate market prices</button>
+        <button onClick={async () => { const r = await fetch('/api/hub/reprice'); const d = await r.json(); alert(JSON.stringify(d).slice(0, 400)); }} className="border border-black/20 px-4 py-2 text-xs font-black uppercase tracking-widest">Refresh prices with AI now</button>
+      </div>
+      <p className="mt-3 text-xs text-black/50">Market-priced items: selling price = SA retail price ÷ ZAR rate × (1 + landing %) + markup. The AI refresh runs daily once GEMINI_API_KEY is set in Vercel.</p>
     </div>
   );
 }

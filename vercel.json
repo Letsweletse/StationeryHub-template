@@ -8,5 +8,11 @@
     "app/api/**/*.ts": {
       "maxDuration": 30
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/hub/reprice",
+      "schedule": "0 3 * * *"
+    }
+  ]
 }

@@ -2,7 +2,8 @@
 // Tables are created on first use, so no manual SQL step is needed.
 import { Pool } from 'pg';
 import crypto from 'crypto';
-import { SEED_ITEMS } from './catalog-seed';
+import { MARKET_ZAR, SEED_ITEMS } from './catalog-seed';
+import { etaFor, type Area } from './eta';
 
 let pool: Pool | null = null;
 function db() {
@@ -51,11 +52,16 @@ async function migrate() {
     id serial primary key, channel text, sender text, message text, matched int, created_at timestamptz not null default now())`);
   const defaults: Record<string, string> = {
     default_markup: '25', usd_per_bwp: '0.073', zar_per_bwp: '1.33', listing_fee_bwp: '300',
-    quote_valid_days: '7',
+    quote_valid_days: '7', landing_pct: '12',
   };
   for (const [k, v] of Object.entries(defaults)) {
     await q(`insert into sh_settings (key, value) values ($1, $2) on conflict (key) do nothing`, [k, v]);
   }
+  await q(`alter table sh_items add column if not exists market_zar numeric(12,2)`);
+  await q(`alter table sh_items add column if not exists price_source text`);
+  await q(`alter table sh_items add column if not exists price_checked_at timestamptz`);
+  await q(`alter table sh_quotes add column if not exists delivery_area text`);
+  await q(`alter table sh_quotes add column if not exists ordered_at timestamptz`);
   const [{ n }] = await q<{ n: number }>(`select count(*)::int as n from sh_items`);
   if (n === 0) {
     for (const it of SEED_ITEMS) {
@@ -63,6 +69,23 @@ async function migrate() {
         [it.code, it.name, it.brand, it.category, it.fixed ?? null]);
     }
   }
+  // One-off: price the catalogue from researched South African market prices (only items with no price yet).
+  const done = await q(`select 1 from sh_settings where key = 'market_seed_v1'`);
+  if (!done.length) {
+    const st = Object.fromEntries((await q<{ key: string; value: string }>(`select key, value from sh_settings`)).map((r) => [r.key, r.value]));
+    for (const [code, zar] of Object.entries(MARKET_ZAR)) {
+      await q(`update sh_items set market_zar = $2, cost_price = $3, price_source = 'market_za', price_checked_at = now(), updated_at = now()
+        where lower(code) = lower($1) and cost_price is null and fixed_price is null`, [code, zar, landedCost(zar, st)]);
+    }
+    await q(`insert into sh_settings (key, value) values ('market_seed_v1', now()::text) on conflict (key) do nothing`);
+  }
+}
+
+/** Landed cost in Pula for an item bought at a South African retail price. */
+export function landedCost(zar: number, s: Record<string, string>) {
+  const zarPerBwp = Number(s.zar_per_bwp) || 1.33;
+  const landing = Number(s.landing_pct ?? 12) || 0;
+  return Math.round((zar / zarPerBwp) * (1 + landing / 100) * 100) / 100;
 }
 
 export async function getSettings(): Promise<Record<string, string>> {
@@ -88,13 +111,13 @@ export function sellingPrice(it: Pick<Item, 'cost_price' | 'markup_pct' | 'fixed
 }
 const round = (n: number) => Math.round(n * 100) / 100;
 
-export type PublicItem = { id: number; code: string | null; name: string; brand: string | null; category: string | null; status: string; price: number | null; compat: string | null };
+export type PublicItem = { id: number; code: string | null; name: string; brand: string | null; category: string | null; status: string; price: number | null; compat: string | null; eta: string };
 
-export async function publicCatalogue(): Promise<PublicItem[]> {
+export async function publicCatalogue(area: Area = 'Gaborone'): Promise<PublicItem[]> {
   const s = await getSettings();
   const dm = Number(s.default_markup) || 25;
   const rows = await q<Item>(`select * from sh_items where active order by brand nulls last, category, name`);
-  return rows.map((r) => ({ id: r.id, code: r.code, name: r.name, brand: r.brand, category: r.category, status: r.status, price: sellingPrice(r, dm), compat: r.compat }));
+  return rows.map((r) => ({ id: r.id, code: r.code, name: r.name, brand: r.brand, category: r.category, status: r.status, price: sellingPrice(r, dm), compat: r.compat, eta: etaFor(r.status, area).label }));
 }
 
 // ---------- search (used by the chat assistant and WhatsApp) ----------

@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { ensureSchema, getSettings, money, q, quoteSig } from '@/lib/hub';
 import PrintButton from './PrintButton';
+import OrderBox from './OrderBox';
+import { branchFor } from '@/lib/eta';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Quotation · StationeryHub', robots: { index: false } };
@@ -19,6 +21,9 @@ export default async function QuoteView({ params, searchParams }: { params: { re
   const valid = new Date(date.getTime() + (Number(s.quote_valid_days) || 7) * 86400000);
   const d = (x: Date) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const intl = String(row.country || '').toLowerCase() !== 'botswana';
+  const branch = branchFor(row.delivery_area || 'Gaborone');
+  const maxDays = Math.max(0, ...priced.concat(unpriced).map((x: any) => x.eta_max ?? 0));
+  const etaAll = maxDays <= 1 ? 'Same or next working day' : `Within ${maxDays} working days`;
 
   return (
     <main className="min-h-screen bg-[#f0ede8] px-4 py-8 text-[#0e0e0e] print:bg-white print:p-0">
@@ -26,7 +31,7 @@ export default async function QuoteView({ params, searchParams }: { params: { re
         <div className="flex flex-col justify-between gap-4 border-b-4 border-[#0e0e0e] pb-5 sm:flex-row sm:items-end">
           <div>
             <p className="text-3xl font-black uppercase tracking-[0.12em]">Stationery<span className="text-[#c8481a]">Hub</span></p>
-            <p className="mt-1 text-xs text-black/60">Office supplies, ink &amp; toner · Gaborone, Botswana<br />sales@stationeryhub.co.bw · +267 75 560 140 · stationeryhub.co.bw</p>
+            <p className="mt-1 text-xs text-black/60">Office supplies, ink &amp; toner · Gaborone, Botswana<br />Gaborone · Palapye · Francistown<br />sales@stationeryhub.co.bw · +267 75 560 140 · stationeryhub.co.bw</p>
           </div>
           <div className="text-left sm:text-right">
             <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">Quotation</p>
@@ -40,12 +45,16 @@ export default async function QuoteView({ params, searchParams }: { params: { re
           <p className="font-bold">{row.customer_name}{row.company ? `, ${row.company}` : ''}</p>
           <p className="text-black/60">{[row.phone, row.email, row.country].filter(Boolean).join(' · ')}</p>
         </div>
+        <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+          <div className="border border-black/10 p-3"><p className="text-xs font-black uppercase tracking-widest text-black/50">Delivery to</p><p className="font-bold">{row.delivery_area || 'Gaborone'}</p><p className="text-black/60">{etaAll} after order confirmation</p></div>
+          <div className="border border-black/10 p-3"><p className="text-xs font-black uppercase tracking-widest text-black/50">Your branch</p><p className="font-bold">{branch.town}</p><p className="text-black/60">{branch.phone}</p></div>
+        </div>
 
         <table className="mt-6 w-full text-sm">
           <thead><tr className="bg-[#0e0e0e] text-left text-xs uppercase tracking-widest text-white"><th className="px-3 py-2">Item</th><th className="px-3 py-2 text-center">Qty</th><th className="px-3 py-2 text-right">Unit</th><th className="px-3 py-2 text-right">Total</th></tr></thead>
           <tbody>
             {priced.map((x) => (
-              <tr key={x.id} className="border-b border-black/10"><td className="px-3 py-2">{x.name}<span className="block font-mono text-[11px] text-black/50">{x.code}</span></td><td className="px-3 py-2 text-center">{x.qty}</td><td className="px-3 py-2 text-right">{fx(x.unit_bwp)}</td><td className="px-3 py-2 text-right font-bold">{fx(x.total_bwp)}</td></tr>
+              <tr key={x.id} className="border-b border-black/10"><td className="px-3 py-2">{x.name}<span className="block font-mono text-[11px] text-black/50">{x.code}{x.eta ? ` · ${x.eta}` : ''}</span></td><td className="px-3 py-2 text-center">{x.qty}</td><td className="px-3 py-2 text-right">{fx(x.unit_bwp)}</td><td className="px-3 py-2 text-right font-bold">{fx(x.total_bwp)}</td></tr>
             ))}
             {unpriced.map((x) => (
               <tr key={`u${x.id}`} className="border-b border-black/10"><td className="px-3 py-2">{x.name}<span className="block font-mono text-[11px] text-black/50">{x.code}</span></td><td className="px-3 py-2 text-center">{x.qty}</td><td colSpan={2} className="px-3 py-2 text-right text-[#c8481a]">Price to follow</td></tr>
@@ -63,9 +72,10 @@ export default async function QuoteView({ params, searchParams }: { params: { re
           <p>Banking details are provided on the invoice when you confirm the order.</p>
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row print:hidden">
+        <OrderBox refNo={row.ref} sig={searchParams.s!} ordered={!!row.ordered_at} branchPhone={branch.phone} />
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row print:hidden">
           <PrintButton />
-          <a href={`https://wa.me/26775560140?text=${encodeURIComponent(`Hello StationeryHub, I'd like to proceed with quotation ${row.ref}.`)}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-6 py-3 text-center text-sm font-black uppercase tracking-widest text-black">Confirm order on WhatsApp</a>
+          <a href={`https://wa.me/${branch.wa}?text=${encodeURIComponent(`Hello StationeryHub, I have a question about quotation ${row.ref}.`)}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-6 py-3 text-center text-sm font-black uppercase tracking-widest text-black">Questions? WhatsApp us</a>
         </div>
       </div>
     </main>

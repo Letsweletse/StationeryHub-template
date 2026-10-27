@@ -2,6 +2,7 @@
 
 import LeadCaptureButton from './components/LeadCaptureButton';
 import SiteFooter from './components/SiteFooter';
+import { BRANCHES } from '@/lib/eta';
 
 const whatsappNumber = '26775560140';
 
@@ -96,10 +97,10 @@ export default function Home() {
           </div>
           <div className="grid content-end gap-3 sm:grid-cols-2 lg:pb-4">
             {[
-              ['100+', 'Products in stock'],
-              ['24hr', 'Gaborone quote response'],
-              ['P280+', 'Starting cartridge price'],
-              ['Bulk', 'Business ordering'],
+              ['3', 'Branches: Gaborone, Palapye, Francistown'],
+              ['24/7', 'Instant online quotations'],
+              ['Next day', 'Gaborone delivery on stocked items'],
+              ['BWP·USD·ZAR', 'Local and export pricing'],
             ].map(([value, label]) => (
               <div key={label} className="border border-white/10 bg-black/45 p-5 backdrop-blur">
                 <div className="text-3xl font-black uppercase text-white">{value}</div>
@@ -165,6 +166,32 @@ export default function Home() {
           <p className="mt-2 text-sm leading-6 text-black/60">Manufacturers and distributors: reach businesses, schools and government buyers. Free or featured listing.</p>
           <span className="mt-4 inline-block text-xs font-black uppercase tracking-widest group-hover:text-[#c8481a]">Become a supplier →</span>
         </a>
+      </section>
+
+      <section id="branches" className="bg-[#0e0e0e] px-5 py-16 text-white lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#e8622e]"><span className="h-px w-9 bg-[#e8622e]" /> Our network</p>
+          <h2 className="mt-3 text-4xl font-black uppercase tracking-tight sm:text-5xl">Three branches. One national supplier.</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-white/60">Order online from anywhere in Botswana. Your order is handled by the branch nearest you, with countrywide courier and export on request.</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {BRANCHES.map((b) => (
+              <div key={b.town} className="border border-white/10 bg-white/[0.03] p-6">
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#e8622e]">{b.role}</p>
+                <p className="mt-2 text-3xl font-black uppercase">{b.town}</p>
+                <p className="mt-3 text-sm leading-6 text-white/55">Serves {b.serves}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <a href={`tel:${b.tel}`} className="border border-white/25 px-3 py-2 text-xs font-black uppercase tracking-widest hover:border-[#e8622e]">{b.phone}</a>
+                  <a href={`https://wa.me/${b.wa}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-3 py-2 text-xs font-black uppercase tracking-widest text-black">WhatsApp</a>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 grid gap-4 border-t border-white/10 pt-8 text-sm md:grid-cols-4">
+            {[['01', 'Search or ask', 'Live prices on the price list, or ask the price assistant in plain words.'], ['02', 'Instant quotation', 'Priced, printable quotation in Pula, US dollars or rand, with delivery time.'], ['03', 'Confirm online', 'Place the order from the quotation with your delivery address and PO.'], ['04', 'Delivered', 'Your nearest branch confirms stock, invoices and delivers.']].map(([n, t, d]) => (
+              <div key={n}><p className="text-[#e8622e] font-black">{n}</p><p className="mt-1 font-black uppercase">{t}</p><p className="mt-1 text-white/55">{d}</p></div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section id="categories" className="bg-[#e8e4dd] px-5 py-20 lg:px-10">

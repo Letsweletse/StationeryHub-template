@@ -4,9 +4,10 @@ import { FormEvent, useEffect, useMemo, useState } from 'react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import { addToBasket, clearBasket, fmtP, onBasket, readBasket, removeLine, setQty, type BasketLine } from '@/lib/basket';
+import { AREAS } from '@/lib/eta';
 
-type Item = { id: number; code: string | null; name: string; brand: string | null; price: number | null };
-type Result = { ref: string; url: string; subtotal_bwp: number; currency: string; rate: number; priced: any[]; unpriced: any[] };
+type Item = { id: number; code: string | null; name: string; brand: string | null; price: number | null; eta: string };
+type Result = { ref: string; url: string; subtotal_bwp: number; currency: string; rate: number; priced: any[]; unpriced: any[]; area: string; eta: string; branch: { town: string; phone: string; wa: string } };
 
 const CUR: Record<string, (n: number) => string> = {
   BWP: (n) => fmtP(n),
@@ -20,6 +21,7 @@ export default function QuotePage() {
   const [rates, setRates] = useState<Record<string, number>>({ BWP: 1, USD: 0.073, ZAR: 1.33 });
   const [currency, setCurrency] = useState('BWP');
   const [country, setCountry] = useState('Botswana');
+  const [area, setArea] = useState('Gaborone');
   const [search, setSearch] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -27,15 +29,22 @@ export default function QuotePage() {
 
   useEffect(() => {
     const up = () => setLines(readBasket()); up();
-    fetch('/api/hub/catalogue').then((r) => r.json()).then((d) => { setItems(d.items || []); if (d.rates) setRates(d.rates); }).catch(() => {});
+    try { const a = localStorage.getItem('sh_area'); if (a) setArea(a); } catch {}
     return onBasket(up);
   }, []);
+  useEffect(() => {
+    try { localStorage.setItem('sh_area', area); } catch {}
+    fetch(`/api/hub/catalogue?area=${encodeURIComponent(area)}`).then((r) => r.json()).then((d) => { setItems(d.items || []); if (d.rates) setRates(d.rates); }).catch(() => {});
+  }, [area]);
+  useEffect(() => { if (area === 'International' && country.toLowerCase() === 'botswana') setCountry(''); if (area !== 'International' && !country) setCountry('Botswana'); }, [area]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (country && country.toLowerCase() !== 'botswana' && currency === 'BWP') setCurrency('USD'); }, [country]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const rate = rates[currency] || 1;
   const fx = (n: number) => CUR[currency](Math.round(n * rate * 100) / 100);
-  const subtotal = lines.reduce((a, l) => a + (l.price != null ? l.price * l.qty : 0), 0);
-  const unpricedCount = lines.filter((l) => l.price == null).length;
+  const byId = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
+  const priceOf = (l: BasketLine) => (byId.has(l.id) ? byId.get(l.id)!.price : l.price);
+  const subtotal = lines.reduce((a, l) => { const p = priceOf(l); return a + (p != null ? p * l.qty : 0); }, 0);
+  const unpricedCount = lines.filter((l) => priceOf(l) == null).length;
   const suggestions = useMemo(() => {
     const q = search.trim().toLowerCase(); if (q.length < 2) return [];
     return items.filter((i) => [i.name, i.code, i.brand].some((v) => (v || '').toLowerCase().includes(q))).slice(0, 8);
@@ -45,7 +54,7 @@ export default function QuotePage() {
     e.preventDefault(); setBusy(true); setError('');
     const f = new FormData(e.currentTarget);
     const payload = {
-      name: f.get('name'), company: f.get('company'), phone: f.get('phone'), email: f.get('email'), country, currency,
+      name: f.get('name'), company: f.get('company'), phone: f.get('phone'), email: f.get('email'), country: country || 'International', currency, area,
       notes: f.get('notes'), items: lines.map((l) => ({ id: l.id, qty: l.qty })),
     };
     try {
@@ -70,10 +79,14 @@ export default function QuotePage() {
             {result.unpriced.map((x) => <div key={x.id} className="flex justify-between gap-3 border-b border-black/5 py-2 text-sm"><span>{x.qty} × {x.name}</span><span className="text-[#c8481a]">Price to follow</span></div>)}
             <div className="flex justify-between pt-3 text-lg font-black"><span>Subtotal</span><span>{rfx(result.subtotal_bwp)}</span></div>
           </div>
-          <p className="mt-4 text-sm leading-6 text-black/60">We&apos;ve sent this to our sales team{result.unpriced.length ? ' and they will price the remaining items shortly' : ''}. If you gave an email, a copy is on its way.</p>
+          <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+            <div className="border border-black/10 bg-white p-4"><p className="text-xs font-black uppercase tracking-widest text-black/50">Delivery to {result.area}</p><p className="mt-1 font-bold">{result.eta.charAt(0).toUpperCase() + result.eta.slice(1)}</p></div>
+            <div className="border border-black/10 bg-white p-4"><p className="text-xs font-black uppercase tracking-widest text-black/50">Your branch</p><p className="mt-1 font-bold">{result.branch.town} · {result.branch.phone}</p></div>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-black/60">{result.unpriced.length ? 'Our team will price the remaining items shortly. ' : ''}If you gave an email, a copy is on its way.</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a href={result.url} className="bg-[#c8481a] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-white">View &amp; print quotation</a>
-            <a href={`https://wa.me/26775560140?text=${encodeURIComponent(`Hello StationeryHub, I'd like to proceed with quotation ${result.ref}.`)}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-black">Confirm on WhatsApp</a>
+            <a href={result.url} className="bg-[#c8481a] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-white">Review &amp; place order</a>
+            <a href={`https://wa.me/${result.branch.wa}?text=${encodeURIComponent(`Hello StationeryHub, I have a question about quotation ${result.ref}.`)}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-black">Ask on WhatsApp</a>
           </div>
         </div>
       </main>
@@ -112,9 +125,9 @@ export default function QuotePage() {
               <div className="mt-4 divide-y divide-black/10">
                 {lines.map((l) => (
                   <div key={l.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
-                    <div className="min-w-0 flex-1"><p className="font-bold">{l.name}</p><p className="font-mono text-xs text-black/50">{l.code}</p></div>
+                    <div className="min-w-0 flex-1"><p className="font-bold">{l.name}</p><p className="font-mono text-xs text-black/50">{l.code}</p>{byId.get(l.id)?.eta && <p className="text-xs font-bold text-[#1f7a4d]">🚚 {byId.get(l.id)!.eta}</p>}</div>
                     <input type="number" min={1} value={l.qty} onChange={(e) => setQty(l.id, Number(e.target.value))} className="w-20 border border-black/15 px-2 py-2 text-sm" aria-label="Quantity" />
-                    <span className="w-28 text-right font-black">{l.price != null ? fx(l.price * l.qty) : <span className="text-xs text-[#c8481a]">Price to follow</span>}</span>
+                    <span className="w-28 text-right font-black">{priceOf(l) != null ? fx(priceOf(l)! * l.qty) : <span className="text-xs text-[#c8481a]">Price to follow</span>}</span>
                     <button type="button" onClick={() => removeLine(l.id)} className="text-xs font-bold uppercase text-black/40 hover:text-[#c8481a]">Remove</button>
                   </div>
                 ))}
@@ -126,6 +139,11 @@ export default function QuotePage() {
 
           <form onSubmit={submit} className="border border-black/10 bg-white p-4 sm:p-5">
             <div className="grid gap-3">
+              <label className="text-xs font-bold uppercase tracking-widest text-black/60">Deliver to
+                <select value={area} onChange={(e) => setArea(e.target.value)} className="mt-1 w-full border border-[#c8481a]/40 px-3 py-2 text-sm font-semibold normal-case tracking-normal text-black">
+                  {AREAS.map((a) => <option key={a} value={a}>{a}</option>)}
+                </select>
+              </label>
               <div className="grid grid-cols-2 gap-3">
                 <label className="text-xs font-bold uppercase tracking-widest text-black/60">Country
                   <input value={country} onChange={(e) => setCountry(e.target.value)} className="mt-1 w-full border border-black/15 px-3 py-2 text-sm font-normal normal-case tracking-normal text-black" />

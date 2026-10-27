@@ -77,3 +77,29 @@ export const SEED_ITEMS: SeedItem[] = [
   { brand: 'Canon', category: 'Ink Cartridge', name: 'Canon PG-485 Standard Black Ink Cartridge', code: 'PG-485', fixed: 780 },
   { brand: 'HP', category: 'Toner Reload', name: 'HP 154A Neverstop Toner Reload Kit', code: 'W1540A', fixed: 450 },
 ];
+
+// Typical South African retail price (ZAR, incl. VAT) for the genuine item, researched 27 Oct 2026
+// across PriceCheck, Makro, Takealot, Waltons, FirstShop, Computer Mania and others.
+// Landed cost in Botswana = ZAR ÷ (ZAR per BWP) × (1 + landing %). Selling = landed cost + markup.
+// Values marked "est" had no direct listing and are estimated from the same family.
+export const MARKET_ZAR: Record<string, number> = {
+  'BSP-01BK': 375, 'BSP-01C': 375, 'BSP-01M': 375, 'BSP-01Y': 375,
+  'BLC-3719XLB': 590, 'BLC-3719XLC': 590, 'BLC-3719XLM': 590, 'BLC-3719XLY': 590,
+  'BLC-472XLB': 450, 'BLC-472XLC': 450, 'BLC-472XLM': 450, 'BLC-472XLY': 450,
+  'BLC-535XLC': 320, 'BLC-535XLM': 320, 'BLC-535XLY': 320, 'BLC-539XLB': 300,
+  'BT-5000C': 290, 'BT-5000M': 290, 'BT-5000Y': 290, 'BT-6000B': 280,
+  'CCRG051B': 2200,
+  'CCRG064BK': 4500, 'CCRG064C': 4800, 'CCRG064M': 4800, 'CCRG064Y': 4800, // colours est
+  'CCRG067BK': 1700, 'CCRG067C': 1850, 'CCRG067M': 1850, 'CCRG067Y': 1850, // colours est
+  'CCRG069BK': 2600, 'CCRG069C': 3150, 'CCRG069M': 3150, 'CCRG069Y': 3150,
+  'CCRH071HBK': 2200, 'CWT-201': 900,
+  'C-EXV48-B': 930, 'C-EXV48-C': 1300, 'C-EXV48-M': 1300, 'C-EXV48-Y': 1300, // colours est
+  'C716B': 1200, 'C716C': 1850, 'C716M': 1850, 'C716Y': 1850,
+  'C725': 1600, 'C728B': 2000, 'C737': 2200,
+  'H6ZD61AE': 130, 'H7FP38UE': 330, 'H7FP39UE': 330,
+  'HP4K0V6PE': 270, 'HP4K0V7PE': 270, 'HP4K0V8PE': 270,
+  'HP4K0W0PE': 500, 'HP4K0W1PE': 500, 'HP4K0W2PE': 500, 'HP4K0W3PE': 620, // 925e black est
+  'HP4S6X5PE': 500, 'HP4S6X6PE': 500, 'HP4S6X7PE': 500, 'HP4S6X8PE': 520,
+  'HP4S6X9PE': 1150, 'HP4S6Y0PE': 1150, 'HP4S6Y1PE': 1150, 'HP4S6Y2PE': 1500,
+  'H1VV21AE': 220, 'H3JA27AE': 800, 'H3JA28AE': 800, 'H3JA29AE': 800,
+};

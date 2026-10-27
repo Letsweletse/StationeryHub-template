@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import { addToBasket, fmtP } from '@/lib/basket';
+import { AREAS } from '@/lib/eta';
 
-type Item = { id: number; code: string | null; name: string; brand: string | null; category: string | null; status: string; price: number | null };
+type Item = { id: number; code: string | null; name: string; brand: string | null; category: string | null; status: string; price: number | null; eta: string };
 
 export default function PriceListPage() {
   const [items, setItems] = useState<Item[]>([]);
@@ -15,10 +16,13 @@ export default function PriceListPage() {
   const [category, setCategory] = useState('All');
   const [qty, setQty] = useState<Record<number, number>>({});
   const [added, setAdded] = useState<number | null>(null);
+  const [area, setArea] = useState('Gaborone');
 
+  useEffect(() => { try { const a = localStorage.getItem('sh_area'); if (a) setArea(a); } catch {} }, []);
   useEffect(() => {
-    fetch('/api/hub/catalogue').then((r) => r.json()).then((d) => setItems(d.items || [])).catch(() => {}).finally(() => setLoading(false));
-  }, []);
+    try { localStorage.setItem('sh_area', area); } catch {}
+    fetch(`/api/hub/catalogue?area=${encodeURIComponent(area)}`).then((r) => r.json()).then((d) => setItems(d.items || [])).catch(() => {}).finally(() => setLoading(false));
+  }, [area]);
 
   const brands = useMemo(() => ['All', ...Array.from(new Set(items.map((i) => i.brand || 'Other'))).sort()], [items]);
   const categories = useMemo(() => ['All', ...Array.from(new Set(items.map((i) => i.category || 'Other'))).sort()], [items]);
@@ -49,7 +53,7 @@ export default function PriceListPage() {
           <a href="/quote" className="bg-[#c8481a] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-white">Get instant quote</a>
         </div>
 
-        <div className="mb-5 grid gap-3 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
+        <div className="mb-5 grid gap-3 lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr]">
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search product, code, brand e.g. HP 47, CRG 067, BSP-01"
             className="w-full border border-black/15 bg-white px-4 py-3 text-sm font-semibold outline-none focus:border-[#c8481a]" />
           <select value={brand} onChange={(e) => setBrand(e.target.value)} className="w-full border border-black/15 bg-white px-4 py-3 text-sm font-semibold">
@@ -57,6 +61,9 @@ export default function PriceListPage() {
           </select>
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full border border-black/15 bg-white px-4 py-3 text-sm font-semibold">
             {categories.map((o) => <option key={o}>{o}</option>)}
+          </select>
+          <select value={area} onChange={(e) => setArea(e.target.value)} aria-label="Deliver to" className="w-full border border-[#c8481a]/40 bg-white px-4 py-3 text-sm font-semibold">
+            {AREAS.map((o) => <option key={o} value={o}>Deliver to: {o}</option>)}
           </select>
         </div>
         <p className="mb-4 text-sm text-black/60"><strong className="text-black">{filtered.length}</strong> items · {pricedCount} with instant prices</p>
@@ -68,6 +75,7 @@ export default function PriceListPage() {
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#c8481a]">{i.brand} · {i.category}</p>
                 <p className="mt-1 font-bold">{i.name}</p>
                 <p className="font-mono text-xs text-black/50">{i.code}</p>
+                <p className="mt-1 text-xs font-bold text-[#1f7a4d]">🚚 {i.eta} · {area}</p>
                 <div className="mt-3 flex items-center justify-between gap-2">
                   <span className="text-lg font-black">{i.price != null ? fmtP(i.price) : <span className="text-sm text-black/50">Price on request</span>}</span>
                   <div className="flex items-center gap-2">
@@ -84,7 +92,7 @@ export default function PriceListPage() {
           <div className="hidden overflow-x-auto border border-black/10 bg-white md:block">
             <table className="w-full text-left text-sm">
               <thead className="bg-[#0e0e0e] text-xs uppercase tracking-widest text-white">
-                <tr><th className="px-4 py-3">Brand</th><th className="px-4 py-3">Product</th><th className="px-4 py-3">Code</th><th className="px-4 py-3 text-right">Price</th><th className="px-4 py-3">Status</th><th className="px-4 py-3">Qty</th><th className="px-4 py-3"></th></tr>
+                <tr><th className="px-4 py-3">Brand</th><th className="px-4 py-3">Product</th><th className="px-4 py-3">Code</th><th className="px-4 py-3 text-right">Price</th><th className="px-4 py-3">Delivery</th><th className="px-4 py-3">Qty</th><th className="px-4 py-3"></th></tr>
               </thead>
               <tbody className="divide-y divide-black/10">
                 {filtered.map((i) => (
@@ -93,7 +101,7 @@ export default function PriceListPage() {
                     <td className="px-4 py-3 font-bold">{i.name}</td>
                     <td className="px-4 py-3 font-mono text-xs text-black/60">{i.code}</td>
                     <td className="px-4 py-3 text-right font-black">{i.price != null ? fmtP(i.price) : <span className="text-xs font-semibold text-black/50">On request</span>}</td>
-                    <td className="px-4 py-3">{i.status}</td>
+                    <td className="px-4 py-3 text-xs"><span className="font-bold">{i.eta}</span><span className="block text-black/45">{i.status}</span></td>
                     <td className="px-4 py-3"><input type="number" min={1} value={qty[i.id] || 1} onChange={(e) => setQty({ ...qty, [i.id]: Number(e.target.value) })} className="w-16 border border-black/15 px-2 py-1" aria-label="Quantity" /></td>
                     <td className="px-4 py-3"><button onClick={() => add(i)} className="whitespace-nowrap bg-[#0e0e0e] px-3 py-2 text-xs font-black uppercase tracking-widest text-white hover:bg-[#c8481a]">{added === i.id ? 'Added ✓' : 'Add to quote'}</button></td>
                   </tr>

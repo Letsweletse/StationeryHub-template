@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
     q<Item>(`select * from sh_items order by active desc, brand nulls last, category, name`),
     q(`select s.*, (select count(*)::int from sh_supplier_items x where x.supplier_id = s.id and x.status = 'pending') as pending_items from sh_suppliers s order by s.created_at desc`),
     q(`select x.*, s.name as supplier_name from sh_supplier_items x join sh_suppliers s on s.id = x.supplier_id where x.status = 'pending' order by x.created_at desc limit 300`),
-    q(`select id, ref, customer_name, company, phone, email, country, currency, subtotal_bwp, items, unpriced, notes, status, created_at from sh_quotes order by created_at desc limit 100`),
+    q(`select id, ref, customer_name, company, phone, email, country, currency, subtotal_bwp, items, unpriced, notes, status, created_at, delivery_area, ordered_at from sh_quotes order by created_at desc limit 100`),
     q(`select channel, sender, message, matched, created_at from sh_chat_log order by created_at desc limit 60`),
   ]);
   return NextResponse.json({
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, updated, missing });
     }
     case 'save_settings': {
-      const allowed = ['default_markup', 'usd_per_bwp', 'zar_per_bwp', 'listing_fee_bwp', 'quote_valid_days'];
+      const allowed = ['default_markup', 'usd_per_bwp', 'zar_per_bwp', 'listing_fee_bwp', 'quote_valid_days', 'landing_pct'];
       for (const k of allowed) {
         const v = num(b.settings?.[k]);
         if (v != null && v >= 0) await q(`insert into sh_settings (key, value) values ($1,$2) on conflict (key) do update set value=excluded.value`, [k, String(v)]);
@@ -95,6 +95,13 @@ export async function POST(req: NextRequest) {
       }
       await q(`update sh_supplier_items set status='approved', item_id=$2 where id=$1`, [x.id, itemId]);
       return NextResponse.json({ ok: true, item_id: itemId });
+    }
+    case 'recalc_market': {
+      const st = await getSettings();
+      const zpb = Number(st.zar_per_bwp) || 1.33; const landing = Number(st.landing_pct ?? 12) || 0;
+      const r = await q(`update sh_items set cost_price = round((market_zar / $1::numeric) * (1 + $2::numeric / 100), 2), updated_at = now()
+        where market_zar is not null and price_source like 'market%' returning id`, [zpb, landing]);
+      return NextResponse.json({ ok: true, updated: r.length });
     }
     case 'reject_supplier_item':
       await q(`update sh_supplier_items set status='rejected' where id=$1`, [Number(b.id)]);

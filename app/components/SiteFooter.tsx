@@ -1,9 +1,11 @@
+import { BRANCHES } from '@/lib/eta';
+
 const wa = (n: string, msg = 'Hello StationeryHub, I need help.') => `https://wa.me/${n}?text=${encodeURIComponent(msg)}`;
 
 export const CONTACTS = {
   phones: [
-    { label: '+267 75 560 140', tel: '+26775560140', wa: '26775560140' },
-    { label: '+267 72 347 712', tel: '+26772347712', wa: '26772347712' },
+    { label: '+267 75 560 140', tel: '+26775560140', wa: '26775560140', note: 'Gaborone head office' },
+    { label: '+267 72 347 712', tel: '+26772347712', wa: '26772347712', note: 'Palapye & Francistown' },
   ],
   emails: [
     { label: 'Sales & quotes', email: 'sales@stationeryhub.co.bw' },
@@ -19,7 +21,14 @@ export default function SiteFooter() {
         <div>
           <div className="text-3xl font-black uppercase tracking-[0.18em]">Stationery<span className="text-[#e8622e]">Hub</span></div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-white/45">Office supplies, ink, toner and technology for businesses, schools, clinics and government in Botswana, with international supply on request.</p>
-          <p className="mt-3 text-sm text-white/45">Gaborone, Botswana</p>
+          <div className="mt-5 space-y-3">
+            {BRANCHES.map((b) => (
+              <div key={b.town} className="border-l-2 border-[#e8622e] pl-3">
+                <p className="text-sm font-black uppercase tracking-widest text-white">{b.town}</p>
+                <p className="text-xs text-white/45">{b.role} · <a href={`tel:${b.tel}`} className="hover:text-[#e8622e]">{b.phone}</a></p>
+              </div>
+            ))}
+          </div>
         </div>
         <div>
           <h3 className="text-xs font-black uppercase tracking-[0.25em] text-white/40">Contact</h3>
@@ -28,6 +37,7 @@ export default function SiteFooter() {
               <p key={p.tel} className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 <a href={`tel:${p.tel}`} className="font-bold text-white hover:text-[#e8622e]">{p.label}</a>
                 <a href={wa(p.wa)} target="_blank" rel="noopener noreferrer" className="text-xs font-black uppercase tracking-widest text-[#25d366]">WhatsApp</a>
+                <span className="w-full text-[10px] font-black uppercase tracking-[0.2em] text-white/40">{p.note}</span>
               </p>
             ))}
             {CONTACTS.emails.map((e) => (
