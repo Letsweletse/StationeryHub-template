@@ -1,69 +1,162 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import SiteNav from '../components/SiteNav';
+import { addToBasket, clearBasket, fmtP, onBasket, readBasket, removeLine, setQty, type BasketLine } from '@/lib/basket';
+
+type Item = { id: number; code: string | null; name: string; brand: string | null; price: number | null };
+type Result = { ref: string; url: string; subtotal_bwp: number; currency: string; rate: number; priced: any[]; unpriced: any[] };
+
+const CUR: Record<string, (n: number) => string> = {
+  BWP: (n) => fmtP(n),
+  USD: (n) => `US$${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+  ZAR: (n) => `R${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+};
 
 export default function QuotePage() {
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [lines, setLines] = useState<BasketLine[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
+  const [rates, setRates] = useState<Record<string, number>>({ BWP: 1, USD: 0.073, ZAR: 1.33 });
+  const [currency, setCurrency] = useState('BWP');
+  const [country, setCountry] = useState('Botswana');
+  const [search, setSearch] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState<Result | null>(null);
 
-  async function submitQuote(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setMessage('');
+  useEffect(() => {
+    const up = () => setLines(readBasket()); up();
+    fetch('/api/hub/catalogue').then((r) => r.json()).then((d) => { setItems(d.items || []); if (d.rates) setRates(d.rates); }).catch(() => {});
+    return onBasket(up);
+  }, []);
+  useEffect(() => { if (country && country.toLowerCase() !== 'botswana' && currency === 'BWP') setCurrency('USD'); }, [country]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const form = new FormData(event.currentTarget);
+  const rate = rates[currency] || 1;
+  const fx = (n: number) => CUR[currency](Math.round(n * rate * 100) / 100);
+  const subtotal = lines.reduce((a, l) => a + (l.price != null ? l.price * l.qty : 0), 0);
+  const unpricedCount = lines.filter((l) => l.price == null).length;
+  const suggestions = useMemo(() => {
+    const q = search.trim().toLowerCase(); if (q.length < 2) return [];
+    return items.filter((i) => [i.name, i.code, i.brand].some((v) => (v || '').toLowerCase().includes(q))).slice(0, 8);
+  }, [search, items]);
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault(); setBusy(true); setError('');
+    const f = new FormData(e.currentTarget);
     const payload = {
-      fullName: String(form.get('fullName') || ''),
-      companyName: String(form.get('companyName') || ''),
-      phone: String(form.get('phone') || ''),
-      email: String(form.get('email') || ''),
-      location: String(form.get('location') || ''),
-      requestedItems: String(form.get('requestedItems') || ''),
+      name: f.get('name'), company: f.get('company'), phone: f.get('phone'), email: f.get('email'), country, currency,
+      notes: f.get('notes'), items: lines.map((l) => ({ id: l.id, qty: l.qty })),
     };
+    try {
+      const r = await fetch('/api/hub/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || 'Could not create quotation');
+      setResult(d); clearBasket(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) { setError(err.message || 'Something went wrong'); }
+    setBusy(false);
+  }
 
-    const response = await fetch('/api/quote-request', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (response.ok) {
-      const text = encodeURIComponent(`Hello StationeryHub, I submitted a quote request. Name: ${payload.fullName}. Company: ${payload.companyName}. Phone: ${payload.phone}. Items: ${payload.requestedItems.slice(0, 200)}`);
-      window.open(`https://wa.me/26775560140?text=${text}`, '_blank', 'noopener,noreferrer');
-      setMessage('Quote request saved. WhatsApp opened so sales can continue with you.');
-      event.currentTarget.reset();
-    } else {
-      setMessage('Could not save quote request. Please WhatsApp +267 75 560 140.');
-    }
-
-    setLoading(false);
+  if (result) {
+    const rfx = (n: number) => CUR[result.currency](Math.round(n * result.rate * 100) / 100);
+    return (
+      <main className="min-h-screen bg-[#f0ede8] text-[#0e0e0e]">
+        <SiteNav />
+        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">Quotation ready</p>
+          <h1 className="mt-2 text-4xl font-black uppercase tracking-tight sm:text-5xl">{result.ref}</h1>
+          <div className="mt-6 border border-black/10 bg-white p-5">
+            {result.priced.map((x) => <div key={x.id} className="flex justify-between gap-3 border-b border-black/5 py-2 text-sm"><span>{x.qty} × {x.name}</span><strong>{rfx(x.total_bwp)}</strong></div>)}
+            {result.unpriced.map((x) => <div key={x.id} className="flex justify-between gap-3 border-b border-black/5 py-2 text-sm"><span>{x.qty} × {x.name}</span><span className="text-[#c8481a]">Price to follow</span></div>)}
+            <div className="flex justify-between pt-3 text-lg font-black"><span>Subtotal</span><span>{rfx(result.subtotal_bwp)}</span></div>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-black/60">We&apos;ve sent this to our sales team{result.unpriced.length ? ' and they will price the remaining items shortly' : ''}. If you gave an email, a copy is on its way.</p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href={result.url} className="bg-[#c8481a] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-white">View &amp; print quotation</a>
+            <a href={`https://wa.me/26775560140?text=${encodeURIComponent(`Hello StationeryHub, I'd like to proceed with quotation ${result.ref}.`)}`} target="_blank" rel="noopener noreferrer" className="bg-[#25d366] px-6 py-4 text-center text-sm font-black uppercase tracking-widest text-black">Confirm on WhatsApp</a>
+          </div>
+        </div>
+      </main>
+    );
   }
 
   return (
-    <main className="min-h-screen bg-[#f0ede8] px-5 py-10 text-[#0e0e0e] lg:px-10">
-      <div className="mx-auto max-w-3xl bg-white p-6 shadow-2xl md:p-10">
-        <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">StationeryHub corporate quote</p>
-        <h1 className="mt-3 text-4xl font-black uppercase leading-none md:text-6xl">Request a quote</h1>
-        <p className="mt-5 text-black/60">For schools, offices, clinics, companies and bulk supply. The request is saved, sales is alerted, and you can continue on WhatsApp.</p>
+    <main className="min-h-screen bg-[#f0ede8] text-[#0e0e0e]">
+      <SiteNav />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-10">
+        <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">Instant quotation</p>
+        <h1 className="mt-2 text-4xl font-black uppercase tracking-tight sm:text-6xl">Build your quote</h1>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-black/60">Add items, set quantities and get a priced quotation straight away. Businesses in Botswana and international buyers welcome.</p>
 
-        <form onSubmit={submitQuote} className="mt-8 grid gap-4">
-          <input name="fullName" required placeholder="Your name" className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <input name="companyName" placeholder="Company / school / office" className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <input name="phone" required placeholder="Phone / WhatsApp" className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <input name="email" type="email" placeholder="Email" className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <input name="location" placeholder="Location e.g. Gaborone" className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <textarea name="requestedItems" required rows={6} placeholder="List items needed: cartridges, paper, furniture, laptops, quantities, printer model, etc." className="border border-black/15 px-4 py-3 outline-none focus:border-[#c8481a]" />
-          <button disabled={loading} className="bg-[#0e0e0e] px-6 py-4 font-black uppercase tracking-widest text-white transition hover:bg-[#c8481a] disabled:opacity-60">
-            {loading ? 'Saving...' : 'Submit quote request'}
-          </button>
-          {message && <p className="font-bold text-[#c8481a]">{message}</p>}
-        </form>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <section className="border border-black/10 bg-white p-4 sm:p-5">
+            <div className="relative">
+              <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Add an item: type a name or code, e.g. HP 47 or CRG 067"
+                className="w-full border border-black/15 px-4 py-3 text-sm font-semibold outline-none focus:border-[#c8481a]" />
+              {suggestions.length > 0 && (
+                <div className="absolute z-10 mt-1 w-full border border-black/10 bg-white shadow-xl">
+                  {suggestions.map((s) => (
+                    <button key={s.id} type="button" onClick={() => { addToBasket({ id: s.id, name: s.name, code: s.code, price: s.price }); setSearch(''); }}
+                      className="flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm hover:bg-[#f0ede8]">
+                      <span><strong>{s.name}</strong> <span className="font-mono text-xs text-black/50">{s.code}</span></span>
+                      <span className="whitespace-nowrap font-black">{s.price != null ? fmtP(s.price) : 'On request'}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
-        <div className="mt-8 border-t border-black/10 pt-5 text-sm text-black/60">
-          <p>Sales: <a className="font-bold text-[#c8481a]" href="mailto:sales@stationeryhub.co.bw">sales@stationeryhub.co.bw</a></p>
-          <p>Admin: <a className="font-bold text-[#c8481a]" href="mailto:letsweletseseatla@stationeryhub.co.bw">letsweletseseatla@stationeryhub.co.bw</a></p>
-          <p>WhatsApp: +267 75 560 140 / +267 72 347 712</p>
+            {lines.length === 0 ? (
+              <p className="py-10 text-center text-sm text-black/50">Your quote is empty. Search above or browse the <a href="/price-list" className="font-bold text-[#c8481a] underline">price list</a>. You can also just describe what you need in the notes.</p>
+            ) : (
+              <div className="mt-4 divide-y divide-black/10">
+                {lines.map((l) => (
+                  <div key={l.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
+                    <div className="min-w-0 flex-1"><p className="font-bold">{l.name}</p><p className="font-mono text-xs text-black/50">{l.code}</p></div>
+                    <input type="number" min={1} value={l.qty} onChange={(e) => setQty(l.id, Number(e.target.value))} className="w-20 border border-black/15 px-2 py-2 text-sm" aria-label="Quantity" />
+                    <span className="w-28 text-right font-black">{l.price != null ? fx(l.price * l.qty) : <span className="text-xs text-[#c8481a]">Price to follow</span>}</span>
+                    <button type="button" onClick={() => removeLine(l.id)} className="text-xs font-bold uppercase text-black/40 hover:text-[#c8481a]">Remove</button>
+                  </div>
+                ))}
+                <div className="flex justify-between pt-4 text-lg font-black"><span>Subtotal</span><span>{subtotal > 0 ? fx(subtotal) : 'To be priced'}</span></div>
+                {unpricedCount > 0 && <p className="pt-1 text-xs text-black/50">{unpricedCount} item(s) will be priced by our sales team.</p>}
+              </div>
+            )}
+          </section>
+
+          <form onSubmit={submit} className="border border-black/10 bg-white p-4 sm:p-5">
+            <div className="grid gap-3">
+              <div className="grid grid-cols-2 gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-black/60">Country
+                  <input value={country} onChange={(e) => setCountry(e.target.value)} className="mt-1 w-full border border-black/15 px-3 py-2 text-sm font-normal normal-case tracking-normal text-black" />
+                </label>
+                <label className="text-xs font-bold uppercase tracking-widest text-black/60">Currency
+                  <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="mt-1 w-full border border-black/15 px-3 py-2 text-sm font-normal text-black">
+                    <option value="BWP">BWP (Pula)</option><option value="USD">USD</option><option value="ZAR">ZAR (Rand)</option>
+                  </select>
+                </label>
+              </div>
+              <input name="name" required placeholder="Your name *" className="border border-black/15 px-3 py-3 text-sm" />
+              <input name="company" placeholder="Company / organisation" className="border border-black/15 px-3 py-3 text-sm" />
+              <input name="phone" placeholder="Phone / WhatsApp" className="border border-black/15 px-3 py-3 text-sm" />
+              <input name="email" type="email" placeholder="Email (we'll send the quotation)" className="border border-black/15 px-3 py-3 text-sm" />
+              <textarea name="notes" rows={4} placeholder="Anything else? Items not on the list, printer models, delivery address…" className="border border-black/15 px-3 py-3 text-sm" />
+              {currency !== 'BWP' && <p className="text-xs leading-5 text-black/50">{currency} amounts are indicative at today&apos;s rate; invoices are issued in Pula.</p>}
+              {error && <p className="text-sm font-bold text-red-700">{error}</p>}
+              <button disabled={busy} className="bg-[#c8481a] px-6 py-4 text-sm font-black uppercase tracking-widest text-white disabled:opacity-60">{busy ? 'Preparing…' : 'Get my quotation'}</button>
+              <p className="text-xs text-black/50">Give a phone number or email so we can reach you.</p>
+            </div>
+          </form>
         </div>
+
+        <section id="international" className="mt-10 scroll-mt-24 bg-[#0e0e0e] p-6 text-white sm:p-8">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">International buyers</p>
+          <h2 className="mt-2 text-3xl font-black uppercase tracking-tight sm:text-4xl">Ordering from outside Botswana?</h2>
+          <div className="mt-5 grid gap-4 text-sm leading-6 text-white/70 md:grid-cols-3">
+            <p><strong className="block text-white">Quote in your currency</strong>Set your country above and choose USD or ZAR. Prices convert at today&apos;s indicative rate.</p>
+            <p><strong className="block text-white">Shipping quoted per order</strong>We confirm courier or freight cost to your destination once we have your address and order size.</p>
+            <p><strong className="block text-white">Bulk and tender supply</strong>For large or recurring orders, put the full list in the notes and our team will send a formal offer.</p>
+          </div>
+        </section>
       </div>
     </main>
   );

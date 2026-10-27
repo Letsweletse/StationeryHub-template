@@ -63,7 +63,9 @@ export default function Home() {
             <a href="#products" className="hover:text-[#c8481a]">Products</a>
             <a href="#categories" className="hover:text-[#c8481a]">Categories</a>
             <a href="/price-list" className="hover:text-[#c8481a]">Price list</a>
-            <a href="/quote" className="hover:text-[#c8481a]">Quote</a>
+            <a href="/quote" className="hover:text-[#c8481a]">Instant quote</a>
+            <a href="/suppliers" className="hover:text-[#c8481a]">Suppliers</a>
+            <a href="/quote#international" className="hover:text-[#c8481a]">International</a>
           </div>
           <a href={waLink('Hello StationeryHub, I need assistance with office supplies.')} target="_blank" rel="noopener noreferrer" className="bg-[#0e0e0e] px-3 py-2 text-xs font-bold uppercase tracking-widest text-[#f0ede8] hover:bg-[#c8481a]">WhatsApp</a>
         </nav>
@@ -141,6 +143,27 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-4 px-5 py-16 md:grid-cols-3 lg:px-10">
+        <a href="/quote" className="group border border-black/10 bg-white p-6 hover:border-[#c8481a]">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">Instant quote</p>
+          <h3 className="mt-2 text-2xl font-black uppercase">Priced quotation in a minute</h3>
+          <p className="mt-2 text-sm leading-6 text-black/60">Pick items and quantities, get a printable quotation straight away, in Pula, US dollars or rand.</p>
+          <span className="mt-4 inline-block text-xs font-black uppercase tracking-widest group-hover:text-[#c8481a]">Build my quote →</span>
+        </a>
+        <a href="/quote#international" className="group border border-black/10 bg-[#0e0e0e] p-6 text-white hover:border-[#c8481a]">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#e8622e]">International buyers</p>
+          <h3 className="mt-2 text-2xl font-black uppercase">Ordering from outside Botswana</h3>
+          <p className="mt-2 text-sm leading-6 text-white/70">Quotes in USD or ZAR, bulk and tender supply, shipping quoted to your destination.</p>
+          <span className="mt-4 inline-block text-xs font-black uppercase tracking-widest group-hover:text-[#e8622e]">Get an export quote →</span>
+        </a>
+        <a href="/suppliers" className="group border border-black/10 bg-white p-6 hover:border-[#c8481a]">
+          <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c8481a]">Suppliers</p>
+          <h3 className="mt-2 text-2xl font-black uppercase">List your products with us</h3>
+          <p className="mt-2 text-sm leading-6 text-black/60">Manufacturers and distributors: reach businesses, schools and government buyers. Free or featured listing.</p>
+          <span className="mt-4 inline-block text-xs font-black uppercase tracking-widest group-hover:text-[#c8481a]">Become a supplier →</span>
+        </a>
       </section>
 
       <section id="categories" className="bg-[#e8e4dd] px-5 py-20 lg:px-10">

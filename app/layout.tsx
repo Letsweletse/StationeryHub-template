@@ -1,4 +1,5 @@
 import './globals.css';
+import PriceAssistant from './components/PriceAssistant';
 
 export const metadata = {
   title: 'StationeryHub — Enterprise Office Solutions Botswana',
@@ -14,6 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        <PriceAssistant />
       </body>
     </html>
   );
