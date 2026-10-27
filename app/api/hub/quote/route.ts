@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { waitUntil } from '@vercel/functions';
+import { autoPriceQuote, ensureFlowSchema, requestSupplierPrices } from '@/lib/flow';
 import { etaFor, branchFor, AREAS } from '@/lib/eta';
 import { competitorMins, clean, ensureSchema, esc, getSettings, money, newRef, q, quoteUrl, SALES_WHATSAPP, sellingPrice, sendEmail, sendWhatsApp, type Item } from '@/lib/hub';
 
@@ -83,6 +85,11 @@ ${unpriced.length ? '<p style="font-size:13px;color:#555">Items marked "price to
       await sendEmail(email, `Your StationeryHub quotation ${ref}`, html, text);
     }
 
+    if (unpriced.length || notes.length >= 4) {
+      waitUntil((async () => {
+        try { await ensureFlowSchema(); await autoPriceQuote(ref); await requestSupplierPrices(ref); } catch (e) { console.error('flow', e); }
+      })());
+    }
     return NextResponse.json({ ref, url, subtotal_bwp: subtotal, currency, rate, priced, unpriced, area, eta: etaAll, branch: { town: branch.town, phone: branch.phone, wa: branch.wa } });
   } catch (e) {
     console.error('quote', e);

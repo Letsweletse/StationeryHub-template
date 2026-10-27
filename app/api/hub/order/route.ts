@@ -1,6 +1,8 @@
 // Customer confirms a quotation as an order. This is the point where people step in:
 // sales and the delivering branch get a WhatsApp alert and operations@ gets the order by email.
 import { NextRequest, NextResponse } from 'next/server';
+import { waitUntil } from '@vercel/functions';
+import { sendPurchaseOrders } from '@/lib/flow';
 import { clean, ensureSchema, esc, money, q, quoteSig, quoteUrl, SALES_WHATSAPP, sendEmail, sendWhatsApp } from '@/lib/hub';
 import { branchFor } from '@/lib/eta';
 
@@ -43,5 +45,6 @@ export async function POST(req: NextRequest) {
       `Thank you, we have received your order ${row.ref}. Our ${branch.town} team will confirm stock, delivery and payment details shortly. WhatsApp ${branch.phone}.`,
       { from: 'StationeryHub Orders <orders@stationeryhub.co.bw>', replyTo: 'operations@stationeryhub.co.bw' });
   }
+  waitUntil(sendPurchaseOrders(row.ref).catch((e) => console.error('po', e)));
   return NextResponse.json({ ok: true, branch: { town: branch.town, phone: branch.phone } });
 }

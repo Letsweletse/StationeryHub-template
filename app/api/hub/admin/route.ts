@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { ensureFlowSchema } from '@/lib/flow';
 import { competitorMins, clean, ensureSchema, getSettings, isAdminCookie, q, sellingPrice, type Item } from '@/lib/hub';
 
 export const dynamic = 'force-dynamic';
@@ -15,7 +16,7 @@ function guard(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   if (!guard(req)) return NextResponse.json({ error: 'unauthorised' }, { status: 401 });
-  await ensureSchema();
+  await ensureFlowSchema();
   const s = await getSettings();
   const dm = Number(s.default_markup) || 25;
   const comp = await competitorMins(); const ctx = { settings: s, comp };
@@ -29,6 +30,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     settings: s,
     items: items.map((i) => ({ ...i, selling: sellingPrice(i, dm, ctx), rival: comp.get(String(i.code || '').toLowerCase()) ?? null })),
+    supplierRequests: await q(`select r.id, r.quote_ref, r.kind, r.status, r.items, r.response, r.created_at, s.name as supplier from sh_supplier_requests r join sh_suppliers s on s.id = r.supplier_id order by r.created_at desc limit 60`),
     competitors: await q(`select code, shop, price_bwp, url, checked_at from sh_competitor_prices order by checked_at desc limit 300`),
     suppliers, supplierItems, quotes, chats,
   });

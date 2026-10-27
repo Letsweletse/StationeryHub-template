@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-type Data = { settings: Record<string, string>; items: any[]; suppliers: any[]; supplierItems: any[]; quotes: any[]; chats: any[] };
+type Data = { settings: Record<string, string>; items: any[]; suppliers: any[]; supplierItems: any[]; quotes: any[]; chats: any[]; supplierRequests?: any[] };
 const P = (n: any) => (n == null || n === '' ? '—' : `P${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
 
 export default function HubAdmin() {
@@ -155,6 +155,17 @@ export default function HubAdmin() {
               </div>
             </div>
             <div>
+              <p className="mb-2 font-black uppercase">Price requests &amp; purchase orders sent</p>
+              <div className="mb-6 grid gap-2">
+                {(data.supplierRequests || []).length === 0 && <p className="text-sm text-black/50">None yet. They go out automatically when a quote has unpriced items or an order is confirmed.</p>}
+                {(data.supplierRequests || []).map((r) => (
+                  <div key={r.id} className="border border-black/10 bg-white p-3 text-xs">
+                    <p className="font-bold">{r.kind === 'po' ? 'PO' : 'Price request'} {r.quote_ref} → {r.supplier} · <span className={r.status === 'answered' ? 'text-[#1f7a4d]' : 'text-[#c8481a]'}>{r.status}</span></p>
+                    <p className="text-black/60">{(r.items || []).map((x: any) => `${x.qty}× ${x.name}`).join(', ')}</p>
+                    {r.response?.lines && <p className="mt-1">{r.response.lines.map((x: any) => `${x.available ? (x.price ? `P${x.price}` : 'ok') : 'n/a'}${x.lead ? ` ${x.lead}d` : ''}`).join(' · ')}</p>}
+                  </div>
+                ))}
+              </div>
               <p className="mb-2 font-black uppercase">Items waiting for approval</p>
               {data.supplierItems.length === 0 && <p className="text-sm text-black/50">Nothing waiting.</p>}
               <div className="grid gap-2">
