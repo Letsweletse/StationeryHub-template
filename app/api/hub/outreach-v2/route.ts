@@ -15,10 +15,11 @@ const LIST: { company: string; email: string; angle: string }[] = [
 ];
 
 async function run() {
+  if (!process.env.RESEND_API_KEY) return NextResponse.json({ skipped: 'no email key on this deployment' });
   await ensureSchema();
-  const done = await q(`select value from sh_settings where key = 'outreach_v2_sent'`);
+  const done = await q(`select value from sh_settings where key = 'outreach_v2b_sent'`);
   if (done.length) return NextResponse.json({ skipped: 'already sent', at: done[0].value });
-  await q(`insert into sh_settings (key, value) values ('outreach_v2_sent', $1)`, [new Date().toISOString()]);
+  await q(`insert into sh_settings (key, value) values ('outreach_v2b_sent', $1)`, [new Date().toISOString()]);
   const results: any[] = [];
   for (const r of LIST) {
     const text = `Dear ${r.company} team,
