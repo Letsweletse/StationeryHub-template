@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import LeadCaptureButton from './components/LeadCaptureButton';
 import SiteFooter from './components/SiteFooter';
 import { BRANCHES } from '@/lib/eta';
@@ -55,10 +56,23 @@ function waLink(message: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
+// Black Friday promo shows until the end of Monday 30 November 2026 (Botswana time).
+const BLACK_FRIDAY_ENDS = new Date('2026-12-01T00:00:00+02:00').getTime();
+
 export default function Home() {
+  const [showBlackFriday, setShowBlackFriday] = useState(true);
+  useEffect(() => {
+    if (Date.now() >= BLACK_FRIDAY_ENDS) setShowBlackFriday(false);
+  }, []);
+
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#f0ede8] text-[#0e0e0e]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-[#f0ede8]/95 backdrop-blur-xl">
+        {showBlackFriday && (
+          <a href="#black-friday" className="block bg-[#c8481a] px-4 py-2 text-center text-[11px] font-black uppercase tracking-[0.22em] text-white hover:bg-[#e8622e]">
+            Black Friday week: deals on toners, paper, furniture &amp; tech. Ends 30 Nov &rarr;
+          </a>
+        )}
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-5 lg:px-10">
           <a href="#top" className="text-xl font-black uppercase tracking-[0.14em] sm:text-2xl">Stationery<span className="text-[#c8481a]">Hub</span></a>
           <div className="hidden items-center gap-6 text-xs font-semibold uppercase tracking-[0.18em] text-black/55 md:flex">
@@ -110,6 +124,32 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {showBlackFriday && (
+        <section id="black-friday" className="relative scroll-mt-28 overflow-hidden bg-[#0e0e0e] text-[#f0ede8]">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(232,98,46,0.25),transparent_60%)]" />
+          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-20">
+            <a href={waLink('Hello StationeryHub, I would like a Black Friday quote for:')} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden border border-[#e8622e]/40 shadow-2xl shadow-[#c8481a]/20">
+              <img src="/black-friday-banner.jpg" alt="StationeryHub Black Friday office supplies sale: toners, ink, paper, furniture and tech" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
+            </a>
+            <div>
+              <p className="mb-4 inline-flex items-center gap-2 bg-[#c8481a] px-3 py-1 text-[11px] font-black uppercase tracking-[0.28em] text-white">Black Friday week</p>
+              <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl">Black Friday <span className="text-[#e8622e]">deals</span> on office supplies</h2>
+              <p className="mt-6 max-w-lg text-base leading-8 text-white/70">Stock up before the January rush. Toners, ink, A4 paper, office furniture and tech at special Black Friday prices this week only, for offices, schools, clinics and procurement teams.</p>
+              <ul className="mt-6 grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
+                {['Toners & ink', 'A4 paper', 'Office furniture', 'Laptops & tech'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 border border-white/10 bg-white/5 px-3 py-3"><span className="h-1.5 w-1.5 rounded-full bg-[#e8622e]" />{item}</li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href={waLink('Hello StationeryHub, I would like a Black Friday quote for:')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-[#c8481a] px-7 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#e8622e]">Get my Black Friday quote</a>
+                <a href="/quote" className="inline-flex items-center justify-center border border-white/30 px-7 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-white/10">Request quote online</a>
+              </div>
+              <p className="mt-5 text-xs uppercase tracking-[0.2em] text-white/40">Offer ends Monday 30 November · WhatsApp 75 560 140</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       <div className="overflow-hidden bg-[#0e0e0e] py-4 text-[#f0ede8]/50">
         <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-10 whitespace-nowrap text-xs font-bold uppercase tracking-[0.22em]">
