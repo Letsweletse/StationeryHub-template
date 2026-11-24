@@ -128,14 +128,17 @@ export default function Home() {
       {showBlackFriday && (
         <section id="black-friday" className="relative scroll-mt-28 overflow-hidden bg-[#0e0e0e] text-[#f0ede8]">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(232,98,46,0.25),transparent_60%)]" />
-          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-20">
-            <a href={waLink('Hello StationeryHub, I would like a Black Friday quote for:')} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden border border-[#e8622e]/40 shadow-2xl shadow-[#c8481a]/20">
+          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:px-10 lg:py-16">
+            <a href={waLink('Hello StationeryHub, I would like a Black Friday quote for:')} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden border border-[#e8622e]/40 shadow-2xl shadow-[#c8481a]/20 lg:col-span-2">
               <img src="/black-friday-banner.jpg" alt="StationeryHub Black Friday office supplies sale: toners, ink, paper, furniture and tech" className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]" />
             </a>
-            <div>
+            <div className="lg:grid lg:grid-cols-2 lg:gap-12">
+              <div>
               <p className="mb-4 inline-flex items-center gap-2 bg-[#c8481a] px-3 py-1 text-[11px] font-black uppercase tracking-[0.28em] text-white">Black Friday week</p>
               <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl">Black Friday <span className="text-[#e8622e]">deals</span> on office supplies</h2>
               <p className="mt-6 max-w-lg text-base leading-8 text-white/70">Stock up before the January rush. Toners, ink, A4 paper, office furniture and tech at special Black Friday prices this week only, for offices, schools, clinics and procurement teams.</p>
+              </div>
+              <div>
               <ul className="mt-6 grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
                 {['Toners & ink', 'A4 paper', 'Office furniture', 'Laptops & tech'].map((item) => (
                   <li key={item} className="flex items-center gap-2 border border-white/10 bg-white/5 px-3 py-3"><span className="h-1.5 w-1.5 rounded-full bg-[#e8622e]" />{item}</li>
@@ -146,6 +149,7 @@ export default function Home() {
                 <a href="/quote" className="inline-flex items-center justify-center border border-white/30 px-7 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-white/10">Request quote online</a>
               </div>
               <p className="mt-5 text-xs uppercase tracking-[0.2em] text-white/40">Offer ends Monday 30 November · WhatsApp 75 560 140</p>
+              </div>
             </div>
           </div>
         </section>
